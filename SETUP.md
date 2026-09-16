@@ -10,13 +10,17 @@ See the [GovTribe connection guide](https://govtribe.com/docs/govtribe-user-guid
 
 ## Claude Code
 
-Sign in to Claude Code with the same Claude.ai account used to connect GovTribe. Restart Code and open `/mcp`. A connected **claude.ai GovTribe** entry can supply tools to the plugin even if a separate `plugin:govtribe:govtribe` entry needs authentication.
+After installing the plugin, open `/mcp`, select the GovTribe server, and complete GovTribe sign-in and authorization in your browser. Start a new session after connecting.
 
-### Native sign-in returns `invalid_redirect_uri`
+You can also start authentication from your terminal:
 
-GovTribe currently rejects the local callback used by a fresh native Claude Code connection. Use the connected Claude.ai account above. Reinstalling the plugin does not resolve this server-side error.
+```sh
+claude mcp login plugin:govtribe:govtribe
+```
 
-Code sessions authenticated with an Anthropic API key or another provider do not inherit Claude.ai connectors. For bearer-token configuration, follow [GovTribe's MCP server setup](https://govtribe.com/docs/govtribe-user-guide/govtribe-mcp/mcp-server-urls/). Enter credentials only in the client's secure configuration or sign-in interface, never in a conversation or repository.
+If GovTribe is already connected in **Claude.ai → Customize → Connectors**, sign in to Code with that same Claude.ai account. A connected **claude.ai GovTribe** entry can supply tools to the plugin even if the separate plugin server has not been authenticated.
+
+Code sessions authenticated with an Anthropic API key or another provider do not inherit Claude.ai connectors; authenticate the plugin's server directly. For bearer-token configuration, follow [GovTribe's MCP server setup](https://govtribe.com/docs/govtribe-user-guide/govtribe-mcp/mcp-server-urls/). Enter credentials only in the client's secure configuration or sign-in interface, never in a conversation or repository.
 
 See [Claude Code's connector documentation](https://code.claude.com/docs/en/mcp#use-mcp-servers-from-claudeai) for account and connection requirements.
 

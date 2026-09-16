@@ -1,10 +1,10 @@
 # Changelog
 
-## 1.0.1 (unreleased)
+## 1.0.1 — 2026-09-16
 
 - Improve discovery of connected GovTribe tools in Claude Code.
 - Resolve relative documentation citations to full GovTribe URLs.
-- Update installation and connection troubleshooting instructions.
+- Document direct Claude Code OAuth sign-in and reuse of existing Claude.ai connections.
 
 ## 1.0.0
 

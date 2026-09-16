@@ -33,9 +33,9 @@ Run these commands inside Claude Code:
 /plugin install govtribe@govtribe
 ```
 
-Connect GovTribe in **Claude.ai → Customize → Connectors**, then sign in to Claude Code with the same Claude.ai account. Restart Code and use `/mcp` to confirm **claude.ai GovTribe** is connected.
+Open `/mcp`, select the GovTribe server, and complete sign-in and authorization in your browser. Start a new session after connecting.
 
-If the plugin's separate connection reports `invalid_redirect_uri`, use the Claude.ai connection above. See [connection troubleshooting](SETUP.md) for details and API-key session requirements.
+If GovTribe is already connected through your Claude.ai account, the skills can reuse that connection when Code is signed in to the same account. See [connection troubleshooting](SETUP.md) for authentication options and API-key session requirements.
 
 ## Skills
 
