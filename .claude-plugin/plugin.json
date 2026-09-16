@@ -1,0 +1,15 @@
+{
+  "name": "govtribe",
+  "displayName": "GovTribe",
+  "version": "1.0.0",
+  "description": "Find government opportunities, research buyers and competitors, assess bids, analyze pricing, and prepare proposals with GovTribe data and guided workflows.",
+  "author": {
+    "name": "GovTribe",
+    "url": "https://govtribe.com"
+  },
+  "homepage": "https://github.com/GovTribe/claude-plugin#readme",
+  "repository": "https://github.com/GovTribe/claude-plugin",
+  "license": "Apache-2.0",
+  "keywords": ["govtribe", "government-contracting", "govcon", "capture", "market-research", "pricing", "proposals"],
+  "skills": "./skills/"
+}

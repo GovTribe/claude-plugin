@@ -1,0 +1,71 @@
+{
+  "claude_code_version": "2.1.273",
+  "model": "account default (not pinned)",
+  "ablation": "none",
+  "real_mcp_servers": false,
+  "cases": {
+    "capture-gate": {
+      "date": "2026-09-16T18:28:23.792Z",
+      "runs": 3,
+      "passed_runs": 3,
+      "scores": [
+        1,
+        1,
+        1
+      ]
+    },
+    "deep-dive-lineage": {
+      "date": "2026-09-16T18:24:04.479Z",
+      "runs": 1,
+      "passed_runs": 1,
+      "scores": [
+        1
+      ]
+    },
+    "disconnected": {
+      "date": "2026-09-16T18:24:04.479Z",
+      "runs": 1,
+      "passed_runs": 1,
+      "scores": [
+        1
+      ]
+    },
+    "market-values": {
+      "date": "2026-09-16T18:24:04.479Z",
+      "runs": 1,
+      "passed_runs": 1,
+      "scores": [
+        1
+      ]
+    },
+    "pricing-units": {
+      "date": "2026-09-16T18:24:04.479Z",
+      "runs": 1,
+      "passed_runs": 1,
+      "scores": [
+        1
+      ]
+    },
+    "proposal-amendment": {
+      "date": "2026-09-16T18:31:05.033Z",
+      "runs": 3,
+      "passed_runs": 3,
+      "scores": [
+        1,
+        1,
+        1
+      ]
+    },
+    "unrelated-writing": {
+      "date": "2026-09-16T18:31:58.077Z",
+      "runs": 3,
+      "passed_runs": 3,
+      "scores": [
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "note": "Latest scoped runs after the documented revisions; not an A/B measurement or a live-authentication test."
+}
