@@ -1,7 +1,7 @@
 {
   "name": "govtribe",
   "displayName": "GovTribe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Government contracting research, capture, pricing, and proposal workflows using the GovTribe MCP server.",
   "author": {
     "name": "GovTribe",
