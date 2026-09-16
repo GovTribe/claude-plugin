@@ -1,0 +1,23 @@
+{
+  "name": "govtribe",
+  "displayName": "GovTribe",
+  "version": "1.0.0",
+  "description": "Government contracting research, capture, pricing, and proposal workflows using the GovTribe MCP server.",
+  "author": {
+    "name": "GovTribe",
+    "url": "https://govtribe.com"
+  },
+  "homepage": "https://github.com/GovTribe/claude-plugin#readme",
+  "repository": "https://github.com/GovTribe/claude-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "govtribe",
+    "government-contracting",
+    "govcon",
+    "capture",
+    "market-research",
+    "pricing",
+    "proposals"
+  ],
+  "skills": "./skills/"
+}
