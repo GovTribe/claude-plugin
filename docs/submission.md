@@ -1,6 +1,6 @@
 # Claude directory submission
 
-Status: **Not submitted.** The submission form redirects to Claude sign-in. A signed-in organization session with directory management access is required. The prepared repository and release package are ready for submission; no review or approval is claimed.
+Status: **Not submitted — held for owner review.** The signed-in organization submission form is accessible. The new plugin's directory terms have not been accepted and the submission has not been sent. Version 1.0.0 is the published release; 1.0.1 is the review candidate with the Code/Cowork acceptance updates.
 
 ## Submission details
 
@@ -8,7 +8,7 @@ Status: **Not submitted.** The submission form redirects to Claude sign-in. A si
 | --- | --- |
 | Display name | GovTribe |
 | Plugin identifier | `govtribe` |
-| Version | `1.0.0` |
+| Version | `1.0.1` review candidate; `1.0.0` currently released |
 | Publisher | GovTribe |
 | Public repository | https://github.com/GovTribe/claude-plugin |
 | Plugin path | Repository root (`.`) |
@@ -42,3 +42,7 @@ After submission, record its identifier, date, submitted commit, and actual revi
 As checked September 16, 2026, [Claude Code's submission documentation](https://code.claude.com/docs/en/plugins#submit-your-plugin-to-the-community-marketplace) sends third-party submissions to `claude-community`, backed by `anthropics/claude-plugins-community`. It states that `claude-plugins-official` is curated separately and has no application process. The [Claude.ai submission guide](https://claude.com/docs/plugins/submit) still describes the directory differently. Both point to the same submission forms. Follow the form's actual review result and do not promise either official-catalog placement or an Anthropic Verified badge.
 
 GovTribe's existing connector listing is a separate listing and does not automatically publish this plugin. Customers can use the GovTribe repository marketplace or release ZIP while directory review is pending.
+
+## Existing connector maintenance
+
+The existing published MCP listing was updated separately with the current 112 tool names, clearer permissions, MCP App and self-test declarations, company details, the supplied SVG logo URL, and simpler reviewer setup instructions. Those listing changes are pending Anthropic review; they do not constitute submission of this plugin. Reviewer credentials are held only in the private testing-access form and are not included in this repository or package.

@@ -9,7 +9,7 @@ npx --yes @anthropic-ai/claude-code@2.1.273 plugin validate .claude-plugin/plugi
 npx --yes @anthropic-ai/claude-code@2.1.273 plugin validate skills --strict
 python3 scripts/package.py
 claude --plugin-dir . plugin details govtribe
-claude --plugin-dir ./dist/govtribe-1.0.0.zip plugin details govtribe
+claude --plugin-dir ./dist/govtribe-1.0.1.zip plugin details govtribe
 ```
 
 The local validator checks the five-skill inventory, original-source hashes for unmodified files, relative reference links, Python syntax, JSON, MCP configuration, and absence of machine-specific paths. The packager includes only installation files, skills, logo, and documentation; it excludes Git metadata, local settings, eval transcripts, credentials, and build files. ZIP members have stable timestamps and permissions.
@@ -55,4 +55,21 @@ Checks performed September 16, 2026:
 - All seven behavioral cases passed in their latest scoped runs (13 successful trials total): capture, proposal, and unrelated writing each passed 3/3; market, pricing, deep dive, and disconnected-account behavior each passed 1/1. See [eval-summary.json](eval-summary.json). These runs used the account default model, read-only tools, no real MCP servers, and no no-plugin baseline; they do not establish a measured improvement over base Claude.
 - The initial seven-case run passed all outcome rubrics but skipped the capture and proposal skills. Their descriptions were revised. Proposal repeats then exposed an ambiguous test fixture (replacement of an entire section versus only two fields) and an overly broad grader; the fixture and rubric were clarified without changing the intended assertions. The proposal skill also now explicitly separates source-mandated rules from recommended checks. All final proposal trials passed.
 
-Still requiring a user-authorized Claude session: install/upload verification in web or desktop UI, GovTribe OAuth completion and a live Claude tool call, and submission through the directory form. No authenticated Claude plugin or directory acceptance result is claimed. Directory status is tracked in [submission.md](submission.md).
+## Live Claude acceptance
+
+The published 1.0.0 ZIP was uploaded through Claude's private plugin upload interface on September 16, 2026. Claude displayed GovTribe, five skills, and one connected GovTribe connector. These checks reused an existing authorized Claude.ai GovTribe connection.
+
+| Surface | Observed result |
+| --- | --- |
+| Claude web chat | Loaded the deep-dive skill and agency reference; Documentation and Search Federal Agencies returned NASA's real agency record and source URL. |
+| Cowork in Claude web | Loaded the pricing skill and reference, retrieved live GovTribe Documentation, and correctly calculated a synthetic 20-FTE requirement, 5-FTE staffing gap, $88 hourly price, and $3,168,000 annual price. |
+| Claude Code 2.1.273 | The connected Claude.ai GovTribe server completed Documentation and NASA agency reads. A separate natural-language pricing request automatically selected the pricing skill and produced the expected arithmetic. |
+| Fresh native Claude Code OAuth | Failed at dynamic client registration with HTTP 400 `invalid_redirect_uri`. A GovTribe server hotfix is being prepared; the tested interim path is the existing Claude.ai connection described in [SETUP.md](../SETUP.md). |
+
+The current Claude connector exposes 112 named tools: 111 ordinary tools and one app-only document refresh tool. Tool availability remains subject to the account and client.
+
+The 1.0.1 review candidate adds explicit discovery of an existing working GovTribe connection before declaring authentication unavailable, and converts Documentation `/docs/` citations to absolute GovTribe URLs. The published 1.0.0 archive is unchanged.
+
+A follow-up Code run loaded the packaged 1.0.1 pricing skill, found the working Claude.ai connector, retrieved live Documentation, returned the expected staffing and price calculations, and cited absolute `https://govtribe.com/docs/` links. A separate bounded diagnostic made successful read-only calls to State and Local Contract Opportunities, BLS Occupational Wage Data, Federal Grant Opportunities, and Federal Agencies. These four successful requests establish point-in-time availability, not an explanation or resolution of historical tool errors.
+
+Fresh native OAuth after the server deployment and the native desktop application UI remain unverified. The live checks cover representative read-only workflows, not every tool or production write action. Directory submission is held for owner review; its status is tracked in [submission.md](submission.md).

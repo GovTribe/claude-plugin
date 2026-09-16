@@ -42,7 +42,11 @@ Run these commands inside Claude Code:
 /plugin install govtribe@govtribe
 ```
 
-Restart the session, then use `/mcp` to authenticate the GovTribe connection. The plugin's identifier is `govtribe`; its display name is **GovTribe**. Its five skills are also available as `/govtribe:govtribe-market-intelligence`, `/govtribe:govtribe-capture-workflows`, `/govtribe:govtribe-pricing-data`, `/govtribe:govtribe-deep-dive`, and `/govtribe:govtribe-proposal-workflows`.
+Connect GovTribe in **Claude.ai → Customize → Connectors**, then sign in to Claude Code with the same Claude.ai account. Restart Code and use `/mcp` to confirm **claude.ai GovTribe** is connected. The plugin's skills can use that connection. This is the setup verified with live calls on September 16, 2026.
+
+Fresh authentication of the plugin's separate Code server currently fails with `invalid_redirect_uri` because GovTribe does not yet accept Code's local callback. A server fix is being prepared; use the connected Claude.ai account in the meantime. API-key-only Claude Code sessions do not inherit Claude.ai connectors; see [SETUP.md](SETUP.md) for the developer path and verification limits.
+
+The plugin's identifier is `govtribe`; its display name is **GovTribe**. Its five skills are also available as `/govtribe:govtribe-market-intelligence`, `/govtribe:govtribe-capture-workflows`, `/govtribe:govtribe-pricing-data`, `/govtribe:govtribe-deep-dive`, and `/govtribe:govtribe-proposal-workflows`.
 
 For account connection problems, see [SETUP.md](SETUP.md). Never paste an API key into a conversation.
 
