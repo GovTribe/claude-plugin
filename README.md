@@ -1,2 +1,2 @@
 # claude-plugin
-GovTribe Claude Code and Cowork
+GovTribe plugin for Claude Code and Cowork
