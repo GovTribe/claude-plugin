@@ -73,6 +73,23 @@ Some filters match through a parent, container, or connected record rather than 
 
 Use these filters when the question is about the relationship around a record. Use record-specific tools or returned relationship fields when the agent needs to verify the exact parent, child, source, or downstream connection.
 
+### Inspect a federal transaction's immediate parent
+
+On [Search federal transactions MCP tool](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-transactions-mcp-tool), select `transaction_type` and `parent_record` when the answer needs family or lineage context. The parent is the record that owns the transaction. A contract subaward transaction points to its contract subaward; an assistance subaward transaction points to its assistance subaward. Neither substitutes the upstream prime award.
+
+Tool: `Search_Federal_Transactions`
+
+```json
+{
+  "govtribe_ids": ["<transaction_govtribe_id>"],
+  "fields_to_return": ["govtribe_id", "transaction_type", "parent_record"]
+}
+```
+
+A resolved `parent_record` includes `status: "resolved"`, the parent's `govtribe_id`, `govtribe_type`, and name, with a URL or source contract/grant identifier when available. Use the returned type to choose the matching parent search tool and its GovTribe ID to retrieve the parent. Source contract or grant identifiers describe the parent; they are not its GovTribe ID.
+
+If the parent cannot be resolved, `status: "unavailable"` preserves the stored parent ID and any recognized type. An unrecognized parent class has a null `govtribe_type`. Keep the transaction in the answer, state that the parent is unavailable, and do not infer a parent name, URL, or upstream award. See [Parent record](https://govtribe.com/docs/data-model/attributes/parent-record-attribute) for the returned field shape.
+
 ## Pursuit discussion and comment workflow
 
 Pursuit responses do not include nested discussion or comment arrays. Retrieve those records through the discussion and comment search tools so the agent can keep payloads focused.

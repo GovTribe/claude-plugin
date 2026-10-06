@@ -57,8 +57,8 @@ Classify decision-moving conditions as sourced hard gates, operational hard gate
 - Preserve the base workflow's bid/no-bid, incumbent, likely-bidder, black-hat, past-performance, PTW, pipeline, and output procedures.
 - Do not create unsupported requirements, capabilities, licenses, certifications, inventory, capacity, authorization status, quotes, or performance claims.
 - For non-labor-led pursuits, treat the deterministic bid/no-bid engine as a services-weighted indicator and add a supplemental industry gate/economics table rather than inventing FTE inputs.
-- Use `Search_Federal_Contract_Awards`, `Search_Federal_Transactions`, `Search_GSA_Labor_Rates`, `BLS_Occupational_Wage_Data`, `Search_Line_Items`, or `Search_Service_Contract_Inventory` for primary pricing evidence as appropriate. A complementary pricing capability may build a detailed model when installed; otherwise return a bounded pricing handoff with explicit gaps. Capture still owns P(win), teaming, bid posture, and next actions.
-- When the task becomes a response artifact or proposal-control deliverable, use a complementary proposal skill when installed. Otherwise return a provider-neutral handoff with target IDs, source files, capture rationale, gaps, and outline-readiness status rather than constructing an out-of-scope proposal artifact.
+- Hand primary pricing evidence to `govtribe-pricing-data`; use Capture for P(win), teaming, bid posture, and next actions.
+- Use `govtribe-proposal-workflows` when the task becomes a response artifact or proposal-control deliverable.
 
 ## Current-rule verification
 

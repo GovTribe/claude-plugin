@@ -1,6 +1,6 @@
 # Workbook schema
 
-Use the bundled asset when available. It already includes preferred sheet order, helper lists, and dashboard formulas.
+For the curated workbook, resolve `proposal-control-workbook` through `govtribe-file-templates`; that skill owns the approved master. This schema remains the standalone construction contract for portable hosts or a user-authorized new design. Column lists describe logical fields; locate actual columns by header name rather than ordinal position.
 
 ## Sheet order
 1. `Start Here`
@@ -19,7 +19,7 @@ Use the bundled asset when available. It already includes preferred sheet order,
 - Preserve the overall structure unless a different workbook design is explicitly requested.
 - Keep one filterable header row per working sheet.
 - Do not remove the `Lists` tab if data validation depends on it.
-- Preserve formulas on `Dashboard` when working from the bundled asset.
+- Preserve formulas on `Dashboard` when working from the resolved master or an existing working workbook.
 - Freeze the working header row and keep columns wide enough for citations and notes.
 - Prefer plain, operational labels over decorative formatting.
 

@@ -69,8 +69,8 @@ Use this reference when the user asks who currently performs the work, asks for 
 - Exclude keyword-adjacent awards, wrong-scope same-agency work, wrong-office work, wrong-vehicle work, expired unrelated orders, parent-only lineage, and entity-mismatched vendor results.
 - Before returning `No Defensible Incumbent`, expand every plausible Tier 2 or Tier 3 lineage lead or explicitly reject it with a reason.
 - If the answer depends on Tier 2, Tier 3, or Tier 4 instead of direct thread evidence, say so explicitly.
-- If the resolved incumbent is a candidate teaming partner rather than a head-on competitor, use `./team-on-an-opportunity.md` to coordinate a teaming interest on the recompete.
-- If the user asks for a full record dossier after the incumbent is resolved, use a complementary deep-dive skill when installed. Otherwise return the exact award/order/IDV target, lineage evidence, source IDs, and a provider-neutral dossier handoff instead of claiming a full dossier was completed.
+- If the resolved incumbent is a candidate teaming partner rather than a head-on competitor, use `references/team-on-an-opportunity.md` to coordinate a teaming interest on the recompete.
+- If the user asks for a full record dossier after the incumbent is resolved, hand the exact award/order/IDV target to the `govtribe-deep-dive` skill.
 
 ## Output contract
 - Start with the resolved opportunity and the incumbent call.

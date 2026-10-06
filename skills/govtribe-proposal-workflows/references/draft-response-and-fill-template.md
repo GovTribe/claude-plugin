@@ -27,13 +27,13 @@ Before asking the user to repeat information, inspect:
 
 A terse prompt is sufficient when "this," the target record, and the source files resolve cleanly. Ask one bounded clarification only when multiple possible targets or output formats remain.
 
-Use `Search_GovTribe`, `Search_Federal_Contract_Opportunities`, or `Search_Pursuits` to resolve the active record. Use `Search_Government_Files` and `Search_User_Files` for source and reusable files. When exact file text controls the response, call `Add_To_Vector_Store`, wait for readiness, and use focused `Search_Vector_Store` queries. Cite returned source metadata through the external host's native citation format.
+Preserve the resolved target, provided source files and requested source scope. For needed record lookup or refresh, select the tool by established target type: `Search_Federal_Contract_Opportunities` for federal contract opportunities, `Search_State_And_Local_Contract_Opportunities` for state/local contract opportunities, `Search_Federal_Grant_Opportunities` for federal grant opportunities, or `Search_Pursuits` for pursuits. Use `Search_GovTribe` when the type remains unresolved; a solicitation number, notice ID, title or URL alone does not establish a federal-contract type. Use `Search_Government_Files` and `Search_User_Files` for source and reusable files. When exact file text controls the response, call `Add_To_Vector_Store`, wait for readiness, and use focused `Search_Vector_Store` queries. Cite returned source metadata through the external host's native citation format.
 
 ## Source priority
 
 Use this order when sources conflict:
 
-1. latest conformed solicitation, RFI/RFQ, amendment, and Q&A
+1. current controlling solicitation or notice and formally incorporated amendments; apply Q&A according to its stated authority and incorporation status
 2. buyer-provided response form, survey, workbook, or template
 3. PWS, SOW, SOO, attachments, exhibits, and submission instructions
 4. verified GovTribe opportunity, pursuit, agency, vehicle, and vendor context
@@ -41,6 +41,8 @@ Use this order when sources conflict:
 6. clearly labeled assumptions or drafting recommendations
 
 Do not invent company capabilities, past performance, certifications, staffing, pricing, or commitments to complete a template.
+
+Use the source package's explicit order of precedence. Informal Q&A does not automatically override an issued requirement. Company evidence establishes what the company can substantiate; it does not change the buyer's requirements. Surface unresolved conflicts before representing the response as compliant.
 
 ## Workflow
 
@@ -56,6 +58,8 @@ Classify the request as one or more of:
 - questionnaire, survey, information sheet, or form completion
 - buyer-provided template population
 - revision of an existing draft
+
+Identify the intended reader and decision as part of artifact intent. External responses and capability statements normally serve the relevant government program, technical and acquisition reviewers; use the source requirement and evaluation criteria to establish their priorities. Writer-facing outlines and internal control packages serve the proposal team. An explicitly requested partner or internal audience takes precedence. Reuse resolved context and ask only when competing audiences would materially change the response.
 
 ### 2. Build the response requirement map
 
@@ -73,18 +77,28 @@ Use exact source language where compliance depends on wording.
 
 ### 3. Draft the response package
 
+Optionally apply the bundled `govtribe-govcon-writing` skill to drafting, rewriting, shortening, or prose review using the established requirement map and evidence. Otherwise follow the writing steps here. Review-only requests produce findings; file conversion alone preserves accepted wording.
+
 - Match the buyer's requested order and terminology.
-- Lead with direct answers before supporting narrative.
+- Lead with direct answers before supporting narrative. Connect supported capabilities to the intended reader's mission and decision; do not substitute generic sales language or invent evaluation preferences.
 - Tailor the response to the user's company, role, market, and known differentiators without overstating them.
 - Keep claims traceable to company-provided or retrieved evidence.
-- Include caveats or placeholders for information the user must confirm.
-- When useful, deliver a coordinated package such as cover letter, narrative, survey answers, information sheet, checklist, and submission email.
+- Keep missing evidence and confirmation items in internal review notes. Use unmistakable placeholders in a review draft when needed, but do not add them to government-facing fields when buyer instructions prohibit caveats or extra text. Missing mandatory facts leave the draft incomplete.
+- Deliver the requested coordinated package, such as cover letter, narrative, survey answers, information sheet, checklist, and submission email. Include only components permitted by the buyer in the external package.
+
+### Purposeful proposal and CONOPS illustrations
+
+Use an illustration when requested or when it materially explains the proposed service. Name the intended reviewers, their mission and the decision the figure supports in the visual brief. Ground it in the source requirement and supported solution narrative; distinguish proposed/conceptual elements from verified capability and past performance. Build a self-contained visual brief naming audience, mission, decision, supported content, palette/style, aspect ratio, selected asset revision and occurrence, caption and alt text. Reuse approved customer artwork. Use the host's image generation or editing capability only when available; it is separate from GovTribe MCP. Access image binaries through authorized host attachments/downloads or file tools; vector retrieval is not image access. Preserve the original and edited assets and inspect the saved image before embedding. A host-created image does not automatically become a GovTribe User File or receive a GovTribe generation identifier. If generation is unavailable, reuse an authorized supplied asset, use an appropriate deterministic diagram, or omit optional decoration. Disclose an explicitly requested illustration that could not be produced.
+
+Check buyer page, file and formatting limits before allocating figure space. Keep required wording, precise process labels, values and citations in editable text/shapes/tables; use deterministic charts for measured comparisons. Do not replace an approved logo, seal or fixed template illustration unless the request calls for that edit. A crowded matrix or compliance workbook does not need generated decoration.
+
+Embed the inspected figure through the host's destination-format capability, add a useful caption and alt text, render and inspect the final artifact. Reuse selected imagery during text-only revisions; on an image edit preserve approved wording, page geometry and unaffected artwork. Generating a figure does not complete the requested response package.
 
 ### 4. Populate the template faithfully
 
 - Preserve required headings, tables, fields, sheet names, page layout, and file type.
 - Fill existing fields rather than recreating a different document unless the source template is unusable.
-- Keep blank or uncertain fields visibly marked for review instead of fabricating answers.
+- Identify blank or uncertain fields in review notes instead of fabricating answers; preserve buyer restrictions on text inside the form.
 - Retain previously accepted user edits during follow-up revisions.
 - Use the external host's provider-neutral document, spreadsheet, PDF, or presentation capability for artifact construction and render validation. If unavailable, deliver the validated Markdown, CSV, or JSON source artifact and state what was not rendered or visually verified.
 
@@ -102,11 +116,13 @@ Return:
 4. missing evidence or source files
 5. final compliance and formatting checks
 
+Keep the handoff, missing evidence, and internal review notes separate from government-facing copy. A review draft is not prepared for submission while material facts or applicable final-file checks remain unresolved. Report only checks actually performed; drafting or generating a file does not establish submission or receipt.
+
 For advisory-only asks, return a prioritized response strategy and section outline rather than forcing a full document.
 
 ## Boundary rules
 
-- Route capture-only qualification or bid/no-bid questions to an appropriate capture workflow.
-- Route unresolved staffing, rates, FTEs, wrap assumptions, or price evidence to an appropriate pricing workflow.
+- Use `govtribe-capture-workflows` when the user is still deciding whether or how to pursue the opportunity.
+- Use `govtribe-pricing-data` when the unresolved issue is primarily staffing, rates, FTEs, wrap assumptions, or price evidence.
 - A request to extract one fact from a document is file retrieval, not this workflow.
 - A generic solicitation summary is not enough when the user requested a completed response or populated template.

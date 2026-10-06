@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
@@ -100,7 +101,11 @@ PIPE_SEPARATOR_RE = re.compile(r"^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 BULLET_RE = re.compile(r"^\s*[-*+]\s+(.+)$")
 NUMBERED_RE = re.compile(r"^\s*\d+[.)]\s+(.+)$")
-INLINE_TOKEN_RE = re.compile(r"(`[^`]+`|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_|\[[^\]]+\]\([^)]+\))")
+# Underscore delimiters must sit outside words so record/profile identifiers stay literal.
+INLINE_TOKEN_RE = re.compile(
+    r"(`[^`]+`|\*\*[^*]+\*\*|(?<!\w)__(?=\S).+?(?<=\S)__(?!\w)"
+    r"|\*[^*]+\*|(?<!\w)_(?=\S).+?(?<=\S)_(?!\w)|\[[^\]]+\]\([^)]+\))"
+)
 
 
 def hex_color(value: str) -> RGBColor:
@@ -262,7 +267,8 @@ def add_footer(document: Document, *, source_note: str, generated_date: str, pag
         left.font.size = Pt(8)
         left.font.color.rgb = RGBColor(90, 90, 90)
 
-        middle = paragraph.add_run(f"\tGenerated {generated_date}")
+        # A literal separator remains visible when a long source note consumes the tab gap.
+        middle = paragraph.add_run(f"\t | Generated {generated_date}")
         middle.font.size = Pt(8)
         middle.font.color.rgb = RGBColor(90, 90, 90)
 
@@ -277,7 +283,17 @@ def set_document_metadata(document: Document, *, title: str, generated_date: str
     document.core_properties.title = title
     document.core_properties.subject = "GovTribe Deep Dive"
     document.core_properties.author = "GovTribe"
+    document.core_properties.last_modified_by = "GovTribe"
     document.core_properties.comments = f"Generated {generated_date} from a validated Markdown source."
+    for part in document.part.package.parts:
+        if str(part.partname) == "/docProps/app.xml":
+            root = ET.fromstring(part.blob)
+            namespace = "{http://schemas.openxmlformats.org/officeDocument/2006/extended-properties}"
+            for name in ("Application", "AppVersion", "Company", "Manager"):
+                element = root.find(namespace + name)
+                if element is not None:
+                    element.text = "GovTribe"
+            part._blob = ET.tostring(root, encoding="utf-8", xml_declaration=True)
 
 
 def add_markdown_table(document: Document, rows: list[list[str]], preset: StylePreset, *, evidence_ledger: bool) -> None:
@@ -368,9 +384,9 @@ def convert_markdown(document: Document, text: str, preset: StylePreset, *, titl
             heading_text = heading.group(2).strip()
             current_heading = heading_text.lower()
             if level == 1 and title == "GovTribe Deep Dive":
-                title = re.sub(r"[*_`]", "", heading_text)
                 paragraph = document.add_paragraph(style="Title")
                 add_inline_runs(paragraph, heading_text, font_name=preset.heading_font)
+                title = paragraph.text
             elif level == 1:
                 paragraph = document.add_paragraph(style="Title")
                 add_inline_runs(paragraph, title_override or heading_text, font_name=preset.heading_font)
@@ -478,6 +494,13 @@ def main() -> int:
     args = parse_args()
     if not args.markdown.is_file():
         print(f"error: Markdown file not found: {args.markdown}", file=sys.stderr)
+        return 2
+
+    if args.docx.is_symlink() or args.markdown.resolve() == args.docx.resolve():
+        print("error: choose a separate host-approved output file; preserve the source Markdown.", file=sys.stderr)
+        return 2
+    if args.docx.suffix.lower() != ".docx":
+        print("error: output must use .docx; keep the Markdown input as the fallback.", file=sys.stderr)
         return 2
 
     dependency_error = load_python_docx()

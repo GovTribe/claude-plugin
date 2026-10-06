@@ -6,10 +6,10 @@
 - Goal: produce a writer-facing outline that maps instructions, evaluation factors, work requirements, and evidence needs into a usable proposal structure.
 
 ## Default output
-- Prefer a Markdown deliverable based on [Annotated Proposal Outline Template](../assets/annotated-proposal-outline-template.md).
+- Prefer a Markdown deliverable based on Annotated Proposal Outline Template (`assets/annotated-proposal-outline-template.md`, from the skill root).
 - If requested, also provide:
-  - a CSV companion based on [Annotated Proposal Compliance Matrix Template](../assets/annotated-proposal-compliance-matrix-template.csv),
-  - or an intermediate JSON representation that validates against [Annotated Proposal Outline Schema](../assets/annotated-proposal-outline-schema.json).
+  - a CSV companion based on Annotated Proposal Compliance Matrix Template (`assets/annotated-proposal-compliance-matrix-template.csv`, from the skill root),
+  - or an intermediate JSON representation that validates against Annotated Proposal Outline Schema (`assets/annotated-proposal-outline-schema.json`, from the skill root).
 - Include a concise summary of:
   - source coverage,
   - highest-risk requirements,
@@ -89,7 +89,7 @@ For each major section and meaningful subsection, include:
 - page budget,
 - open questions or risks.
 
-Use [Annotated Proposal Requirement Types](../assets/annotated-proposal-requirement-types.yaml) when a consistent requirement taxonomy is needed.
+Use Annotated Proposal Requirement Types (`assets/annotated-proposal-requirement-types.yaml`, from the skill root) when a consistent requirement taxonomy is needed.
 
 ### 5) Create writer work packages and unresolved-item lists
 - Group sections into practical writing packages with owners, inputs, and review focus.
@@ -106,7 +106,7 @@ Use [Annotated Proposal Requirement Types](../assets/annotated-proposal-requirem
 
 ### 7) Validate before finalizing
 - Run the checklist in [Annotated Outline Quality Checks](annotated-outline-quality-checks.md).
-- If you created an intermediate JSON outline, validate it against [Annotated Proposal Outline Schema](../assets/annotated-proposal-outline-schema.json).
+- If you created an intermediate JSON outline, validate it against Annotated Proposal Outline Schema (`assets/annotated-proposal-outline-schema.json`, from the skill root).
 - If script execution is available in the external host, run from the skill root:
 
 ```bash

@@ -36,7 +36,7 @@ Then:
 - label broader results as analogs, likely-bidder signals, or predecessor hypotheses rather than exact linkage
 - preserve exclusions and explain why a candidate was not accepted as the predecessor
 
-## File retrieval in hosted runtimes
+## File retrieval with MCP
 
 When attached files matter, follow [Vector-store content retrieval](govtribe-docs-vector-store-content-retrieval.md). After `Add_To_Vector_Store` reports the files ready, use `Search_Vector_Store` and cite returned source metadata with the external host's native citation format. If a material spreadsheet or unsupported attachment is skipped, use the host's ordinary attachment or spreadsheet capability; when none is available, disclose the gap and return a labeled partial result or request a supported export if the missing evidence could change the answer.
 

@@ -25,4 +25,6 @@ Return:
 - exact entity scope, registration, certifications, and ownership context
 - federal prime, subcontract, grant, and state/local footprints kept separate
 - top buyers, categories, vehicles, and representative awards
-- pricing or labor-rate
+- pricing or labor-rate context when requested
+- requested opportunity fit, recompete, teaming and current-news implications
+- confidence, identity or coverage gaps, and the next evidence to retrieve

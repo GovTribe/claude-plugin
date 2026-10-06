@@ -57,6 +57,39 @@ The tool page is the source of truth for available keys. Common patterns are:
 
 If the user asks "which vendors/agencies/categories dominate this space?", choose a top-list aggregation. If they ask "how much?" or "how many?", choose a stats aggregation or compare the returned total count.
 
+## Summarize federal transaction values
+
+[Search federal transactions MCP tool](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-transactions-mcp-tool) covers contract awards, contract IDVs, assistance awards, contract subawards, and assistance subawards. Set `transaction_types` explicitly when the question needs a particular population. For prime contract activity, use `["contract_award", "contract_idv"]`. Omitting the filter leaves the family population unrestricted, including any unrecognized stored families; combining prime and subaward amounts does not produce unduplicated government spending.
+
+| Aggregation | Interpretation |
+| --- | --- |
+| `transactions_by_type` | Matching transaction counts by family, with each bucket's signed amount in `sum_value.value`. |
+| `positive_value_stats` | Statistics for amounts strictly greater than zero. |
+| `negative_value_stats` | Statistics for amounts strictly less than zero; the sum remains negative. |
+| `dollars_obligated_stats` | Net statistics across present amounts, including actual zeros. |
+
+Transaction dollar statistics and dollar leaderboards use signed `total_value` in USD, including any reported non-federal amount. For +$100 and −$20 actions, the positive sum is $100, the negative sum is −$20, and the net sum is $80. A ceiling-only change adds no obligation dollars. See [Federal award values and transactions](https://govtribe.com/docs/data-model/guides/federal-award-values-and-transactions) for the amount meanings across families.
+
+Zero and missing amounts enter neither positive nor negative statistics. Net statistics exclude absent amounts from their count and average, but already stored zeros cannot be reclassified as missing source amounts. Use family bucket counts to count matching transactions, including those without an amount.
+
+All requested transaction aggregations summarize the full filtered population, independently of the returned page size and the 10,000 hit-count threshold. Each aggregation includes `amount_basis: "total_value"` and `transaction_types` so the agent can state the basis and population with the result. Explicit family selections return their deduplicated list; omitted, null, or empty selections return `transaction_types: null` for the unrestricted family population.
+
+Tool: `Search_Federal_Transactions`
+
+```json
+{
+  "transaction_types": ["contract_award", "contract_idv"],
+  "query": "\"cloud migration\"",
+  "aggregations": [
+    "transactions_by_type",
+    "positive_value_stats",
+    "negative_value_stats",
+    "dollars_obligated_stats"
+  ],
+  "per_page": 0
+}
+```
+
 ## Use date histograms for monthly trends
 
 Date histogram aggregations return monthly buckets for the scoped result set. Use them when the user needs timing, workload, or trend context before reviewing individual records.

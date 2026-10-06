@@ -6,6 +6,8 @@ import json
 import sys
 import argparse
 from pathlib import Path
+from proposal_contract import read_contract, validate as validate_contract
+from delivery_evidence import finish, verify_receipt
 
 EXPECTED_SHEETS = [
     "Start Here",
@@ -48,12 +50,41 @@ REQUIRED_HEADERS = {
         "Evidence / Artifact Needed",
         "Control Flag",
     },
-    "Evaluation Crosswalk": {"Eval ID", "Source Citation", "Factor / Subfactor", "Related Req IDs"},
-    "Submission Checklist": {"Check ID", "Category", "Control Item", "Status", "Control Flag"},
-    "Pricing & Deliverables": {"Item ID", "Item Type", "Source Citation", "Description", "Related Requirement IDs"},
+    "Evaluation Crosswalk": {
+        "Eval ID",
+        "Source Citation",
+        "Factor / Subfactor",
+        "Related Req IDs",
+    },
+    "Submission Checklist": {
+        "Check ID",
+        "Category",
+        "Control Item",
+        "Status",
+        "Control Flag",
+    },
+    "Pricing & Deliverables": {
+        "Item ID",
+        "Item Type",
+        "Source Citation",
+        "Description",
+        "Related Requirement IDs",
+    },
     "Questions-Risks": {"Item ID", "Type", "Priority", "Issue / Decision", "Status"},
-    "Amendment Log": {"Amendment ID", "Date", "Change Type", "Summary of Change / Clarification", "Impacted Req IDs"},
-    "Sources": {"Source Type", "Short Name", "What it supports", "Key Takeaway / Notes", "Source URL"},
+    "Amendment Log": {
+        "Amendment ID",
+        "Date",
+        "Change Type",
+        "Summary of Change / Clarification",
+        "Impacted Req IDs",
+    },
+    "Sources": {
+        "Source Type",
+        "Short Name",
+        "What it supports",
+        "Key Takeaway / Notes",
+        "Source URL",
+    },
 }
 
 CORE_REQUIREMENT_COLUMNS = {
@@ -92,7 +123,10 @@ def populated(value: object) -> bool:
 
 
 def row_values(ws, row_idx: int) -> list[object]:
-    return [ws.cell(row=row_idx, column=col_idx).value for col_idx in range(1, ws.max_column + 1)]
+    return [
+        ws.cell(row=row_idx, column=col_idx).value
+        for col_idx in range(1, ws.max_column + 1)
+    ]
 
 
 def header_map(ws) -> dict[str, int]:
@@ -151,8 +185,13 @@ def validate(path: Path) -> dict[str, object]:
             if col_idx and not populated(rm.cell(row=row_idx, column=col_idx).value):
                 errors.append(f"Requirement Matrix row {row_idx} missing {header}")
 
-    if not any(rm.cell(row=row_idx, column=rm_headers["Compliance Posture"]).value == "Gap" for row_idx in requirement_rows):
-        warnings.append("Requirement Matrix has no gap rows; confirm this is intentional")
+    if "Compliance Posture" in rm_headers and not any(
+        rm.cell(row=row_idx, column=rm_headers["Compliance Posture"]).value == "Gap"
+        for row_idx in requirement_rows
+    ):
+        warnings.append(
+            "Requirement Matrix has no gap rows; confirm this is intentional"
+        )
 
     ev = wb["Evaluation Crosswalk"]
     ev_headers = header_map(ev)
@@ -160,14 +199,36 @@ def validate(path: Path) -> dict[str, object]:
     if not eval_rows:
         errors.append("Evaluation Crosswalk has no factor rows")
     for row_idx in eval_rows:
-        if not populated(ev.cell(row=row_idx, column=ev_headers["Related Req IDs"]).value):
+        if "Related Req IDs" in ev_headers and not populated(
+            ev.cell(row=row_idx, column=ev_headers["Related Req IDs"]).value
+        ):
             errors.append(f"Evaluation Crosswalk row {row_idx} missing Related Req IDs")
 
     dashboard = wb["Dashboard"]
-    if not str(dashboard["A5"].value or "").startswith("=COUNTA"):
-        errors.append("Dashboard total requirements formula is missing or changed")
-    if not str(dashboard["D5"].value or "").startswith("=COUNTIFS"):
-        errors.append("Dashboard mandatory rows formula is missing or changed")
+    if dashboard["A11"].value == "Active requirements":
+        # The approved #7365 master relocated these metrics and reordered fields.
+        # Validate their bindings, not only a function prefix or cached number.
+        from openpyxl.utils import get_column_letter
+
+        def matrix_range(header):
+            column = get_column_letter(rm_headers[header])
+            return f"'Requirement Matrix'!${column}$8:${column}${rm.max_row}"
+
+        if "Req ID" in rm_headers and "Requirement Level" in rm_headers:
+            ids = matrix_range("Req ID")
+            levels = matrix_range("Requirement Level")
+            expected_total = f'=SUMPRODUCT(--({ids}<>""))'
+            expected_mandatory = f'=SUMPRODUCT(--({ids}<>""),--({levels}="Mandatory"))'
+            if dashboard["A12"].value != expected_total:
+                errors.append("Dashboard total requirements formula is missing or changed")
+            if dashboard["F32"].value != expected_mandatory:
+                errors.append("Dashboard mandatory rows formula is missing or changed")
+    else:
+        # Retain validation of existing user workbooks based on the legacy seed.
+        if not str(dashboard["A5"].value or "").startswith("=COUNTA"):
+            errors.append("Dashboard total requirements formula is missing or changed")
+        if not str(dashboard["D5"].value or "").startswith("=COUNTIFS"):
+            errors.append("Dashboard mandatory rows formula is missing or changed")
 
     for sheet_name in EXPECTED_SHEETS:
         ws = wb[sheet_name]
@@ -189,8 +250,16 @@ def validate(path: Path) -> dict[str, object]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Validate a GovTribe proposal control workbook.")
+    parser = argparse.ArgumentParser(
+        description="Validate a GovTribe proposal control workbook."
+    )
     parser.add_argument("workbook", type=Path, help="Input .xlsx workbook")
+    parser.add_argument(
+        "--profile", choices=("eleven-sheet", "contract"), default="eleven-sheet"
+    )
+    parser.add_argument("--contract", type=Path)
+    parser.add_argument("--json", action="store_true")
+    parser.add_argument("--verify-receipt", type=Path)
     args = parser.parse_args()
 
     path = args.workbook
@@ -198,7 +267,21 @@ def main() -> int:
         print(f"ERROR: workbook not found: {path}", file=sys.stderr)
         return 1
 
-    summary = validate(path)
+    try:
+        contract = read_contract(args.contract) if args.contract else None
+        if args.profile == "contract" and contract is None:
+            raise ValueError("Contract profile requires --contract")
+        if args.profile == "eleven-sheet" and contract is not None:
+            raise ValueError("Use --profile contract with --contract")
+        if args.verify_receipt:
+            verify_receipt(path, json.loads(args.verify_receipt.read_text()), contract)
+        summary = (
+            validate_contract(path, contract)
+            if contract
+            else finish(validate(path), path, checks=["eleven-sheet-structure"])
+        )
+    except Exception as exc:
+        summary = {"status": "failed", "errors": [str(exc)], "warnings": []}
     print(json.dumps(summary, indent=2))
 
     return 1 if summary.get("errors") else 0

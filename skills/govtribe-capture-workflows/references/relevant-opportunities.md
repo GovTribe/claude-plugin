@@ -50,7 +50,7 @@ Use this reference when the user wants a ranked short list of open federal contr
 - Use `Search_Federal_Contract_Awards` or `Search_Federal_Grant_Awards` only when incumbent, prior-delivery, or market validation materially changes the ranking.
 - Exclude weak keyword matches, broad adjacent work, and opportunities that are only tenuously connected to the target.
 - Keep only opportunities that are genuinely pursuit-worthy.
-- For top-ranked opportunities where teaming is a credible pursuit posture, use `./team-on-an-opportunity.md` to discover existing teaming interests and coordinate matches.
+- For top-ranked opportunities where teaming is a credible pursuit posture, use `references/team-on-an-opportunity.md` to discover existing teaming interests and coordinate matches.
 
 ## Output contract
 - Return a short target-profile summary, a compact search-approach note, a market-slice summary, a ranked opportunities table, a short rejection section, and confidence.

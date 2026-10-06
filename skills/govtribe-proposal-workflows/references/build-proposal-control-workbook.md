@@ -7,8 +7,10 @@
 - If the real request is a writer-facing annotated outline, storyboard starter, or section-by-section drafting package, switch to [Build Annotated Proposal Outline](build-annotated-proposal-outline.md) instead of forcing workbook output.
 
 ## Default output
-- Prefer cloning `assets/govtribe_proposal_control_workbook_template.xlsx` and populating it.
-- If the asset is unavailable, create a workbook with the tabs and key columns listed in [Workbook Schema](workbook-schema.md).
+- For a new curated workbook, use `govtribe-file-templates` to resolve catalog ID `proposal-control-workbook`. Its approved blank master is the canonical master; the populated example is a reference, not a source of solicitation facts.
+- Use the bundled `govtribe-document-editing` skill and the host's file capabilities for adaptation and revision handling. For an existing workbook, continue from the selected working revision rather than resetting it to the master.
+- If the user selected a specific catalog revision and resolution fails, obtain that verified revision before adaptation; do not silently substitute a schema-built workbook.
+- The portable distribution includes a generated `assets/proposal-control-workbook.xlsx` copy of the same canonical master; use that copy when available. Without a packaged or supplied workbook, create one with the tabs and key fields in [Workbook Schema](workbook-schema.md), using host spreadsheet capabilities. Identify schema-built output as such; it is not the approved master. Keep the source-traceability, validation and partial-output rules below. The generated portable copy is never an independently maintained source master.
 - Also deliver a concise narrative summary with:
   - coverage status,
   - highest-risk gaps,
@@ -38,9 +40,9 @@ If vector-store retrieval skips pricing schedules, workbook attachments, CSV/TSV
 - Read [Quality Checks](quality-checks.md) before finalizing.
 - Read [Final Proposal Artifact Quality Checks](./final-artifact-quality-checks.md) before delivering the workbook or any companion narrative.
 - Read [Prior User File Context](prior-user-file-context.md) before searching for a prior workbook, proposal template, approved boilerplate, or reusable matrix structure.
-- Before PDF rendering or visual delivery, run `python3 scripts/prepare_proposal_workbook_render.py path/to/workbook.xlsx --in-place` so print areas, fit-to-width settings, and wrapped row heights reflect the populated workbook.
+- On an authorized working copy, when execution and `openpyxl` are available, before PDF rendering or visual delivery run `python3 scripts/prepare_proposal_workbook_render.py path/to/workbook.xlsx --in-place` so print areas, fit-to-width settings, and wrapped row heights reflect the populated workbook.
 - For generic workbook-derived PDF QA, use the external host's spreadsheet render and visual-inspection capability.
-- Before final delivery, run `python3 scripts/validate_proposal_workbook.py path/to/workbook.xlsx` and correct any reported errors.
+- When execution and `openpyxl` are available, before final delivery run `python3 scripts/validate_proposal_workbook.py path/to/workbook.xlsx` and correct any reported errors.
 
 ## Procedure
 
@@ -61,7 +63,7 @@ Identify:
 - any explicit risk, staffing, security, small business, OCI, transition, past performance, or management response instructions.
 
 ### 3) Populate the workbook
-Prefer the bundled template. Update these tabs in this order:
+Populate a working copy of the resolved master or selected workbook. Map columns by header names, not legacy column letters. Update these tabs in this order:
 
 1. `Opportunity Setup`
    - Fill opportunity metadata, major dates, and review schedule.

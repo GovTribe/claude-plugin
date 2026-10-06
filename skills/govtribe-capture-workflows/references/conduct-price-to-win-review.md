@@ -71,7 +71,7 @@ If the request depends on exact solicitation wording for price evaluation, prici
 
 ### 5) Normalize pricing signals
 - Normalize for scope, option structure, contract type, location, labor mix, units, and escalation where the evidence supports it.
-- When PTW needs staffing or wage model support, labor-category mapping, BLS/GSA rate comparisons, labor-rate benchmarks, MAS ceiling-rate evidence, awarded state/local line-item pricing support, or Service Contract Inventory context, use `BLS_Occupational_Wage_Data`, `Search_GSA_Labor_Rates`, `Search_Line_Items`, and `Search_Service_Contract_Inventory` as appropriate. A complementary pricing skill may build the detailed model when installed; otherwise keep the assumptions and missing inputs explicit.
+- Use the `govtribe-pricing-data` skill when PTW needs staffing or wage model support, labor-category mapping, BLS/GSA rate comparisons, labor-rate benchmarks, MAS ceiling-rate evidence, awarded state/local line-item pricing support, or Service Contract Inventory context for service-labor footprint, FTEs, contractor reliance, workshare, and derived hourly-rate checks.
 - Flag outliers and explain why they were excluded or down-weighted.
 
 ### 6) Reconcile market view and execution view

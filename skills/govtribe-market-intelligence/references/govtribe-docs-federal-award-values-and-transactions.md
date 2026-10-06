@@ -37,6 +37,22 @@ Use value fields differently depending on whether the question is about an award
 | `non_federal_value` | Non-federal portion of a transaction value. | [Non-federal value](https://govtribe.com/docs/data-model/attributes/non-federal-value-attribute) |
 | Federal transaction | Action-level contract or assistance transaction. | [Federal transaction](https://govtribe.com/docs/data-model/data-types/federal-transaction) |
 
+## Transaction search amount and date basis
+
+[Search federal transactions](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-transactions-mcp-tool) includes five families. Its statistics and dollar leaderboards sum signed `total_value` in USD; dollar sorting uses `federalValue`. `total_value` combines the reported federal and non-federal portions. It is not necessarily federal-only spending.
+
+| Family | Amount basis | Date basis in current source processing |
+| --- | --- | --- |
+| Contract award | Signed action obligation plus reported non-government dollars. | Source date signed. |
+| Contract IDV | Signed IDV action obligation plus reported non-government dollars; ceiling values are separate. | Source date signed. |
+| Assistance award | Federal action obligation plus reported non-federal funding. | Source action date. |
+| Contract subaward | Reported subaward amount. | Source subaward date. |
+| Assistance subaward | Reported subaward amount. | Source subaward date. |
+
+Historical stored transaction and effective dates can differ. Search uses the stored transaction date for `transaction_date_range`, the stored effective date for `transaction_effective_date_range`, and the immediate parent's award date for `award_date_range`. A 2022 award's 2025 modification belongs to the 2025 transaction period, not the 2025 award-date cohort. Missing dates cannot match the corresponding range.
+
+Select `contract_award` and `contract_idv` for prime contract activity. The `transactions_by_type` aggregation keeps family counts and amount sums separate. Positive and negative statistics preserve signed values: +$100 and −$20 yield positive $100, negative −$20, and net $80. Zero and absent values enter neither sign group. Net statistics include actual zeros but exclude absent amounts from count and average. Already stored zeros do not reveal whether a source amount was absent.
+
 ## How to avoid double counting
 
 - Use award records when the question is about current award-level history or a standard search result.

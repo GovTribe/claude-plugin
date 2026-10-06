@@ -10,11 +10,19 @@ Use these checks before delivering proposal-development artifacts such as RFI/RF
 - Carry partial-source limitations into the final summary instead of implying completeness.
 
 ## Proposal polish
+- Check that the narrative and any artwork serve the intended reader: mission fit and supported solution benefits for government submissions, or instructions and controls for internal proposal teams. Honor explicit audience overrides; audience appeal never changes required wording or permits unsupported claims.
 - Use a professional section hierarchy that matches the expected customer workflow.
 - Avoid raw prompt dumps, oversized matrices in portrait documents, default-template styling, and dense wall-of-text summaries.
 - Keep tables narrow enough for rendered Markdown/PDF/DOCX output; move full row-level matrices to CSV/XLSX/JSON companions when needed.
 - Check page-limit awareness before expanding content. Do not create drafts that would obviously violate known page or format controls.
-- Remove placeholders, bracketed insert notes, temporary comments, internal paths, debug text, and model/tool identifiers.
+- Apply [delivery states and contract validation](./delivery-states-and-contract-validation.md): marked missing inputs are legitimate in drafts; unresolved mandatory inputs fail submission readiness. Remove internal paths, debug text and model/tool identifiers in every state.
+
+## Illustration checks
+
+- Confirm each generated figure explains the proposed solution and respects buyer page/format constraints. Preserve mandatory wording, supplied template geometry and approved artwork.
+- Separate proposed concepts from proven performance; illustrations are not supporting evidence for capability claims. Keep quantitative figures and exact labels deterministic/editable.
+- Verify the selected asset revision, caption/alt text, aspect ratio, crop and final-size readability. Inspect the image with the surrounding narrative after DOCX/PDF/PPTX rendering.
+- For a targeted image edit, compare approved text, charts, page/slide layout and unaffected pictures. Refresh the final artifact's QA receipt; do not claim a whole package is finished because its image exists.
 
 ## File-specific QA
 - For workbook outputs, use the external host's spreadsheet render and visual QA capability.

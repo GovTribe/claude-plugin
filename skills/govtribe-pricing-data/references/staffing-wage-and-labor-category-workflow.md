@@ -52,8 +52,8 @@ Choose the narrowest useful path:
 - **Public wrap-rate benchmark**: build a transparent planning multiplier or range and state what fringe, overhead, G&A, fee, escalation, and other elements it includes or excludes.
 - **Full staffing model**: combine BLS wage baseline, burden assumptions, GSA labor-rate benchmark, comparable award or line-item evidence, SCI where service-labor footprint matters, and user-provided assumptions.
 - **Exact pricing-evidence review**: resolve the award, order, parent contract, obligations, source-file pricing instructions, and comparable evidence before drawing conclusions.
-- **PTW support**: use this guide for staffing and rate evidence, then preserve the evidence, selected range, assumptions, and confidence as a capture-analysis handoff when the task becomes bid posture or target-price strategy.
-- **Proposal pricing support**: use this guide for rate and assumption evidence, then use the external host's document or spreadsheet capability when the task becomes a proposal artifact; return a complete Markdown or CSV fallback when that capability is unavailable.
+- **PTW support**: use this guide for staffing and rate evidence, then use the bundled `govtribe-capture-workflows` skill when the task becomes bid posture or target-price strategy, preserving the evidence, selected range, assumptions, and confidence.
+- **Proposal pricing support**: use this guide for rate and assumption evidence, then use the bundled `govtribe-proposal-workflows` skill and the host's document or spreadsheet capability when the task becomes a proposal artifact; return a complete Markdown or CSV fallback when that capability is unavailable.
 - **Sanity check**: return a small evidence table, confidence, caveats, and next data needed.
 
 ### 2) Normalize Roles
@@ -145,8 +145,8 @@ Make fringe, overhead, G&A, fee, escalation, productivity, labor mix, hours, FTE
 
 - Stay in this guide while the answer is mainly staffing, FTE, wage, labor-category, wrap, rate, or source-semantics work.
 - Use [Pricing Model Workflow](./pricing-model-workflow.md) when the user needs a broader combined pricing model beyond staffing and rate evidence.
-- When the user needs bid/no-bid, pursuit posture, competitor posture, or PTW strategy, preserve the pricing result as a capture-analysis handoff without assuming another packaged skill is installed.
-- When the user needs a pricing-volume artifact, workbook, annotated outline, or submission email, preserve the model inputs and use the external host's document or spreadsheet capability; if unavailable, return the corresponding Markdown or CSV source artifact.
+- When the user needs bid/no-bid, pursuit posture, competitor posture, or PTW strategy, use the bundled `govtribe-capture-workflows` skill and preserve the pricing result.
+- When the user needs a pricing-volume artifact, compliance matrix, workbook, annotated outline, or submission email, use the bundled `govtribe-proposal-workflows` skill, preserve the model inputs, and use the host's document or spreadsheet capability; if unavailable, return the corresponding Markdown or CSV source artifact.
 
 ## Output Contract
 

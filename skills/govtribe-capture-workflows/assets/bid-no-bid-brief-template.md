@@ -5,7 +5,7 @@
 |---|---|
 | Recommendation | `{{recommendation}}` |
 | Pursuit path | {{selected_path}} |
-| P(win | bid) | {{pwin}} |
+| P(win given bid) | {{pwin}} |
 | Expected value | {{expected_value}} |
 | Confidence | {{confidence}} |
 | Primary action | {{primary_action}} |

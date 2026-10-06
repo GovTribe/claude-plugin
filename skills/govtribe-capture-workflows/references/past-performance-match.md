@@ -51,7 +51,7 @@ Use this reference when the user wants defensible past-performance references fo
 - Normalize vendor identity only when legal-entity or parent-child context materially affects the interpretation.
 - Select an anchor reference first, then decide which references are supporting evidence and which should be withheld or reserved.
 - Treat score as a defensibility aid, not the memo itself. Do not let a matching table replace the argument.
-- If the gap analysis surfaces requirement dimensions the company cannot defensibly cover alone, use `./team-on-an-opportunity.md` to find a partner whose past performance closes the gap.
+- If the gap analysis surfaces requirement dimensions the company cannot defensibly cover alone, use `references/team-on-an-opportunity.md` to find a partner whose past performance closes the gap.
 
 ## Output contract
 - Start with a reference decision that states match posture, recommended use, anchor reference, main proof point, main limitation, and confidence.
@@ -63,5 +63,6 @@ Use this reference when the user wants defensible past-performance references fo
 - Include gap/risk assessment and evidence traceability so a reviewer can see which requirement and award facts support the conclusion.
 - Make the scoring rationale explicit for the best references and explicit about meaningful gaps, but keep long analysis out of table cells.
 - If there is not enough evidence for a defensible match, say so clearly instead of stretching the comparison.
-- Validate generated markdown memos before finalizing:
+- Validate full requirement-to-reference match memos before finalizing. A requested evidence-collection brief without a target requirement instead uses source-inventory and document contract checks; preserve its actual evidence count and concise owner actions. Full match-memo section/count minimums do not apply to that distinct deliverable.
+- For a full match memo, run:
   `python3 scripts/validate_past_performance_match_memo.py path/to/past_performance_match.md`

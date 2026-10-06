@@ -17,7 +17,7 @@ Use this reference when the user wants a disciplined bid / no-bid decision for o
 - Required: one specific opportunity or one pursuit that resolves to a specific opportunity or requirement.
 - Required: our company, team, or teammate context.
 - Helpful: incumbent hypothesis, likely bidder list, uploaded requirement files, proposal timing, bid-cost assumptions, margin floor, and strategic priorities.
-- Helpful only when relevant: prior capability statements, past performance summaries, proposal outlines, debrief notes, or reusable company-context files. Read `./prior-user-file-context.md` before searching for them.
+- Helpful only when relevant: prior capability statements, past performance summaries, proposal outlines, debrief notes, or reusable company-context files. Read `references/prior-user-file-context.md` before searching for them.
 - If the target opportunity or our side does not resolve cleanly enough to evaluate, ask for the minimum missing detail and stop.
 
 ## Workflow
@@ -45,7 +45,7 @@ Use this reference when the user wants a disciplined bid / no-bid decision for o
 - Keep the comparable slice close to the work pattern using the strongest available combination of scope, NAICS, PSC, program, vehicle, IDV, set-aside posture, geography, contract type, and value band.
 - Keep the window recent enough to matter, usually the last 24 to 36 months unless the buyer history is too thin.
 - Use this pass to ground likely winning vendors, incumbent strength, switching behavior, contract-type preference, set-aside usage, and pricing pressure.
-- When comparable-award pricing evidence materially sharpens the price-to-win and margin view, use `Search_Federal_Contract_Awards`, `Search_Federal_Transactions`, `Search_GSA_Labor_Rates`, `BLS_Occupational_Wage_Data`, `Search_Line_Items`, or `Search_Service_Contract_Inventory` as appropriate to the requirement. A complementary pricing capability may do the detailed model when installed; otherwise return a bounded pricing-evidence handoff and label missing cost or execution inputs.
+- Use the `govtribe-pricing-data` skill only when comparable-award pricing evidence materially sharpens the price-to-win and margin view.
 
 ### 4. Run hard gates before scoring
 - Check hard gates first:
@@ -87,7 +87,7 @@ Use this reference when the user wants a disciplined bid / no-bid decision for o
 - Past performance relevance:
   - score examples on requirement similarity, recency, dollar-size fit, contract or assistance structure fit, buyer adjacency, and prime versus sub role
   - aggregate the top three examples, not the average of all examples
-  - use `./past-performance-match.md` when the comparable-reference question needs a deeper pass
+  - use `references/past-performance-match.md` when the comparable-reference question needs a deeper pass
 - Price-to-win or margin fit:
   - build a comparable cohort from the strongest same-buyer and same-lane evidence
   - estimate low, median, and high likely winning bands
@@ -95,8 +95,8 @@ Use this reference when the user wants a disciplined bid / no-bid decision for o
 - Competitive position:
   - penalize strong incumbency, concentrated buyers, and crowded serious-bidder fields
   - boost only when the contractor has a believable discriminator that maps to the buyer's likely evaluation story
-  - use `./gao-bid-protest-evidence.md` when protest history, agency outcomes, or a linked procurement dispute could materially change competitive risk
-- If the competitive field is missing or too thin, build it first with `./likely-bidders.md`.
+  - use `references/gao-bid-protest-evidence.md` when protest history, agency outcomes, or a linked procurement dispute could materially change competitive risk
+- If the competitive field is missing or too thin, build it first with `references/likely-bidders.md`.
 
 ### 7. Compute both decision posture and economic posture
 - Convert the factor view into both:
@@ -115,8 +115,8 @@ Use this reference when the user wants a disciplined bid / no-bid decision for o
   - sub only
   - monitor and shape
 - Use teammate scenarios to test whether partner access closes hard gaps around vehicle, set-aside, past performance, staffing, or buyer position.
-- If a partnered scenario is the most credible path, use `./team-on-an-opportunity.md` to discover who has already created a teaming interest on the opportunity and coordinate matches.
-- If the recommendation still looks ambiguous after the scenario pass, use `./conduct-black-hat-review.md` to pressure-test the competitive posture before finalizing.
+- If a partnered scenario is the most credible path, use `references/team-on-an-opportunity.md` to discover who has already created a teaming interest on the opportunity and coordinate matches.
+- If the recommendation still looks ambiguous after the scenario pass, use `references/conduct-black-hat-review.md` to pressure-test the competitive posture before finalizing.
 
 ### 9. Adjudicate to a formal recommendation
 - Use these formal outputs:

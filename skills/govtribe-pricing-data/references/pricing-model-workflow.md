@@ -68,6 +68,8 @@ Recommended sequence:
    - G&A
    - fee/profit
 
+Use this illustrative multiplicative formula only when its sequential allocation bases match the company-approved accounting treatment; otherwise use the supplied bases and avoid double counting. Label the result as a modeled rate including the stated fee, not a BLS wage or proprietary actual.
+
 Use this formula for a burdened estimate:
 
 `Burdened Rate = Wage x (1 + Fringe) x (1 + Overhead) x (1 + G&A) x (1 + Fee/Profit)`

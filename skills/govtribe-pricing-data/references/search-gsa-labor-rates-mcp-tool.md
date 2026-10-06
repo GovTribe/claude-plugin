@@ -16,7 +16,7 @@ Use this guide for `Search_GSA_Labor_Rates` when the top-level pricing workflow 
 - `query`: keyword or semantic search text.
 - `search_mode`: use `keyword` for exact terms, IDs, contract numbers, SINs, and aggregation-heavy work; use `semantic` for concept discovery.
 - `page` and `per_page`: use normal pagination. Set `per_page` to `0` when only aggregations are needed.
-- `fields_to_return`: select fields from the `GSALaborRateLLMResource` contract.
+- `fields_to_return`: select fields from the current public `Search_GSA_Labor_Rates` schema returned by `Documentation`.
 - `aggregations`: request rollups such as price statistics, percentiles, top vendors, top IDVs, top SINs, top categories, and top rate years.
 - `sort`: use a `{ "key": "...", "direction": "asc|desc" }` object.
 

@@ -38,7 +38,7 @@ Use this reference when the user wants a buyer-specific federal pursuit plan for
 - If direct overlap is sparse or absent, run one careful adjacent-evidence pass against the office's dominant lanes, value bands, and ordering patterns.
 - Keep direct evidence separate from adjacent or inferred evidence.
 - If office award evidence shows meaningful IDV or vehicle concentration, run one targeted `Search_Federal_Contract_IDVs` or `Search_Federal_Contract_Vehicles` follow-on lookup to explain the ordering path.
-- If direct office overlap is sparse and teaming with an established office incumbent is a credible access path, use `./team-on-an-opportunity.md` to identify and coordinate with potential partners on live opportunities in the office.
+- If direct office overlap is sparse and teaming with an established office incumbent is a credible access path, use `references/team-on-an-opportunity.md` to identify and coordinate with potential partners on live opportunities in the office.
 
 ### 5. Pull evidence-backed contacts and live demand
 - Use `Search_Contacts` against the office, narrowing with representative award IDs when needed.
