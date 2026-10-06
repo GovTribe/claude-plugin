@@ -14,6 +14,8 @@ EXPECTED_SKILLS = {
     "govtribe-capture-workflows", "govtribe-deep-dive",
     "govtribe-market-intelligence", "govtribe-pricing-data",
     "govtribe-proposal-workflows",
+    "govtribe-file-templates", "govtribe-document-editing",
+    "govtribe-govcon-writing",
 }
 
 
@@ -47,7 +49,7 @@ def validate(root=ROOT):
     check(bool(marketplace.get("description")), "Marketplace description is required")
     check(not (root / "hooks").exists(), "Unexpected hook directory")
     skills = sorted((root / "skills").glob("*/SKILL.md"))
-    check({p.parent.name for p in skills} == EXPECTED_SKILLS, "Expected exactly the five GovTribe skills")
+    check({p.parent.name for p in skills} == EXPECTED_SKILLS, "Expected exactly the eight GovTribe skills")
     for path in skills:
         body = path.read_text()
         match = re.match(r"\A---\n(.*?)\n---\n", body, re.S)

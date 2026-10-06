@@ -1,11 +1,11 @@
 # Saved Search to Bid / No-Bid to Annotated Outline
 
-Use this reference when the user wants a repeatable or externally scheduled workflow that watches a saved search, qualifies new matches, and recommends annotated proposal outlines only for pursuit-worthy targets.
+Use this reference when the user wants a repeatable or externally scheduled workflow that watches a saved search, qualifies new matches, and creates, drafts or recommends annotated proposal outlines according to the user-authorized run policy only for pursuit-worthy targets.
 
 ## Do not use this when
 - The user wants a plain saved-search triage report. Use [Relevant Opportunities](./relevant-opportunities.md).
 - The user wants a one-off qualification call for one already-selected opportunity or pursuit. Use [Conduct Bid / No-Bid Review](./conduct-bid-no-bid-review.md).
-- The user wants an annotated outline for one resolved solicitation without a capture gate. Use a complementary proposal skill when installed; otherwise return the target IDs, source-file set, and a provider-neutral outline handoff.
+- The user wants an annotated outline for one resolved solicitation without a capture gate. Use the bundled `govtribe-proposal-workflows` and its Build Annotated Proposal Outline workflow from its own installed root.
 - The user asks for proposal compliance extraction, a control workbook, or drafting support before a pursuit decision has been made. Hand off to proposal construction after qualification.
 
 ## Inputs to resolve
@@ -13,9 +13,9 @@ Use this reference when the user wants a repeatable or externally scheduled work
 - New result IDs or full result records included with the run.
 - User company, team, teammate, capability, vehicle, certification, geography, buyer, and past-performance context.
 - Any configured fit criteria, hard gates, minimum outline threshold, source-file requirements, destination, and output format.
-- Whether the run should recommend outline creation or remain monitor/triage-only. Do not claim that an outline was created unless a complementary proposal capability actually created it.
+- Whether the user-authorized run should create or draft outlines, recommend outlines, or remain monitor/triage-only. Preserve this policy in every run and report creation only after the requested artifact exists.
 - Whether the user wants the search preserved through MCP. Resolve it with `Search_Saved_Searches`, and use `Create_Saved_Search` or `Update_Saved_Search` only when the user explicitly requests that supported workspace mutation.
-- Check the connected tool catalog before offering automation actions; availability can differ by server and account. If the external host supports scheduling, provide this workflow as the scheduled prompt and let the host own the cadence. Otherwise return a manual rerun checklist and the reusable saved search; never imply that scheduling occurred.
+- This package uses the full GovTribe endpoint without GovTribe automation operations. If the external host supports scheduling, provide this workflow as the scheduled prompt and let the host own the cadence. Otherwise return a manual rerun checklist and the reusable saved search; never imply that scheduling occurred.
 
 If the saved search, company context, or outline policy cannot be resolved well enough to make a defensible call, stop and return the missing inputs instead of guessing.
 
@@ -23,7 +23,7 @@ If the saved search, company context, or outline policy cannot be resolved well 
 
 ### 1. Read run context first
 - Identify the saved search and what triggered this run.
-- If the task is to schedule or revise the monitor, return the reusable prompt, cadence, saved-search identity, deduplication rule, and manual verification steps. Ask the external host to schedule it only when the host exposes that native capability; otherwise state that the user must rerun it manually.
+- If the task is to schedule or revise the monitor, return the reusable prompt, cadence, saved-search identity, deduplication rule, and manual verification steps. Execute host-native scheduling only when the user requested it and the host exposes that capability, then verify the saved schedule; otherwise state that the user must rerun it manually.
 - Use included record details first when the run provides full records.
 - If only GovTribe IDs are provided, retrieve the records before ranking, gating, or outlining.
 - Say when the saved-search result set is truncated, stale, partially inaccessible, or missing key fields.
@@ -54,7 +54,7 @@ Use the user's company strengths, vehicles, certifications, geography, buyer pri
 - Run hard gates before outline decisions: access path, vehicle, set-aside, geography, due date, source availability, company fit, past-performance fit, staffing, compliance, and economics.
 
 ### 5. Decide whether to proceed to proposal outline
-- Default threshold: recommend annotated outlines only for `BID` or "BID_WITH_PARTNER"; report creation only when a complementary proposal capability actually executes it.
+- Default threshold: create or draft annotated outlines only for `BID` or "BID_WITH_PARTNER" when the user-authorized run policy requests creation; otherwise recommend them. Use `govtribe-proposal-workflows` from its own installed root and report creation only after verifying the artifact.
 - Allow configured equivalents, such as including "SUB_ONLY", only when the saved run policy explicitly says the team wants that posture outlined.
 - Never create annotated outlines for every saved-search result.
 - Do not outline "NO_BID", low-confidence, watch-only, missing-source, monitor-only, or hard-gate-failure records.
@@ -70,7 +70,7 @@ Before handing off to proposal construction, confirm:
 If readiness fails, return `outline blocked` with the exact missing files, questions, or access issues.
 
 ### 7. Hand off to proposal construction
-- Use a complementary proposal skill and its annotated-outline workflow when installed. Otherwise return a provider-neutral outline handoff with target record IDs, source IDs, requirement findings, bid/no-bid rationale, company context, teammate assumptions, blockers, and output preferences.
+- Use the bundled `govtribe-proposal-workflows` and its Build Annotated Proposal Outline workflow from its own installed root for qualified outline-ready targets. If the host cannot produce the requested format, retain the evidence-backed Markdown outline and a handoff identifying unsupported format or rendering steps.
 - Pass target record IDs, source IDs, requirement findings, bid/no-bid rationale, company context, teammate assumptions, and configured output preferences.
 - Do not duplicate the annotated-outline method in this workflow. Capture owns qualification; the proposal-construction capability owns outline creation.
 
@@ -102,7 +102,7 @@ Watch the new results from this saved search and qualify them before doing any p
 
 Assume we are a [business type] with strengths in [capabilities], [vehicles/certifications], [past performance], and [target buyers/geographies]. Treat go/no-go as the same decision family as bid/no-bid. Use BID, BID_WITH_PARTNER, SUB_ONLY, MONITOR_AND_SHAPE, or NO_BID where possible.
 
-Only recommend an annotated proposal outline for targets that pass the gate as BID or BID_WITH_PARTNER, unless this run explicitly says to include another threshold. If a complementary proposal capability is installed and actually creates an outline, report that action distinctly. Do not claim outline creation for weak fits, watch-only records, NO_BID records, monitor-only runs, missing source packages, or targets with hard gate failures.
+Only create, draft or recommend an annotated proposal outline according to the user-authorized run policy for targets that pass the gate as BID or BID_WITH_PARTNER, unless this run explicitly says to include another threshold. Use the bundled proposal workflow, verify the artifact and report actual creation distinctly. Do not claim outline creation for weak fits, watch-only records, NO_BID records, monitor-only runs, missing source packages, or targets with hard gate failures.
 
 For each new match, report the gate decision, evidence, outline status, blockers, artifacts created or recommended, and the next capture or proposal action.
 ```

@@ -32,6 +32,8 @@ Pick the date field that matches the user's intent, then confirm the field exist
 | User intent | Common field |
 | --- | --- |
 | Awards issued during a period. | `award_date_range` |
+| Federal transaction activity during a period. | `transaction_date_range` |
+| Federal transaction effective dates during a period. | `transaction_effective_date_range` |
 | Opportunities posted during a period. | `posted_date` |
 | Opportunities due during a period. | `due_date_range` |
 | Current contract or award completion timing. | `current_completion_date_range` |
@@ -43,6 +45,28 @@ Pick the date field that matches the user's intent, then confirm the field exist
 For aggregation-first scans, apply the date filter before requesting aggregations so the rollup summarizes the intended cohort.
 
 ## Common date tasks
+
+### Federal transaction periods and award cohorts
+
+On [Search federal transactions MCP tool](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-transactions-mcp-tool), use `transaction_date_range` for transaction activity and `transaction_effective_date_range` for the stored effective date. Use `award_date_range` to select the immediate parent's award-date cohort where that date is available. These dates answer different questions: a 2025 modification to a 2022 award can match a 2025 transaction period while falling outside a 2025 award cohort.
+
+Transaction date-range bounds are inclusive. Date-only values include the first and final calendar days in UTC; explicit ISO timestamps preserve their time and offset. A transaction without the selected date does not match that range. Historical transaction and effective dates can differ, so choose the stored date that matches the question.
+
+FY2024 runs from October 1, 2023 through September 30, 2024. This request summarizes prime contract transaction activity in that fiscal year. It does not restrict results to awards first issued in FY2024. See [Aggregations and leaderboards](https://govtribe.com/docs/govtribe-for-agents/guides/aggregations-and-leaderboards) for signed amount interpretation.
+
+Tool: `Search_Federal_Transactions`
+
+```json
+{
+  "transaction_types": ["contract_award", "contract_idv"],
+  "transaction_date_range": {
+    "from": "2023-10-01",
+    "to": "2024-09-30"
+  },
+  "aggregations": ["dollars_obligated_stats"],
+  "per_page": 0
+}
+```
 
 ### Recent records
 

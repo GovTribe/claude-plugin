@@ -162,7 +162,9 @@ Use for state/local opportunities, awards, IDVs, vehicles, states, and jurisdict
 - State/local action plan and relationship path.
 
 ## Personalization and customization rules
-Use GovTribe AI user context to tailor relevance, not to overwrite facts.
+
+Resolve the intended reader and decision before drafting the executive takeaway or visual brief. A company dossier for internal partner selection should emphasize evidenced fit and gaps; a buyer-facing profile should connect supported capabilities to that buyer's mission. Honor the user's audience over either default. Tailor emphasis without hiding relevant uncertainty or presenting conceptual imagery as proof.
+Use available user/company context to tailor relevance, not to overwrite facts. When GovTribe AI-injected context is absent, ask only for facts that materially change a gate, score, relevance judgment or recommendation; otherwise continue with public data and state the assumption.
 
 - Custom instructions: follow response-style or role preferences unless they conflict with higher-priority instructions.
 - Memories: use stable user facts or preferences to tune emphasis.
@@ -189,6 +191,16 @@ Do not expose raw internal source labels, tool tokens, placeholder citation text
 - Do not include every raw row in the rendered document. Put exhaustive raw tables in companion CSV or JSON only when needed.
 - Keep the first page focused on the decision snapshot, executive takeaway, and the first material implication.
 - For DOCX output, use `scripts/deep_dive_markdown_to_docx.py` when available, then validate and visually inspect through the external host's document capability. If rendering is unavailable, deliver the validated Markdown or DOCX plus the Markdown fallback and state that visual QA was not performed.
+
+## Optional company and system illustrations
+
+Use conceptual imagery only when requested or when it explains the dossier's company/system context. Build a self-contained visual brief: intended reader and decision, supported company/system facts, mission context for government-facing material, evidenced fit/gaps for internal capture or partners, established palette/type style, composition, aspect ratio, placement, caption and alt text. Honor explicit audience overrides. Reuse approved customer assets when appropriate. Generate or edit conceptual artwork only through an actually available host image capability; it is not a GovTribe MCP tool. Distinguish proposed concepts from verified assets or past performance; artwork is not a source for factual claims or a substitute for the evidence ledger.
+
+Keep a caption and informative alt text with the selected image. The Markdown-to-DOCX converter supports text/tables, not image embedding: convert the validated dossier text first, then insert figures through the host's document-authoring capability before its final render/QA loop. Do not pass Markdown image syntax through the converter and assume it became a picture. Retain source Markdown, selected image bytes and page/section placement information for rebuilding.
+
+Keep important facts, citations, labels, tables, data marks, scales and precise diagrams editable/deterministic; do not bake important text or quantitative charts into conceptual art. Reuse the image for text-only edits; for a requested image change replace its selected occurrence and compare approved text, layout and unaffected images. Inspect the completed DOCX and any exported PDF at final size and refresh their QA evidence.
+
+Use actual image bytes from an authorized attachment/download or the host's generation result. Vector retrieval is not an image-access path. Preserve original and edited assets, aspect ratio, selected occurrence and placement; inspect the saved asset before insertion. A host-created image has no automatic GovTribe User File ID. If generation is unavailable, reuse an authorized supplied asset, use an appropriate deterministic diagram, or omit optional decoration. Disclose an explicitly requested illustration that could not be created. If the original image or document revision is unavailable, request that exact attachment when needed; do not silently rebuild from extracted text. When final rendering is unavailable, retain the editable source and Markdown fallback and report the unverified visuals separately from structural checks.
 
 ## Validation
 When execution is available, validate generated Markdown before final delivery:

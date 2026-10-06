@@ -39,7 +39,9 @@ def load_openpyxl() -> int:
         from openpyxl import load_workbook as openpyxl_load_workbook
         from openpyxl.utils import get_column_letter as openpyxl_get_column_letter
         from openpyxl.worksheet.page import PageMargins as OpenPyxlPageMargins
-        from openpyxl.worksheet.properties import PageSetupProperties as OpenPyxlPageSetupProperties
+        from openpyxl.worksheet.properties import (
+            PageSetupProperties as OpenPyxlPageSetupProperties,
+        )
     except ModuleNotFoundError:
         print(
             "DEGRADED: openpyxl is unavailable. Use the external host's spreadsheet "
@@ -137,14 +139,38 @@ def adjust_row_heights(ws, max_col: int, max_row: int) -> None:
         max_lines = 1
         for col_idx in range(1, max_col + 1):
             cell = ws.cell(row=row_idx, column=col_idx)
-            max_lines = max(max_lines, estimated_lines(cell.value, effective_column_width(ws, col_idx)))
+            max_lines = max(
+                max_lines,
+                estimated_lines(cell.value, effective_column_width(ws, col_idx)),
+            )
 
         if max_lines > 1:
             ws.row_dimensions[row_idx].height = min(max(18, max_lines * 15), 120)
 
 
-def prepare_sheet(ws) -> None:
+def prepare_sheet(ws, contract_mode: bool = False) -> None:
+    if contract_mode:
+        if str(ws.print_area or "").strip():
+            return
+        populated = [cell for row in ws for cell in row if is_populated(cell.value)]
+        if not populated:
+            return
+        max_col = max(cell.column for cell in populated)
+        max_row = max(cell.row for cell in populated)
+        for merged in ws.merged_cells.ranges:
+            if is_populated(ws.cell(merged.min_row, merged.min_col).value):
+                max_col = max(max_col, merged.max_col)
+                max_row = max(max_row, merged.max_row)
+        ws.print_area = f"A1:{get_column_letter(max_col)}{max_row}"
+        return
     max_col = SHEET_COLUMNS.get(ws.title, ws.max_column)
+    for row in ws.iter_rows():
+        for cell in row:
+            if is_populated(cell.value):
+                max_col = max(max_col, cell.column)
+    for merged in ws.merged_cells.ranges:
+        if is_populated(ws.cell(merged.min_row, merged.min_col).value):
+            max_col = max(max_col, merged.max_col)
     max_row = last_populated_row(ws, max_col)
     last_col = get_column_letter(max_col)
 
@@ -156,17 +182,41 @@ def prepare_sheet(ws) -> None:
     ws.page_setup.fitToHeight = 0
     ws.page_setup.scale = None
     ws.sheet_properties.pageSetUpPr = PageSetupProperties(fitToPage=True)
-    ws.page_margins = PageMargins(left=0.25, right=0.25, top=0.4, bottom=0.4, header=0.2, footer=0.2)
+    ws.page_margins = PageMargins(
+        left=0.25, right=0.25, top=0.4, bottom=0.4, header=0.2, footer=0.2
+    )
 
     adjust_row_heights(ws, max_col, max_row)
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Prepare a GovTribe proposal workbook for visual rendering.")
+    parser = argparse.ArgumentParser(
+        description="Prepare a GovTribe proposal workbook for visual rendering."
+    )
     parser.add_argument("workbook", type=Path, help="Input .xlsx workbook")
-    parser.add_argument("--output", type=Path, help="Output .xlsx path. Defaults to overwriting with --in-place.")
-    parser.add_argument("--in-place", action="store_true", help="Overwrite the input workbook")
+    parser.add_argument(
+        "--output",
+        type=Path,
+        help="Output .xlsx path. Defaults to overwriting with --in-place.",
+    )
+    parser.add_argument(
+        "--in-place", action="store_true", help="Overwrite the input workbook"
+    )
+    parser.add_argument(
+        "--profile", choices=("eleven-sheet", "contract"), default="eleven-sheet"
+    )
+    parser.add_argument("--contract", type=Path)
     args = parser.parse_args()
+    if args.profile == "contract":
+        from proposal_contract import read_contract
+
+        try:
+            if args.contract is None:
+                raise ValueError("Contract profile requires --contract")
+            read_contract(args.contract)
+        except Exception as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            return 1
 
     if not args.workbook.exists():
         print(f"ERROR: workbook not found: {args.workbook}")
@@ -182,9 +232,16 @@ def main() -> int:
     output = args.workbook if args.in_place else args.output
     wb = load_workbook(args.workbook)
 
+    if args.profile == "eleven-sheet" and set(wb.sheetnames) != set(SHEET_COLUMNS):
+        print(
+            "ERROR: Non-template layout requires --profile contract --contract contract.json",
+            file=sys.stderr,
+        )
+        return 1
+
     prepared = []
     for ws in wb.worksheets:
-        prepare_sheet(ws)
+        prepare_sheet(ws, contract_mode=args.profile == "contract")
         prepared.append(ws.title)
 
     wb.save(output)

@@ -46,7 +46,7 @@ Use this reference when the user wants the most likely vendors or recipients for
 - Score candidates on direct scope overlap, repeated wins, same agency or customer, same classification or program, same vehicle or assistance pattern, similar value range, recent relevant activity, and eligibility fit.
 - Normalize awardees with `Search_Vendors` only when entity consolidation or parent-child structure materially affects the ranking.
 - Exclude candidates that are only keyword-adjacent, structurally mismatched, or too thinly supported.
-- If any ranked bidder is a credible teaming partner rather than a head-on competitor, use `./team-on-an-opportunity.md` to discover whether they have already created a teaming interest on the opportunity.
+- If any ranked bidder is a credible teaming partner rather than a head-on competitor, use `references/team-on-an-opportunity.md` to discover whether they have already created a teaming interest on the opportunity.
 
 ## Output contract
 - Return a short target-opportunity summary, a compact search-approach note, a comparable-market summary, a ranked likely-bidders table, a short exclusion section, and confidence.

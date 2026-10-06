@@ -17,7 +17,7 @@ Use this reference when the user wants a rigorous black hat review of one opport
 - Required: one specific opportunity or resolvable procurement target.
 - Strongly preferred: our company or team context.
 - Helpful: likely bidders, incumbent hypothesis, solicitation files, amendments, Q&A, and pricing context.
-- If the likely bidder field is missing, build it first with `./likely-bidders.md`.
+- If the likely bidder field is missing, build it first with `references/likely-bidders.md`.
 - If our side is missing, still review the field, but label our-position judgments as lower-confidence.
 
 ## Workflow
@@ -71,7 +71,7 @@ Use this reference when the user wants a rigorous black hat review of one opport
   - relevance: scope, customer, contract or assistance structure, size, recency, and place or security fit
   - credibility: source quality, cross-source agreement, recency, and data completeness
 - Use a neutral fallback when relevant past performance data is genuinely absent instead of treating no evidence as either a strength or a failure.
-- Use `./past-performance-match.md` when the competitor past-performance picture needs a deeper evidence pass.
+- Use `references/past-performance-match.md` when the competitor past-performance picture needs a deeper evidence pass.
 
 ### 5. Model price-to-win and realism separately
 - Do not reduce pricing to a hand-wavy “probably low” judgment.
@@ -79,14 +79,14 @@ Use this reference when the user wants a rigorous black hat review of one opport
 - Produce bidder-specific price posture such as aggressive, mid-pack, or premium.
 - Keep a realism view distinct from simple price posture when the contract type or evaluation method makes realism material.
 - Pressure-test any countermeasure against our own margin floor before recommending it.
-- When price-band evidence or realism materially changes the review, use `Search_Federal_Contract_Awards`, `Search_Federal_Transactions`, `Search_GSA_Labor_Rates`, `BLS_Occupational_Wage_Data`, `Search_Line_Items`, or `Search_Service_Contract_Inventory` as appropriate to the requirement. A complementary pricing capability may do the detailed model when installed; otherwise return a bounded pricing-evidence handoff and label missing cost or execution inputs.
+- Use the `govtribe-pricing-data` skill only when price-band evidence or realism materially changes the review.
 
 ### 6. Emulate the evaluator, not just the competitor
 - Run the review through the `evaluation_model`, not through free-form prose.
 - For each serious bidder, produce two views:
   - evaluator view: likely standing by factor, with probable strengths, weaknesses, deficiencies, significant weaknesses, and risks where the method supports those distinctions
   - competitor view: likely win themes, likely attack themes against us, likely teaming move, and likely price posture
-- Use `./gao-bid-protest-evidence.md` when protest history, prior GAO decision text, or agency protest outcomes materially sharpen bidder attack themes, evaluator vulnerabilities, or risk mitigation.
+- Use `references/gao-bid-protest-evidence.md` when protest history, prior GAO decision text, or agency protest outcomes materially sharpen bidder attack themes, evaluator vulnerabilities, or risk mitigation.
 - In `tradeoff` buys, keep discriminator-oriented factor scorecards.
 - In `lpta` buys, switch non-price scoring to acceptability and price to low-price ranking. Do not pretend tradeoff logic applies when it does not.
 
@@ -105,7 +105,7 @@ Use this reference when the user wants a rigorous black hat review of one opport
   - expected `P(win)` lift
   - proposal effort
   - margin impact
-- Use `./conduct-bid-no-bid-review.md` only when a countermeasure needs to be checked against our own economic posture or pursuit posture.
+- Use `references/conduct-bid-no-bid-review.md` only when a countermeasure needs to be checked against our own economic posture or pursuit posture.
 
 ### 8. Keep uncertainty and evidence first-class
 - Every major claim should carry:

@@ -68,7 +68,7 @@ State and local contract data does not have a separate program layer like federa
 
 ## Coverage
 
-GovTribe collects state and local contract records directly from public procurement sources. As of August 2026, coverage includes about 885,000 opportunities, 985,000 awards, 21,000 IDVs, and 2,200 contract vehicles.
+GovTribe collects state and local contract records directly from public procurement sources. As of August 2026, coverage includes about 895,000 opportunities, 985,000 awards, 21,000 IDVs, and 2,200 contract vehicles.
 
 Coverage differs by record type. Opportunity coverage is broad and includes statewide and local government sources. Award, IDV, and vehicle coverage is state-level only and limited to a smaller set of states.
 
@@ -76,7 +76,7 @@ Coverage differs by record type. Opportunity coverage is broad and includes stat
 
 Each data type page describes its coverage:
 
-- [State and local contract opportunity coverage](https://govtribe.com/docs/data-model/data-types/state-and-local-contract-opportunity#coverage): statewide sources for all 50 states and the District of Columbia, multi-buyer procurement portals, and local buyers with dedicated collection sources.
+- [State and local contract opportunity coverage](https://govtribe.com/docs/data-model/data-types/state-and-local-contract-opportunity#coverage): statewide sources across all 50 states and the District of Columbia, multi-buyer procurement platforms, and local governments with their own dedicated collection sources. In many states the statewide source also carries solicitations from local buyers in that state, though this varies by state.
 - [State and local contract award coverage](https://govtribe.com/docs/data-model/data-types/state-and-local-contract-award#coverage): statewide sources in ten states.
 - [State and local contract IDV coverage](https://govtribe.com/docs/data-model/data-types/state-and-local-contract-idv#coverage): statewide sources in nine states.
 - [State and local contract vehicle coverage](https://govtribe.com/docs/data-model/data-types/state-and-local-contract-vehicle#coverage): statewide sources in six states.

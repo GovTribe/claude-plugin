@@ -1,7 +1,7 @@
 # Skill sources
 
-The five skills are based on GovTribe Skills 1.0.0. The [source inventory](skill-source.json) records the original hashes of all 157 files and identifies files adapted for Claude.
+The eight skills are imported from GovTribe Skills 1.1.0. The [source inventory](skill-source.json) records the SHA-256 hashes of all 232 skill files. These files match the reviewed release without further adaptation.
 
-The adaptations cover skill selection, connection guidance, source citations, user authorization, proposal requirement checks, available scheduling capabilities, and relative asset links. Reference material, templates, schemas, and Python helpers are otherwise preserved.
+The release includes the five research and proposal workflows plus file templates, document editing, and GovCon writing. Supporting references, templates, schemas, and Python helpers are included.
 
-The source archive SHA-256 is `d0f6f69644e4737a0a6c42f15c976244c8a0744ed5e182380fdc95016a794571`.
+The Claude provider archive SHA-256 is `dde25f72434776051b81fa4a4dbbd0ceab3a35baf00a8982b6d14dd25ac47607`.

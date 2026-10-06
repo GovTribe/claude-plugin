@@ -50,7 +50,7 @@ Never promote a common industry practice into a compliance requirement without s
 - Preserve the base solicitation-intelligence, compliance, workbook, annotated-outline, response-drafting, template-filling, validator, and render-QA procedures.
 - Use industry context to sharpen source inventories, extraction targets, questions/risks, outline architecture, evidence needs, workbook rows, and handoffs.
 - Do not invent capabilities, credentials, certifications, staffing, pricing, technical status, licenses, or commitments.
-- Route unresolved pricing analysis to an appropriate pricing workflow and pursuit qualification to an appropriate capture workflow.
+- Hand pricing analysis to `govtribe-pricing-data` and pursuit qualification to `govtribe-capture-workflows`.
 
 ## Current-rule verification
 

@@ -11,7 +11,7 @@ Use this reference when the user asks for price to win, PTW, a target bid range,
 
 A terse prompt such as `ptw` is actionable when the conversation already contains an opportunity, pursuit, delivery order, solicitation, attached pricing files, or a proposed price.
 
-- Recover the active target and available files before asking a question.
+- Recover and preserve the selected record, its identifier and established type, and the supplied files and pricing context before asking a question. Do not repeat resolution or retrieval when that context already supports the analysis.
 - Reuse previously resolved buyer, office, vehicle, incumbent, contract type, period of performance, CLINs, and likely competitors.
 - Ask one bounded clarification only when multiple active targets exist or the missing choice materially changes the analysis, such as quick sanity check versus full PTW model.
 - Do not respond with a generic definition of PTW when target context is available.
@@ -20,7 +20,7 @@ A terse prompt such as `ptw` is actionable when the conversation already contain
 
 Produce a defensible range rather than a single unsupported number, explain the evidence and confidence, compare any proposed price, and identify the pricing actions needed next.
 
-Pricing Data owns the primary range, rate, staffing, FTE, wrap, and comparable-price analysis. When the user needs bid/no-bid, P(win), teaming, or pursuit-posture implications, preserve the result as a capture-analysis handoff without assuming another packaged skill is installed.
+Pricing Data owns the primary range, rate, staffing, FTE, wrap, and comparable-price analysis. Hand the result to the bundled `govtribe-capture-workflows` skill when the user needs bid/no-bid, P(win), teaming, or pursuit-posture implications.
 
 ## Inputs to resolve
 
@@ -46,13 +46,28 @@ Proceed with a bounded analysis when some inputs are missing; state what the mis
 
 Inspect the solicitation, pricing sheets, CLIN structure, amendments, Q&A, wage determinations, staffing exhibits, and evaluation language when available. Preserve the value basis of every price signal.
 
-For GovTribe files, resolve the opportunity and attachments with `Search_Federal_Contract_Opportunities` and `Search_Government_Files`. Stage the smallest useful supported package with `Add_To_Vector_Store`, wait until the requested files are ready, and use focused `Search_Vector_Store` queries for pricing instructions, CLINs, evaluation rules, wage determinations, staffing, and amendments. Cite returned source metadata through the external host's native citation format. If a material spreadsheet or unsupported attachment is skipped, use the host's attachment or spreadsheet capability; if none exists, disclose the gap and request a supported export only when it changes the PTW conclusion.
+Use the selected record and supplied source package first. When additional resolution is needed, choose the tool for the established target type:
+
+- Federal opportunity: `Search_Federal_Contract_Opportunities`.
+- State/local opportunity: `Search_State_And_Local_Contract_Opportunities`.
+- Award, order, or IDV: use the matching federal or state/local operations in step 2.
+- Pursuit with an unresolved linked target: use `Search_Pursuits` to recover that target, then follow its established record type. Preserve the pursuit context and do not create or change a pursuit to perform pricing analysis.
+- Record type still unresolved: use `Search_GovTribe` to establish the type, then switch to the matching typed operation if further lookup is needed. Do not replace a selected target merely because another result is easier to retrieve.
+
+Find missing government attachments with `Search_Government_Files` using the selected record's supported filters; use `Search_User_Files` only when needed workspace source files are not already supplied. Use `Documentation` for current schemas and supported relationships rather than assuming identical filters across record types. If a required tool is unavailable, preserve the selected target, use supplied evidence for a bounded analysis, and state the gap; do not redirect a state/local target into federal datasets.
+
+When full source text is still needed, stage the smallest useful supported package with `Add_To_Vector_Store`, wait until the requested files are ready, review skipped and failed files, and use focused `Search_Vector_Store` queries for pricing instructions, CLINs, evaluation rules, wage determinations, staffing, and amendments. Cite returned source metadata through the external host's native citation format. If a material spreadsheet or unsupported attachment is skipped, use the host's attachment or spreadsheet capability; if none exists, disclose the gap and request a supported export only when it changes the PTW conclusion.
 
 ### 2. Direct lineage and historical performance
 
-For a delivery order or task order, trace the child award to the parent IDV or vehicle and gather historical obligations, period of performance, modifications, incumbent, and related orders when available.
+For a delivery order or task order, follow a parent IDV or vehicle relationship only when supported by the selected record or source documents. Gather historical obligations or other reported amounts, period of performance, modifications, incumbent, and related orders when available, preserving the source's value basis and relationship limits.
 
-Use `Search_Federal_Contract_Awards` to resolve the order or award and related order comparables, `Search_Federal_Contract_IDVs` to resolve its parent instrument, and `Search_Federal_Transactions` when modification or obligation movement matters. Use the bundled federal record-structure and award-value references for stable semantics, and call `Documentation` before relying on freshness-sensitive fields or filters.
+When existing context is insufficient and additional lookup is needed:
+
+- For federal targets, use `Search_Federal_Contract_Awards` for the award, order, or related order comparables and `Search_Federal_Contract_IDVs` for an established parent instrument. Use `Search_Federal_Transactions` only for a federal target when modification or obligation movement matters.
+- For state/local targets, use `Search_State_And_Local_Contract_Awards` for awards or orders represented in that dataset and `Search_State_And_Local_Contract_IDVs` for established parent instruments. Follow actual reported parent/vehicle relationships and source files for history; do not assume federal-style order lineage or invent a state/local transaction tool. Treat missing relationships or history as evidence gaps.
+
+Use the bundled federal record-structure and award-value references only for federal targets. For state/local targets, retain the semantics of the retrieved record and controlling source. Call `Documentation` before relying on freshness-sensitive fields, filters, or relationships for the chosen operations. Preserve the selected target and use the bounded supplied-evidence fallback above when a needed operation is unavailable.
 
 Do not treat parent ceiling, maximum value, or total IDIQ obligations as the likely price for one order.
 
@@ -130,8 +145,8 @@ For a fuller analysis, include:
 
 ## Normal chained workflows
 
-- If the follow-up is “write the submission email,” “draft the pricing cover note,” or another outbound proposal artifact, preserve the chosen price, assumptions, caveats, and active opportunity, then use the external host's document capability or return a complete Markdown draft when that capability is unavailable.
-- If the follow-up asks whether to bid, how PTW affects P(win), or whether a teammate changes the economics, preserve the pricing result as a capture-analysis handoff and clearly separate the new strategic judgment from the pricing evidence.
+- If the follow-up is “write the submission email,” “draft the pricing cover note,” or another outbound proposal artifact, hand off to the bundled `govtribe-proposal-workflows` skill while preserving the chosen price, assumptions, caveats, and active opportunity. Use the host's document capability or return a complete Markdown draft when that capability is unavailable. Drafting does not authorize sending.
+- If the follow-up asks whether to bid, how PTW affects P(win), or whether a teammate changes the economics, hand off to the bundled `govtribe-capture-workflows` skill, preserve the pricing result, and clearly separate the new strategic judgment from the pricing evidence.
 - These handoffs are expected workflow progression, not routing failures.
 
 ## Guardrails

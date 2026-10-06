@@ -10,7 +10,7 @@
       "name": "govtribe",
       "displayName": "GovTribe",
       "source": "./",
-      "description": "Government contracting research, capture, pricing, and proposal workflows using GovTribe.",
+      "description": "Government contracting research, capture, pricing, proposals, and source-backed document workflows using GovTribe.",
       "category": "productivity",
       "tags": [
         "government-contracting",

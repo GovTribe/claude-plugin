@@ -2,7 +2,7 @@
 
 # GovTribe
 
-Claude plugin containing the GovTribe MCP connection and five government contracting skills.
+Claude plugin containing the GovTribe MCP connection and eight government contracting skills.
 
 ## Requirements
 
@@ -15,10 +15,11 @@ MCP calls may consume GovTribe credits. Access to data and workspace actions fol
 
 ### Claude web, desktop, and Cowork
 
-1. Download the plugin ZIP from [Releases](https://github.com/GovTribe/claude-plugin/releases/latest). Keep the file zipped.
-2. Open **Customize → Plugins** in Claude and upload the ZIP. For Cowork, open the Cowork tab first.
-3. Open **Customize → Connectors**, select [GovTribe](https://claude.com/connectors/govtribe), and complete sign-in and authorization. Reuse an existing GovTribe connection if one is already connected.
-4. Start a new conversation. Select a skill from the `/` or `+` menu, or describe the task in your message.
+1. Open [GovTribe in the Claude plugin directory](https://claude.ai/customize/plugins/id/plugin_01H6qRziGtLHCr56JPBWyq82) and add the plugin.
+2. Open **Customize → Connectors**, select [GovTribe](https://claude.com/marketplace/connectors/govtribe), and complete sign-in and authorization. Reuse an existing GovTribe connection if one is already connected.
+3. Start a new conversation. Select a skill from the `/` or `+` menu, or describe the task in your message.
+
+For manual installation, download the plugin ZIP from [Releases](https://github.com/GovTribe/claude-plugin/releases/latest), keep it zipped, and upload it in **Customize → Plugins**. For Cowork, open the Cowork tab first. The directory version may lag the repository while a new release is under review.
 
 Where **Add marketplace** is available, add `https://github.com/GovTribe/claude-plugin` and install **GovTribe**. Marketplace installations support repository updates; ZIP installations are updated by uploading a newer release.
 
@@ -46,6 +47,9 @@ If GovTribe is already connected through your Claude.ai account, the skills can 
 | `govtribe-pricing-data` | Labor rates, staffing, pricing models, and price-to-win evidence |
 | `govtribe-deep-dive` | Research on an individual opportunity, award, agency, vendor, program, or jurisdiction |
 | `govtribe-proposal-workflows` | Solicitation extraction, compliance matrices, outlines, and proposal documents |
+| `govtribe-file-templates` | Templates for documents, workbooks, and presentations |
+| `govtribe-document-editing` | Requested edits, review annotations, revision checks, and artifact validation |
+| `govtribe-govcon-writing` | Source-backed proposal narratives, RFI replies, and official correspondence |
 
 In Claude Code, skills use the `/govtribe:` prefix, for example `/govtribe:govtribe-deep-dive`.
 
@@ -54,6 +58,8 @@ Example requests:
 - “Find NASA's federal agency record in GovTribe and cite the source.”
 - “Calculate the FTEs required for 36,000 annual labor hours at 1,800 productive hours per FTE.”
 - “Build a compliance checklist from this solicitation and its amendments.”
+- “Choose a template for our capture brief and adapt it using these sources.”
+- “Apply these review comments to the selected document and check the saved revision.”
 
 The plugin connects to `https://govtribe.com/mcp`. Available tools depend on the connected account and client. Skills include reference guides, templates, and optional Python helpers for document and spreadsheet outputs. Workspace changes and outbound messages require a user request.
 

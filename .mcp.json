@@ -1,8 +1,8 @@
 {
-  "mcpServers": {
-    "govtribe": {
-      "type": "http",
-      "url": "https://govtribe.com/mcp"
+    "mcpServers": {
+        "govtribe": {
+            "type": "http",
+            "url": "https://govtribe.com/mcp"
+        }
     }
-  }
 }

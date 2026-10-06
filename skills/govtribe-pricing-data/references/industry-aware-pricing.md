@@ -54,7 +54,7 @@ Resolve the dominant unit of competition:
 - Preserve the base staffing, PTW, BLS, GSA, line-item, SCI, and pricing-model procedures.
 - Use industry context to sharpen cost drivers, evidence preferences, scenario variables, sensitivities, and failure modes.
 - When a source is unavailable, state the limitation and use transparent assumptions rather than fabricated precision.
-- Preserve the selected range and assumptions when continuing into capture implications. For proposal artifacts, use the external host's document or spreadsheet capability when available, with a complete Markdown or CSV fallback when it is not.
+- Hand pursuit implications to `govtribe-capture-workflows` and proposal artifacts to `govtribe-proposal-workflows` while preserving the selected range and assumptions. Use the host's document or spreadsheet capability for the requested artifact, with a complete Markdown or CSV fallback when unavailable.
 
 ## Current-rule verification
 

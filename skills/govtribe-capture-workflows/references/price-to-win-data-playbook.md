@@ -75,7 +75,7 @@ Do not infer private competitor intentions. Phrase likely-bidder analysis as pro
 
 ### 6. Retrieve rate and pricing data
 
-When rate or line-item evidence is needed, use `Search_GSA_Labor_Rates`, `BLS_Occupational_Wage_Data`, `Search_Line_Items`, and `Search_Service_Contract_Inventory` as appropriate. A complementary pricing skill may perform detailed normalization when installed; otherwise retrieve and label:
+Use `govtribe-pricing-data` when rate or line-item evidence is needed. Retrieve:
 
 - GSA MAS or other contract vehicle labor rates
 - IDIQ/GWAC/BPA schedule rates

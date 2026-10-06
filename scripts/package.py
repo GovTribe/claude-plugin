@@ -21,7 +21,7 @@ def package():
         raise ValueError("Refusing to package symlinks")
     total = sum(p.stat().st_size for p in files)
     if len(files) > 5000 or total > 200 * 1024 * 1024:
-        raise ValueError("Package exceeds Claude's documented upload limits")
+        raise ValueError("Package exceeds the repository upload budget")
     out = ROOT / "dist"
     out.mkdir(exist_ok=True)
     archive = out / f"govtribe-{version}.zip"
