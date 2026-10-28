@@ -195,13 +195,21 @@ Tool: `Search_Federal_Contract_Opportunities`
 }
 ```
 
+## Handle semantic rate limits
+
+This error means the search did not complete. It contains no results, including partial keyword hits or hits from other datasets. `retryable: true` describes a temporary failure; it does not schedule a retry or specify a delay.
+
+Choose the next call based on the task: retry later, use a supported typed keyword search, or use known identifiers or exact documentation selectors. Check the selected tool's schema first. Keyword search and similarity search have different behavior: a `similar_filter` can still require semantic retrieval even with `search_mode: "keyword"`. Alternative retrieval may have different coverage, so disclose any gap that affects the answer.
+
+See the [Search GovTribe MCP response](https://govtribe.com/docs/govtribe-for-agents/mcp-tool-responses/search-govtribe-mcp-tool-response) for the error envelope. GovTribe AI's typed search tools preserve the same JSON for direct calls and permitted programmatic calls. Documentation supports direct calls only.
+
 ## Related articles
 
 - [Troubleshoot search results](https://govtribe.com/docs/govtribe-for-agents/guides/troubleshoot-search-results): Adjust GovTribe MCP search calls when results are too broad, too narrow, unrelated, or missing expected records.
 - [Filter by related records and hierarchies](https://govtribe.com/docs/govtribe-for-agents/guides/filter-by-related-records-and-hierarchies): Understand how MCP filters can match through agencies, categories, organizations, contacts, jurisdictions, parent records, and related records.
 - [Manage search context](https://govtribe.com/docs/govtribe-for-agents/guides/manage-search-context): Use aggregations and focused `fields_to_return` values before requesting richer records.
 - [MCP tools](https://govtribe.com/docs/govtribe-for-agents/tools): Review tool-specific arguments, supported search modes, filters, fields, sorts, and aggregation keys.
-- [Search GovTribe](https://govtribe.com/docs/govtribe-for-agents/tools/search-govtribe-mcp-tool): Run an integrated GovTribe finder search across public and workspace indexes.
+- [Search GovTribe MCP tool](https://govtribe.com/docs/govtribe-for-agents/tools/search-govtribe-mcp-tool): Run an integrated GovTribe finder search across public and workspace indexes.
 
 ---
 

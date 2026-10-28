@@ -82,7 +82,8 @@ Tool: `Search_Federal_Contract_Awards`
   },
   "fields_to_return": ["govtribe_id", "name", "award_date", "dollars_obligated"],
   "sort": {
-    "awardDate": "desc"
+    "key": "awardDate",
+    "direction": "desc"
   }
 }
 ```
@@ -101,7 +102,8 @@ Tool: `Search_Federal_Contract_Opportunities`
   },
   "fields_to_return": ["govtribe_id", "name", "due_date", "federal_agency"],
   "sort": {
-    "dueDate": "asc"
+    "key": "dueDate",
+    "direction": "asc"
   }
 }
 ```
@@ -127,7 +129,8 @@ Tool: `Search_Federal_Contract_Awards`
     "contracting_federal_agency"
   ],
   "sort": {
-    "completionDate": "asc"
+    "key": "completionDate",
+    "direction": "asc"
   }
 }
 ```
@@ -152,7 +155,8 @@ Tool: `Search_Federal_Forecasts`
     "federal_agency"
   ],
   "sort": {
-    "estimated_solicitation_release_date": "asc"
+    "key": "estimated_solicitation_release_date",
+    "direction": "asc"
   }
 }
 ```
@@ -169,7 +173,7 @@ Tool: `Search_Vendors`
     "from": "now/d",
     "to": "now+6M/d"
   },
-  "sba_certifications": ["HUBZone"],
+  "sba_certifications": ["SBA Certified HUBZone Firm"],
   "fields_to_return": [
     "govtribe_id",
     "name",

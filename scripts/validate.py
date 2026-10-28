@@ -10,14 +10,6 @@ import sys
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_SKILLS = {
-    "govtribe-capture-workflows", "govtribe-deep-dive",
-    "govtribe-market-intelligence", "govtribe-pricing-data",
-    "govtribe-proposal-workflows",
-    "govtribe-file-templates", "govtribe-document-editing",
-    "govtribe-govcon-writing",
-}
-
 
 def validate(root=ROOT):
     errors = []
@@ -33,9 +25,12 @@ def validate(root=ROOT):
             errors.append(f"{path}: {exc}")
             return {}
 
+    provenance = read_json("docs/skill-source.json")
+    expected_skills = set(provenance.get("skills", []))
+    check(bool(expected_skills), "Imported source must declare its skill inventory")
     plugin = read_json(".claude-plugin/plugin.json")
     check(plugin.get("name") == "govtribe", "Plugin identifier must be govtribe")
-    check(plugin.get("displayName") == "GovTribe", "Plugin display name must be GovTribe")
+    check(plugin.get("displayName") == provenance.get("package_display_name"), "Plugin display name must be GovTribe")
     check(bool(re.fullmatch(r"\d+\.\d+\.\d+", plugin.get("version", ""))), "Invalid release version")
     check(plugin.get("skills") == "./skills/", "Root marketplace plugin must explicitly declare skills")
     check(not any(k in plugin for k in ("hooks", "agents", "dependencies")), "Unexpected executable components")
@@ -49,7 +44,7 @@ def validate(root=ROOT):
     check(bool(marketplace.get("description")), "Marketplace description is required")
     check(not (root / "hooks").exists(), "Unexpected hook directory")
     skills = sorted((root / "skills").glob("*/SKILL.md"))
-    check({p.parent.name for p in skills} == EXPECTED_SKILLS, "Expected exactly the eight GovTribe skills")
+    check({p.parent.name for p in skills} == expected_skills, "Skill inventory differs from imported source")
     for path in skills:
         body = path.read_text()
         match = re.match(r"\A---\n(.*?)\n---\n", body, re.S)
@@ -80,7 +75,6 @@ def validate(root=ROOT):
                 resolved = (path.parent / target).resolve()
                 check(resolved.is_relative_to(root.resolve()) and resolved.exists(),
                       f"Broken or escaping relative link: {path.relative_to(root)} -> {target}")
-    provenance = read_json("docs/skill-source.json")
     originals = provenance.get("files", {})
     adaptations = set(provenance.get("adapted_files", []))
     actual = {str(p.relative_to(root)) for p in (root / "skills").rglob("*") if p.is_file()}

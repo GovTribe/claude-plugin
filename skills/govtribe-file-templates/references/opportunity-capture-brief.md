@@ -1,6 +1,8 @@
 # Opportunity Brief
 
-Read only after resolving `opportunity-capture-brief`.
+Use after selecting `opportunity-capture-brief`.
 
-- Resolve the notice, solicitation, amendments, buyer, scope, response deadline and time zone before completing the brief. Separate confirmed requirements, inferred capture implications and open questions.
-- Keep the decision summary, procurement timeline, response controls and source citations usable. Do not carry the NIST example facts or its historical dates into a new opportunity.
+1. **Read the template before drafting.** Inspect every section and table prompt in the selected Word file; the detailed completion instructions are inside it. Use the NIST example for illustration only. Confirm the audience; external summaries should omit internal qualification and research-process commentary.
+2. **Establish the current opportunity.** Reuse the notice, source files and requirement map. Confirm buyer, scope, status, amendments, response deadline/time zone and submission instructions as of the brief. For missing source research or amendment reconciliation, use **Solicitation Intelligence and Compliance Extraction** (`govtribe-proposal-workflows` → `references/solicitation-intelligence-and-compliance-extraction.md`, from that skill's installed root).
+3. **Complete the brief.** Follow the template's prompts for the buyer's need, opportunity facts, requirements, risks, actions and sources. Preserve requirement conditions and alternatives, identify the source sections covered, and separate confirmed facts, capture implications and open questions. Make actions specific to the findings, with a date or trigger. For a requested pursuit recommendation, reuse **Bid / No-Bid Review** (`govtribe-capture-workflows` → `references/conduct-bid-no-bid-review.md`, from that skill's installed root).
+4. **Check the saved document.** Reconcile dates and response controls throughout; retain source versions, locators and links. Use [Template adaptation and revision checks](template-adaptation-and-revisions.md) for native file creation, revision, page inspection and delivery.

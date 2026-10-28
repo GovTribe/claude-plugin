@@ -1,116 +1,50 @@
 # Solicitation Intelligence and Compliance Extraction
 
-## Overview
-- Use this workflow when the user wants an RFP, solicitation, amendment, or source package read for requirements, deadlines, evaluation criteria, submission instructions, and compliance risks.
-- Stay in this workflow when the expected output is extraction, interpretation, risk triage, and next actions, not a full proposal artifact.
-- Prefer concise, source-backed guidance that helps a proposal or capture team decide what matters next.
-- If the user asks for a workbook, requirement matrix, compliance matrix, or Section L / Section M crosswalk artifact, switch to [Build Proposal Control Workbook](./build-proposal-control-workbook.md).
-- If the user asks for a writer-facing outline, storyboard, skeleton, or drafting package, switch to [Build Annotated Proposal Outline](./build-annotated-proposal-outline.md).
+## 1. Resolve the question and source package
 
-## Inputs to resolve
-Resolve as many of these inputs as are available from the request, GovTribe opportunity context, government files, user files, and conversation context. Do not block if some are missing.
-- Solicitation, RFP, RFQ, RFI, notice, task-order request, grant package, or bid package
-- Amendments, conformed solicitation files, Q&A, addenda, or revised attachments
-- Attachments, exhibits, PWS, SOW, SOO, CDRLs, referenced standards, pricing templates, forms, certifications, and reps and certs
-- GovTribe opportunity metadata, notice history, source links, file metadata, and relevant agency or jurisdiction context
-- User-provided business context, deadlines, priority questions, or known compliance concerns
+Reuse the active opportunity, supplied files and existing requirement register. Establish whether the request is a focused question or a full compliance shred.
 
-If critical source files are missing, produce a partial extraction, label the missing files, and explain which conclusions depend on those missing sources.
+Resolve missing context with [Search_Pursuits](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuits-mcp-tool), or the established opportunity type: [Search_Federal_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-opportunities-mcp-tool), [Search_State_And_Local_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-state-and-local-contract-opportunities-mcp-tool), or [Search_Federal_Grant_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-opportunities-mcp-tool). Use [Search_GovTribe](https://govtribe.com/docs/govtribe-for-agents/tools/search-govtribe-mcp-tool) when the type is unclear.
 
-## Source priority
-Use the strongest controlling source available:
+Find package files with [Search_Government_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-government-files-mcp-tool), using the resolved record's documented parent filter. Use supplied files directly; use [Search_User_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-user-files-mcp-tool) for needed company evidence or named prior work.
 
-1. Latest conformed solicitation or latest full solicitation package.
-2. Amendments, Q&A, addenda, and official clarifications that modify the solicitation.
-3. Attachments, exhibits, forms, pricing templates, PWS, SOW, SOO, CDRLs, referenced standards, and submission portals or instructions.
-4. GovTribe opportunity metadata, notice history, file metadata, and surrounding context.
-5. User-provided assumptions or business context.
+## 2. Establish controlling sources
 
-When sources conflict, prefer the latest controlling source and call out the conflict. Do not treat GovTribe metadata or snippets as a substitute for exact solicitation language when compliance depends on wording.
+Record source identity, filename/title, version or amendment, locators and coverage: full file, selected passages, missing or inaccessible. Preserve existing source IDs.
 
-Use prior user files only when the user asks to compare against earlier proposal work, reuse a prior format, or incorporate company-specific reusable material. Read [Prior User File Context](./prior-user-file-context.md) before searching prior files.
+Apply the solicitation's stated precedence. Otherwise reconcile the current solicitation and incorporated attachments with formal amendments and incorporated Q&A. Verify whether a conformed copy includes later changes; a newer upload or informal answer does not automatically supersede an instruction. Keep unresolved official-source conflicts visible. Government instructions control compliance; metadata, incumbent research and company context supply supporting evidence.
 
-## Retrieval guidance
-- Preserve the resolved target, provided source files and requested source scope. For needed record lookup or refresh, select the tool by established target type: `Search_Federal_Contract_Opportunities` for federal contract opportunities, `Search_State_And_Local_Contract_Opportunities` for state/local contract opportunities, `Search_Federal_Grant_Opportunities` for federal grant opportunities, or `Search_Pursuits` for pursuits. Use `Search_GovTribe` when the type remains unresolved; a solicitation number, notice ID, title or URL alone does not establish a federal-contract type. Use `Search_Government_Files` and `Search_User_Files` to build the source inventory.
-- Use snippets only for triage or source selection. If a snippet indicates that exact wording matters, retrieve the file text.
-- When `content_snippet`, metadata, or summarized context is not enough, use [Vector-Store Content Retrieval](govtribe-docs-vector-store-content-retrieval.md): call `Add_To_Vector_Store`, wait until the requested files are ready, then use focused `Search_Vector_Store` queries.
-- Use the external host's native citation format for source metadata returned with retrieved passages.
-- When vector retrieval skips pricing schedules, spreadsheet workbooks, CSV/TSV files, CLIN tables, budget templates, or staffing matrices, use the host's attachment or spreadsheet capability. If none is available, disclose the coverage gap, return a labeled Markdown or CSV partial result, and request a supported export only when the skipped content materially changes the answer.
-- Use `Documentation` for current MCP schemas, parameters, response fields, or freshness-sensitive behavior; use the bundled `govtribe-docs-*.md` references for stable guidance.
-- Preserve exact language for mandatory requirements, evaluation criteria, submission instructions, page limits, forms, certifications, set-aside or access constraints, and deadline rules.
+## 3. Extract and shred the files
 
-## Extraction targets
-Capture the solicitation intelligence needed for compliance triage:
-- Deadlines, time zones, question dates, site visit dates, submission dates, and amendment acknowledgement timing
-- Submission method, portal, delivery address, file naming, packaging, volume structure, signatures, copies, and format controls
-- Section L equivalents, instructions to offerors, required response content, mandatory attachments, and certifications
-- Section M equivalents, evaluation factors, subfactors, relative importance, price or cost treatment, past performance treatment, pass/fail criteria, adjectival or point-scored criteria, and discriminator language
-- Work requirements from PWS, SOW, SOO, statement of need, technical requirements, deliverables, and performance standards
-- Special contract requirements, representations, certifications, and SAM registration or reps and certs currency requirements
-- Pricing instructions, CLINs, cost elements, pricing templates, basis of award, options, and required price narratives
-- Page limits, font, spacing, margin, file size, redaction, branding, table, graphics, and appendix rules
-- Forms, representations, certifications, security, clearance, facility, small-business, set-aside, vehicle, registration, and access constraints
-- Proposal risks, ambiguities, missing files, conflicting instructions, unstated assumptions, and likely Q&A candidates
+- **Focused question:** retrieve the relevant passages, surrounding context and applicable amendments using native file access or the [vector-store retrieval guide](https://govtribe.com/docs/govtribe-for-agents/guides/vector-store-content-retrieval). Answer that question without creating a full requirement register.
+- **Full compliance shred:** extract text and tables from every package file. Review each document section by section in manageable batches, preserving page, section and table locations. Track sections reviewed and unreadable or missing content. Use vector search to locate and cross-check requirements; retrieved chunks alone do not establish complete coverage.
 
-## Amendment and Q&A deltas
-When amendments, addenda, revised attachments, or Q&A are present:
-- Identify changed deadlines, submission instructions, pricing templates, scope requirements, evaluation criteria, page limits, attachments, and forms.
-- Distinguish added, removed, replaced, and clarified requirements.
-- Flag whether each change affects compliance, pricing, schedule, review strategy, or proposal content.
-- Avoid keeping stale pre-amendment language as the controlling rule unless the later source explicitly preserves it.
-- If the amendment set appears incomplete, say which amendment or Q&A files are missing before drawing final conclusions.
+Use the host's document, PDF and spreadsheet tools or a small extraction script. GTAI follows the [hosted-shell guide](https://govtribe.com/docs/govtribe-for-agents/guides/use-search-results-and-user-files-in-the-hosted-shell); external MCP clients use supplied or downloaded originals with native file/code capabilities. Apply OCR to scans and inspect forms or tables visually when extraction loses content. If originals or extraction are unavailable, provide the supported partial review and identify the uncovered files or sections.
 
-## Procedure
+Identify **what to submit**, **how it is evaluated**, and **what must be performed**, wherever those requirements appear. Connect related instructions: a resume request in an attachment, its evaluation criterion in Section M and personnel qualifications in the PWS. Evaluation criteria may need coverage without an explicit command; background with no response implication need not become a row.
 
-### 1) Build the source inventory
-- List every source reviewed, including title or filename, source type, date or amendment number when available, and whether full text or only metadata/snippets were available.
-- Identify the controlling source package and any missing or partial files.
-- Separate government-provided source files from GovTribe metadata and user-provided context.
-- Do not stop at Section L and Section M when the package contains work requirements, special contract requirements, representations, certifications, attachments, or referenced standards elsewhere.
+Preserve existing requirement IDs and add IDs only for new items. Split independently missable commands, artifacts and discriminators. Retain exact wording separately from interpretation, with source ID and page, section, paragraph, table, form field or Q&A number. Link required action, response location, evidence and responsible role when useful. Label inferred needs and internal controls separately from source requirements. Retain requirements supported by explicit user text or verified excerpts with that provenance and coverage; missing originals limit coverage and form completion without establishing unsupplied acknowledgment instructions or form fields.
 
-### 2) Extract the compliance-critical facts
-- Pull deadlines, submission controls, Section L equivalents, Section M equivalents, work requirements, deliverables, pricing instructions, page limits, forms, certifications, and access constraints.
-- Preserve exact source language when a missed word could change compliance.
-- Use concise interpretation only after the exact requirement or evaluation language is clear.
-- Assign stable requirement IDs in any table-like output so later workbook, outline, Q&A, and review work can refer back to the same extracted item.
+Cover deadlines with local time/time zone, mandatory events, submission channel, volume/file separation, naming and size limits, pages and formatting, source-required forms/signatures and acknowledgments, eligibility/access, pricing schedules/CLINs/options, deliverables, evaluation factors and stated relative importance. Separate past-performance count, recency, permitted performer/role, relevance and questionnaire rules. For oral presentations or demonstrations, capture content, time, attendees, format and logistics. Capture the actual acknowledgment/signature instruction, method and deadline; unresolved applicability belongs in a separate check, not a confirmed requirement.
 
-### 3) Triage risks and gaps
-- Flag preventable compliance failures first, such as late submission, missing forms, page-limit violations, unacknowledged amendments, missing pricing template entries, or mandatory certifications.
-- Flag ambiguity, source conflicts, and missing files separately from confirmed requirements.
-- Recommend Q&A items only when the source ambiguity materially affects compliance, price, schedule, or proposal strategy.
-- Flag unresolved solicitation defects, restrictive language, missing provisions, ambiguous evaluation factors, or conflicting instructions early for customer review, Q&A, or legal counsel as appropriate.
+## 4. Check procurement-specific sources
 
-### 4) Decide whether to hand off
-- Stay in this workflow when the user needs an executive readout, compliance watchlist, extracted requirements, amendment impact summary, or next actions.
-- Switch to [Build Proposal Control Workbook](./build-proposal-control-workbook.md) when the user needs a workbook, requirement matrix, compliance matrix, Section L / Section M crosswalk, submission tracker, or spreadsheet artifact.
-- Switch to [Build Annotated Proposal Outline](./build-annotated-proposal-outline.md) when the user needs a writer-facing outline, storyboard, proposal skeleton, work package, or drafting package.
+Use the actual scope to inspect applicable instructions; industry practice alone creates no requirement.
 
-## Default output
-Return a concise response with these sections:
+| Work | Source checks |
+| --- | --- |
+| Products/supply | Part/NSN and drawing revision; quantity/UOM; equivalency and salient characteristics; first article/testing; delivery/FOB; packaging, traceability, warranty and origin terms. |
+| Digital/IT/cyber | System/data boundary, interfaces and volumes; actual authorization scope; incorporated security framework/version; accessibility; license, data/IP and portability rights. |
+| Services | Workload/QASP; key-person qualifications, resumes and commitments; transition; wage determination/CBA; staffing, workshare and OCI instructions. |
+| Construction/A-E/facilities | Selection model and phase; drawings/specifications/addenda precedence; site events, phasing/outages; bonds, licenses, wage instruments; SF 330 if required; commissioning and closeout. |
+| Mission-specific work | Required clinical credentials, data protections, research ethics/IP, cold chain, environmental handling/permits, transport authority or emergency-response conditions. Verify applicability and jurisdiction from the sources. |
 
-1. `Executive Summary`: What the solicitation requires, what matters most, and the strongest compliance risks.
-2. `Compliance Watchlist`: High-risk deadlines, mandatory submissions, file/package controls, amendment acknowledgements, forms, certifications, and missing-source risks.
-3. `Requirement and Evaluation Table`: A compact table with requirement ID, source citation, requirement or evaluation language, proposal implication, risk level, and next action.
-4. `Amendment and Q&A Changes`: Changed deadlines, changed requirements, added or removed attachments, clarifications, and compliance impact.
-5. `Source Coverage`: Sources reviewed, sources only partially available, missing files, and assumptions.
-6. `Next Actions`: Near-term proposal, pricing, Q&A, source retrieval, or artifact handoff actions.
+## 5. Apply amendments and identify gaps
 
-If the source package is large, summarize the most important rows in the response and offer to continue into a workbook or outline only when the user asks for that artifact.
+Trace added, removed, replaced and clarified requirements to the controlling amendment. Update affected instructions, dates, forms, pricing inputs and evaluation mappings across existing controls; preserve superseded text only as labeled history. Retain IDs for continuing requirements and record impacts. Identify missing amendments or attachments before claiming complete coverage.
 
-## Output rules
-- Be source-backed and compliance-focused.
-- Use exact solicitation language where wording controls compliance.
-- Keep interpretation separate from source language.
-- Label partial or missing-source conclusions clearly.
-- Do not invent deadlines, requirements, evaluation weights, forms, or instructions that are not supported by the sources.
-- Do not create a workbook, matrix artifact, or outline by default.
+Prioritize preventable submission failures, missing proof and ambiguous instructions. Distinguish confirmed barriers from unknowns; frame material conflicts as specific Q&A or contracts-review items. Carry affected IDs and source limitations into the answer.
 
-## Common failure modes to avoid
-- Producing an oversized workbook when the user asked for extraction and triage
-- Relying on snippets when exact Section L, Section M, amendment, or submission wording is needed
-- Treating GovTribe metadata as controlling solicitation language
-- Missing amendment-driven deadline or attachment changes
-- Mixing confirmed source requirements with assumptions
-- Hiding missing files or partial-source coverage
-- Treating a successful vector-store read of PDFs or documents as complete package coverage when spreadsheet-like pricing files were skipped
-- Failing to hand off when the user explicitly asks for a matrix, workbook, crosswalk, outline, or storyboard
+## 6. Use the extraction
+
+Choose a useful readout, checklist or change summary for the request. Carry the same register into a requested [compliance matrix](build-proposal-control-workbook.md) or the relevant [response template](../SKILL.md#response-templates). For an annotated outline, use `govtribe-file-templates` reference `references/annotated-proposal-outline.md` from its installed root. Capture can reuse findings for pursuit decisions; Pricing handles unresolved delivery economics. Neither handoff requires repeating completed source research.

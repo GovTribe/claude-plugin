@@ -1,47 +1,36 @@
 ---
 title: GAO Bid Protest Evidence
-description: How to use GAO bid protest records as bounded capture-risk and protest-history evidence.
+description: Find GAO protests and decisions relevant to a federal procurement, agency, company or evaluation issue.
 ---
 
 # GAO Bid Protest Evidence
 
-Use this reference alongside bid / no-bid, black hat, incumbent, or likely-bidder workflows when protest history, agency protest outcomes, procurement identifiers, or protester behavior could materially change the capture-risk read.
+## 1. Identify the research question
 
-## Goal
-- Use `Search_GAO_Bid_Protests` to recover exact protest dockets, decisions, outcomes, and decision text tied to a procurement, agency, or protester.
-- Treat protest records as legal and procedural history, not as proof that a vendor will bid, protest, win, or lose.
-- Keep protest evidence subordinate to the main capture workflow unless it directly changes risk, counterstrategy, or confidence.
+Reuse the resolved procurement and company context. For a supplied pursuit, use [Search_Pursuits](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuits-mcp-tool) to retrieve its linked opportunity. Resolve missing federal contract notices with [Search_Federal_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-opportunities-mcp-tool), using `govtribe_ids` or `solicitation_numbers`. For agency or company history, resolve names with [Search_Federal_Agencies](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-agencies-mcp-tool) or [Search_Vendors](https://govtribe.com/docs/govtribe-for-agents/tools/search-vendors-mcp-tool).
 
-## Workflow
+For history, use the requested period, otherwise the past five years: `decision_date_range` for decisions, `filed_date_range` for docket activity including open cases. Apply no date cutoff to exact-case or procurement-identifier lookups.
 
-### 1. Start from exact anchors
-- Prefer exact `federal_meta_opportunity_id` or procurement identifiers from the target opportunity, award, IDV, vehicle, file, or user input.
-- Use exact GAO file numbers when the user provides them.
-- Use `federal_agency_ids` when the question is about buyer protest history or outcomes.
-- Use exact `protesters` only after resolving the protester name from the target context or user input.
-- If the anchor is weak, do not widen into protest history just to add color.
+## 2. Find relevant protests
 
-### 2. Choose the protest search path
-- Exact procurement path: call `Search_GAO_Bid_Protests` with `federal_meta_opportunity_ids` or `procurement_identifiers`.
-- Protester path: call it with `protesters` plus a bounded date range or agency filter when possible.
-- Agency-history path: use `federal_agency_ids`, `decision_date_range` or `filed_date_range`, and aggregations such as `top_outcomes_by_doc_count`, `top_statuses_by_doc_count`, `top_protesters_by_doc_count`, and `top_procurement_identifiers_by_doc_count`.
-- Decision-text path: use `query` with keyword mode for exact phrases and identifiers, or semantic mode for concept-heavy decision-text research.
-- Use the bundled [search-mode guide](./govtribe-docs-choose-a-search-mode-and-write-queries.md) for stable query guidance and call `Documentation` for the current tool schema, filters, and response fields before constructing non-trivial calls.
+Use [Search_GAO_Bid_Protests](https://govtribe.com/docs/govtribe-for-agents/tools/search-gao-bid-protests-mcp-tool) with exact `file_numbers`, source `procurement_identifiers`, linked `federal_meta_opportunity_ids`, `federal_agency_ids` or exact `protesters` names, as appropriate. If structured linkage is missing, search identifiers and names with `query`; use keyword or semantic search for issues such as unequal discussions or unstated evaluation criteria. Distinguish cases about this procurement from analogous decisions.
 
-### 3. Request useful fields
-- For row retrieval, request at least `govtribe_id`, `file_number`, `protester`, `case_type`, `status`, `outcome`, `filed_date`, `decision_date`, `available_date`, `highlights`, `decision_text`, `pdf_url`, `source_links`, `procurement_identifiers`, `federal_agency`, and `federal_meta_opportunity_id`.
-- Add `federal_meta_opportunity` when the procurement-thread display context matters.
-- Use `per_page: 0` when the task only needs protest-history aggregations.
+Start with `fields_to_return` covering `govtribe_id`, `file_number`, `protester`, `status`, `outcome`, relevant dates and `source_links`. Follow relevant results and remaining pages before concluding no matching protest was found; missing records or links do not establish a clean protest history.
 
-### 4. Interpret conservatively
-- Separate open dockets from decided protests. Open status is a timing and uncertainty signal, not an outcome.
-- Interpret `outcome` as the GAO protest outcome for that record, not as a blanket judgment on the agency, protester, incumbent, or requirement.
-- Prioritize exact procurement-linked protests over broad agency or protester history.
-- Treat older decisions as context unless the same buyer, requirement family, legal issue, or procurement identifier makes them current.
-- Do not provide legal advice. Frame findings as capture risk, procedural history, and evidence gaps.
+## 3. Read the decision and related proceedings
 
-## Output contract
-- Add a short protest-history note only when the evidence changes the main workflow.
-- Include file numbers, dates, outcomes, and the exact anchor used.
-- State whether the evidence came from exact procurement linkage, agency history, protester history, or decision-text research.
-- Carry caveats into the final risk or confidence section instead of presenting protest evidence as a standalone conclusion.
+Retrieve relevant records by `govtribe_ids`, adding `decision_text`, `pdf_url` and `procurement_identifiers`. Read a joint decision once. Open the official decision when retrieved text is insufficient; use [GAO's bid-protest resources](https://www.gao.gov/legal/bid-protests) to fill source gaps. Look up cited docket suffixes, supplemental protests and reconsideration directly when they affect the answer.
+
+Explain the challenged action, parties' arguments, GAO's findings and any recommended remedy. Separate allegations from findings, dismissal from denial, and recommended corrective action from implemented changes or an actual contract award. Preserve mixed outcomes and distinguish `decision_date` from public `available_date`; open dockets have no decided outcome.
+
+## 4. Compare history when requested
+
+Use aggregations such as `top_outcomes_by_doc_count`, `top_protesters_by_doc_count` and `top_procurement_identifiers_by_doc_count`, with `per_page: 0` for counts alone. State the filters and period; group related proceedings before making procurement-level comparisons. Docket counts are not a company's contract win rate. Read representative decisions to explain recurring issues rather than infer them from outcome labels.
+
+## 5. Connect findings to the pursuit
+
+Check subsequent notices, controlling amendments and Q&A with `Search_Federal_Contract_Opportunities` and [Search_Government_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-government-files-mcp-tool); verify resulting awards with [Search_Federal_Contract_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-awards-mcp-tool). For an IDV, retrieve subsequent orders with `federal_contract_idv_ids`. Reuse documents already read and identify what changed after the decision.
+
+Recommend practical responses: clarify an ambiguous requirement, substantiate past performance, revise pricing assumptions or update the capture schedule. Reuse [Black Hat Review](conduct-black-hat-review.md), [Capture Price-to-Win Review](conduct-price-to-win-review.md) or [Bid / No-Bid Review](conduct-bid-no-bid-review.md) when the findings affect those decisions.
+
+Prepare an appropriate GovCon report with case numbers, dates, supporting sources, implications and unresolved questions. Let the requested use determine the format.

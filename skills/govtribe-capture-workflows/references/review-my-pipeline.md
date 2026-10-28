@@ -1,60 +1,49 @@
 ---
 title: Review My Pipeline
-description: How to review one resolved pipeline for stale pursuits, W/L/A candidates, missing forecast data, and basic pursuit hygiene.
+description: Review GovTribe pipelines for capture progress, deadlines, estimates, outcomes and relevant opportunities missing from the pipeline.
 ---
 
 # Review My Pipeline
 
-Use this reference when the user wants a cleanup review of one resolved pipeline.
+## 1. Load the pipeline and its work
 
-## Goal
-- Resolve one pipeline, review active pursuits first, and surface the highest-value cleanup recommendations.
-- Keep the result recommendation-first. Do not move stages, mark W/L/A, or fill values unless the user explicitly asks.
-- Use [Workspace Pipeline Operations](./workspace-pipeline-operations.md) before applying cleanup recommendations, stage moves, field updates, task creation, or deletes.
+Reuse known context or find the requested pipeline with [Search_Pipelines](https://govtribe.com/docs/govtribe-for-agents/tools/search-pipelines-mcp-tool), requesting `govtribe_id`, `name`, `description` and `tags` through `fields_to_return`. Retrieve its actual stage `govtribe_id`, `name`, `description` and `type` through [Search_Stages](https://govtribe.com/docs/govtribe-for-agents/tools/search-stages-mcp-tool), using `pipeline_ids` and `fields_to_return`.
 
-## Workflow
+Use [Search_Pursuits](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuits-mcp-tool) with `pipeline_ids`. Start with active work by excluding terminal `stage_ids` using `stage_ids_operator: "not_in"`. Request IDs, links, `name`, `description`, `stage`, `owner`, `associated_records`, `due_date`, `estimated_award_date`, `estimated_duration`, `estimated_value`, `pwin` and `updated_at` through `fields_to_return`. Follow pagination for the requested scope. Inspect relevant closed pursuits for duplicate work, outcomes or lessons.
 
-### 1. Resolve the target pipeline first
-- Resolve the pipeline with `Search_Pipelines`.
-- If the user names an owner, stage, or review window, carry those constraints forward.
-- If multiple plausible pipelines match, ask for the minimum clarification and stop. Prefer `Show_Option_List` when the remaining choice is a short list of candidate pipelines.
+## 2. Check commitments and blockers
 
-### 2. Load the pipeline stage map
-- Use `Search_Stages` for the resolved pipeline.
-- Separate terminal stages from active stages, with explicit attention to `Won`, `Lost`, and `Abandoned`.
-- Reuse the stage map later when deciding whether a pursuit looks stale, mis-staged, or ready for a W/L/A recommendation.
+Use [Search_Tasks](https://govtribe.com/docs/govtribe-for-agents/tools/search-tasks-mcp-tool), scoped by `pipeline_ids` or `pursuit_ids`, with `fields_to_return` for IDs, links, `name`, `comment`, `owner`, `due_date`, `priority`, `completed_at`, `reopened_at` and `pursuit`. Check `completed_at` before flagging overdue work; `reopened_at` is history. Identify unfinished tasks past their due date, conflicting deadlines and active pursuits without an assigned next action.
 
-### 3. Pull the main cleanup worklist from active pursuits
-- Use `Search_Pursuits` for the resolved pipeline.
-- Default the first pass to non-terminal pursuits by excluding the resolved terminal stage IDs.
-- Work from pursuit fields already surfaced in the search response: `name`, `description`, `due_date`, `estimated_award_date`, `estimated_duration`, `estimated_value`, `updated_at`, `owner`, `stage`, `associated_records`, and `contacts`.
-- Treat the pursuit as the primary unit of analysis. Use linked records to complete the picture, not as stand-alone outcome signals.
-- Use terminal-stage retrieval only if the user explicitly wants a full pipeline audit instead of an active-pipeline cleanup review.
+Read relevant [Search_Pursuit_Discussions](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuit-discussions-mcp-tool) by `pursuit_ids`, projecting `govtribe_id`, `name`, `message`, `comments_count` and `updated_at`. Retrieve replies with [Search_Pursuit_Comments](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuit-comments-mcp-tool), passing discussion `govtribe_id` values as `discussion_ids` and requesting `message`, `creator`, `created_at` and `updated_at`. Look for bid decisions, buyer feedback, partner commitments and blockers. A recent edit alone does not establish progress.
 
-### 4. Run the stale timing pass
-- Flag active pursuits whose due date or estimated award date is materially in the past.
-- Treat the stale signal as stronger when the pursuit also lacks recent updates, linked current opportunities, or other evidence that it is still live.
-- Keep stage context in view. A pursuit in an early active stage with an old due date needs a different recommendation than one sitting near the end of the pipeline.
+## 3. Assess progress against the stage and procurement
 
-### 5. Run the terminal-candidate pass
-- Review linked records only for pursuits that already look stale, resolved, or mis-staged.
-- Form the recommendation from the whole pursuit picture: current stage, timing fields, update recency, description quality, ownership context, and the linked records that appear to represent the pursued work.
-- Use linked award, opportunity, forecast, or vehicle context as supporting evidence, not as a stand-alone terminal signal.
-- Lower the recommendation to manual review when the linked records are mixed, incidental, or too ambiguous to show whether the pursuit was actually won, lost, canceled, expired, or abandoned.
-- Express `Won`, `Lost`, or `Abandoned` only as a recommendation backed by evidence, not as an action.
+Refresh linked records when current buyer information could change the recommendation. Use [Search_Federal_Forecasts](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-forecasts-mcp-tool), [Search_Federal_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-opportunities-mcp-tool), [Search_Federal_Grant_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-opportunities-mcp-tool) or [Search_State_And_Local_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-state-and-local-contract-opportunities-mcp-tool) with the linked `govtribe_ids`. Request each tool's supported status, date, scope and source fields through `fields_to_return`; check current deadlines and amendments. For award evidence, use [Search_Federal_Contract_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-awards-mcp-tool), [Search_Federal_Grant_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-awards-mcp-tool) or [Search_State_And_Local_Contract_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-state-and-local-contract-awards-mcp-tool), requesting scope, dates and recipient fields to match the work and recipient.
 
-### 6. Run the forecast-data pass
-- Flag active pursuits missing usable `estimated_value`, `due_date`, `estimated_award_date`, or `estimated_duration`.
-- Use linked records to recommend fills only when the available evidence is specific enough to support a defensible value, date, or duration suggestion.
-- If the linked evidence is too thin, keep the recommendation as "needs manual fill" instead of guessing.
+Apply these expectations to the team's actual stages:
 
-### 7. Run the ownership and hygiene pass
-- Flag unclear ownership, weak descriptions, or pursuits whose current stage is not well supported by the available context.
-- Treat thin descriptions, no useful linked records, or no clear next step as hygiene issues when they materially weaken pipeline usability.
-- Keep this pass practical. Focus on issues that affect forecast quality, pipeline reporting, or next-action clarity.
+| Stage | What to assess |
+| --- | --- |
+| Triage / Qualification | Fit, eligibility, vehicle access where required, and the next qualification question. |
+| Capture | Buyer knowledge, competitive position, partners, solution and whether to invest in a proposal. |
+| Proposal | Assigned response work, reviews, current requirements and submission readiness. |
+| Submitted | Submission receipt, buyer follow-up and actual award outcome. |
 
-## Output contract
-- Return a short pipeline summary, an active-pipeline readout, a prioritized cleanup queue, and confidence.
-- For each pursuit, include the current stage, the issue, the recommended next action, and the evidence behind that recommendation.
-- Keep W/L/A recommendations clearly labeled as recommendations.
-- If the user wants the cleanup recommendations applied, the same recommendations can be carried forward with `Update_Pursuit`.
+Check estimate assumptions: `estimated_value` is whole USD dollars, duration is months and `pwin` is the team's win assessment. Distinguish subcontract workshare from total contract value; a vehicle ceiling is not expected revenue. Missing precise dates or values may be reasonable for an early forecast. Use [Bid / No-Bid Review](conduct-bid-no-bid-review.md) when scope, eligibility or available resources change the pursue decision.
+
+## 4. Find missing opportunities
+
+Use the pipeline's name, description, tags, pursuits and relevant outcomes to establish its intended market. Carry known company capabilities and constraints into [Relevant Opportunities](relevant-opportunities.md) to find matching opportunities and forecasts, reusing completed research.
+
+Compare candidates with active and relevant closed pursuits by linked records and business scope. Keep the same acquisition's forecast and solicitation together; account for still-relevant loss or abandonment reasons.
+
+Recommend suitable additions to Triage with fit and a next qualification action. When adding work is requested, use [Manage Pipelines and Pursuits](workspace-pipeline-operations.md) to create linked pursuits in the resolved Triage stage.
+
+## 5. Recommend practical next actions
+
+Prioritize approaching deadlines and blocked work, then unsupported estimates, duplicate pursuits and stage/outcome corrections. For each material issue, explain the finding and useful next action, including an owner or date when known.
+
+Recommend Won for a confirmed win, Lost for an unsuccessful submitted response, and Abandoned for work the team stops pursuing or a canceled procurement. Verify the outcome concerns this pursuit and the team's role; a linked incumbent award or elapsed deadline alone is insufficient.
+
+Produce an appropriate GovCon pipeline review. Use [Manage Pipelines and Pursuits](./workspace-pipeline-operations.md) when the user wants the recommendations applied.

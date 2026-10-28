@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0 — pending review
+
+- Import the seven shared GovTribe skills, curated Docs and 15 unchanged template masters.
+- Consolidate Deep Dive into Market Intelligence and use native editing for document revisions.
+- Add concrete research workflows, direct documentation routing and current template guidance.
+- Keep the existing MCP endpoint and account permissions. No publication is performed by this branch.
+
 ## 1.1.0
 
 - Add GovCon file templates, document-editing workflows, and GovCon writing guidance.
