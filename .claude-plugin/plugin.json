@@ -9,5 +9,6 @@
   "homepage": "https://govtribe.com/docs/govtribe-for-agents",
   "repository": "https://github.com/GovTribe/claude-plugin",
   "skills": "./skills/",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "supportUrl": "https://govtribe.com/docs/govtribe-user-guide/contact-govtribe"
 }

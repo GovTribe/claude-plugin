@@ -180,6 +180,6 @@
   },
   "adapted_files": [],
   "provider_configuration_adaptations": {
-    ".claude-plugin/plugin.json": "Explicit ./skills/ declaration and existing Apache-2.0 repository license retained for marketplace installation. Seven imported skill trees match the generated release archive byte-for-byte."
+    ".claude-plugin/plugin.json": "Explicit ./skills/ declaration and existing Apache-2.0 repository license retained for marketplace installation. Seven imported skill trees match the generated release archive byte-for-byte. The support URL is explicit because directory README extraction selected a malformed URL."
   }
 }
