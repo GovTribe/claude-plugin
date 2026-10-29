@@ -25,7 +25,7 @@ Map actual column headers to the relevant controls:
 - **Pricing and deliverables:** schedules, CLINs, quantities, units, periods and attachments linked to requirement IDs; use `govtribe-pricing-data` for pricing research.
 - **Questions and changes:** missing sources, evidence or assignments, decisions and amendment impacts, with affected IDs and next actions.
 
-Keep source requirements distinct from internal controls. Leave unknown owners, evidence and company commitments visible for the proposal team to resolve. For a requested outline, carry the same IDs into `govtribe-file-templates` reference `references/annotated-proposal-outline.md` from its installed root.
+Keep source requirements distinct from internal controls. Leave unknown owners, evidence and company commitments visible for the proposal team to resolve. For a requested outline, carry the same IDs into the buyer's response headings and writer instructions.
 
 ## 4. Update and reconcile
 

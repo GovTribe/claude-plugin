@@ -47,4 +47,4 @@ Prioritize preventable submission failures, missing proof and ambiguous instruct
 
 ## 6. Use the extraction
 
-Choose a useful readout, checklist or change summary for the request. Carry the same register into a requested [compliance matrix](build-proposal-control-workbook.md) or the relevant [response template](../SKILL.md#response-templates). For an annotated outline, use `govtribe-file-templates` reference `references/annotated-proposal-outline.md` from its installed root. Capture can reuse findings for pursuit decisions; Pricing handles unresolved delivery economics. Neither handoff requires repeating completed source research.
+Choose a useful readout, checklist or change summary for the request. Carry the same register into a requested [compliance matrix](build-proposal-control-workbook.md) or the relevant [response template](../SKILL.md#response-templates). For an annotated outline, carry the same register into the buyer's response structure. Capture can reuse findings for pursuit decisions; Pricing handles unresolved delivery economics. Neither handoff requires repeating completed source research.

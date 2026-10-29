@@ -11,7 +11,7 @@ compatibility: Uses native document, spreadsheet and presentation capabilities. 
 Choose the guide matching the requested deliverable; continue a supplied form or selected working file without reselecting a library template.
 
 - **Responses and buyer forms:** [RFI / Sources Sought](references/rfi-sources-sought-response.md), [RFQ Quotation](references/rfq-quotation-response.md), [Proposal Response](references/proposal-response.md), [Past Performance Narrative](references/past-performance-project-narrative.md), or [complete the buyer's original form](references/template-adaptation-and-revisions.md).
-- **Compliance and response planning:** [Compliance Matrix](references/proposal-control-workbook.md) or [Annotated Proposal Outline](references/annotated-proposal-outline.md).
+- **Compliance and response planning:** [Compliance Matrix](references/proposal-control-workbook.md).
 - **Capture decisions and briefings:** [Opportunity Brief](references/opportunity-capture-brief.md), [Bid / No-Bid Assessment](references/bid-no-bid-assessment.md), [Executive Capture Briefing](references/executive-capture-briefing.md), or [Teaming Partner Shortlist](references/teaming-partner-shortlist.md).
 - **Company and market analysis:** [Company Profile / Due Diligence](references/company-profile.md), [Contract Awards and Spend Analysis](references/contract-awards-spend-analysis.md), or [System / Program Research](references/system-program-research.md).
 - **Pricing and pipeline workbooks:** [Labor Pricing and Staffing](references/labor-pricing-staffing-model.md) or [Opportunity Pipeline Tracker](references/opportunity-pipeline-tracker.md).

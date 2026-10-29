@@ -74,4 +74,4 @@ Do not include credentials or private account data in GitHub issues. The plugin 
 
 ## Prepared seven-skill update
 
-This 1.2.0 release candidate contains Market Intelligence (including Deep Dive), Capture, Pricing, Proposal Workflows, File Templates, GovCon Writing and GovTribe Docs. It retains 15 approved template masters and uses native host editing. See [candidate provenance](docs/provenance.md) for integrity checks and known limitations. This branch is for review; it does not publish 1.2.0.
+This 1.2.0 release candidate contains Market Intelligence (including Deep Dive), Capture, Pricing, Proposal Workflows, File Templates, GovCon Writing and GovTribe Docs. This directory-validation experiment retains 14 unchanged template masters and omits Annotated Proposal Outline. Outline research remains available through Proposal Workflows and native authoring. See [candidate provenance](docs/provenance.md) for integrity checks and known limitations. This branch is for review; it does not publish 1.2.0.

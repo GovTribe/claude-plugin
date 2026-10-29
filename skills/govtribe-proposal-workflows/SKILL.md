@@ -13,7 +13,7 @@ Choose references that match the request. Reuse the active opportunity, source f
 
 - **What must we submit, and what changed?** [Solicitation Requirements and Amendments](references/solicitation-intelligence-and-compliance-extraction.md): identify instructions, evaluation factors, deadlines, forms and changes.
 - **Build or update a compliance matrix, spreadsheet checklist or proposal tracker:** [Build or Update a Compliance Matrix](references/build-proposal-control-workbook.md).
-- **Organize the technical response for our writers:** use **Annotated Proposal Outline** (`annotated-proposal-outline`) in `govtribe-file-templates` reference `references/annotated-proposal-outline.md` from its installed root.
+- **Organize the technical response for our writers:** use the requirement map from [Solicitation Requirements and Amendments](references/solicitation-intelligence-and-compliance-extraction.md) to create an annotated outline with the host's native document capabilities.
 
 ## Response templates
 

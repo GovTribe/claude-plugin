@@ -1,8 +1,8 @@
 # Changelog
 
-## 1.2.0 — pending review
+## 1.2.0 — directory-validation experiment
 
-- Import the seven shared GovTribe skills, curated Docs and 15 unchanged template masters.
+- Import the seven shared GovTribe skills, curated Docs and 14 unchanged template masters in this experimental candidate.
 - Consolidate Deep Dive into Market Intelligence and use native editing for document revisions.
 - Add concrete research workflows, direct documentation routing and current template guidance.
 - Keep the existing MCP endpoint and account permissions. No publication is performed by this branch.

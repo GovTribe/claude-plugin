@@ -1,13 +1,10 @@
 {
-  "release": "1.2.0 \u2014 submitted candidate; not published",
+  "release": "1.2.0 alternative directory-validation candidate; not submitted or published",
   "candidate_version": "1.2.0",
   "proposed_release_version": "1.2.0",
   "release_version_confirmed": true,
-  "approval_status": "user-authorized integrity-only submission; full acceptance ledger remains incomplete",
-  "archive_sha256": "86cb40513ad6e94d8c36ebea154c7bef88573944118850fc1a9f01b39573538b",
+  "approval_status": "user-authorized Claude-only exclusion experiment; validation only; no full acceptance claim",
   "source_commit": "8afb46ea93e42abb9e04d2b0bff924395abe7690",
-  "prepared_input_digest": "48ed183dbb951adc267df84fb030218850b8c9e4c57f44f4a9b4a0d29d064404",
-  "distribution_workflow_digest": "bbf953287769bf91baf230ed61a1636dab74c40c281b34a971574792c80db8ea",
   "skills": [
     "govtribe-capture-workflows",
     "govtribe-docs",
@@ -53,14 +50,11 @@
     "skills/govtribe-docs/references/govtribe-docs-troubleshoot-search-results.md": "eba0c62518fc016ca8b30c4e94d826831816bcbc620238c3f2e56df706f3aeb0",
     "skills/govtribe-docs/references/govtribe-docs-use-saved-searches.md": "59beef5a0f3c4dda0d3d8ba71bbcac0fc5ba58869be1e90e6a47f652e9498932",
     "skills/govtribe-docs/references/govtribe-docs-vector-store-content-retrieval.md": "017d6459ad28db10820202e52abe6d4a9aa8c0f2ca451a6e9a21a737ab942744",
-    "skills/govtribe-file-templates/SKILL.md": "67e0ffba3ada15901cf695a171825d35ba04240176c6e50a4bc0d9b4e99cff60",
-    "skills/govtribe-file-templates/assets/annotated-proposal-outline/annotated-proposal-outline.docx": "15b5a4124678e4218e4e5592d64ed28741961f9203383c1127149023b00fc84c",
-    "skills/govtribe-file-templates/assets/annotated-proposal-outline/illustrative-annotated-proposal-outline.docx": "264311198e2c1429baf155e34a38dd95ccbde085827d22f21ba4cf26fb4d47ef",
-    "skills/govtribe-file-templates/assets/annotated-proposal-outline/preview.png": "f364598091db4015475b25843f66b5570d128e831045585c47ded24b7e45cfc2",
+    "skills/govtribe-file-templates/SKILL.md": "697c36d53569a6614a854526846740e86f36212a860b2cbe59bf045111ec62fd",
     "skills/govtribe-file-templates/assets/bid-no-bid-assessment/bid-no-bid-assessment.docx": "2dbed90048c83d022624cdd626aa1475cbb243a7cddf2061b9cef67fab602a7d",
     "skills/govtribe-file-templates/assets/bid-no-bid-assessment/panama-social-listening-bid-no-bid-example.docx": "ac61add15805079fb38b75c096e98c30cfeb826791a2b12e11fad74a72506487",
     "skills/govtribe-file-templates/assets/bid-no-bid-assessment/preview.png": "9ff26cfc64facdc3882d51188a8da51b1080f63caffde62c352bc11c6e335b3d",
-    "skills/govtribe-file-templates/assets/catalog.json": "76afd3fa5c009d05a3be610d61dc8fb4c33e467bd6bbf3727b96b18d9fa908b0",
+    "skills/govtribe-file-templates/assets/catalog.json": "40df3dffb506dee69a6765ddb1df8e741ebbf013e8be4c4ca0f2f20439435de6",
     "skills/govtribe-file-templates/assets/company-profile/company-profile.docx": "22306c80aba91c8ab82869389ed412d05f21db5afae845ea5abe97498f529324",
     "skills/govtribe-file-templates/assets/company-profile/govtribe-company-profile-example.docx": "52186a1ef5d7e105ea5e8adccc0a3991ed9953c83d314e6641bfbda773cecca1",
     "skills/govtribe-file-templates/assets/company-profile/preview.png": "3e9946915642ac62cadfbcf87cac764dcece8e66ffb414874665fe601b384794",
@@ -100,7 +94,6 @@
     "skills/govtribe-file-templates/assets/teaming-partner-shortlist/bitter-lake-teaming-partner-shortlist-example.xlsx": "7fda59993cf9458b1716ad58bafd872199a67076b58d4b844054f42f43e37f73",
     "skills/govtribe-file-templates/assets/teaming-partner-shortlist/preview.png": "8b29c5695d2e81d610c2bbbfff66b016f8a1ee77b48183dc3d2a21c5056b3735",
     "skills/govtribe-file-templates/assets/teaming-partner-shortlist/teaming-partner-shortlist.xlsx": "b2fe91c734b71d0ffb3b4ca58a13b8a5a6a2786b70bbdd7677d9595051334d14",
-    "skills/govtribe-file-templates/references/annotated-proposal-outline.md": "8225044a321f3483bce08d7db5987c9fe903223b663eba60d9f1897ffd1c0944",
     "skills/govtribe-file-templates/references/bid-no-bid-assessment.md": "86b24809355a31dc5186d92d59d5845deaf92cd5942b29686bc505532dcc3fb2",
     "skills/govtribe-file-templates/references/company-profile.md": "d762900571b77cebc44e24b44e49e06e60598e05bd85557966d8a001f25759f8",
     "skills/govtribe-file-templates/references/contract-awards-spend-analysis.md": "13d36204d77b6547549bde81932860b421e417cda8d74b953a7d2691508edb47",
@@ -111,7 +104,7 @@
     "skills/govtribe-file-templates/references/past-performance-project-narrative.md": "56ff8a0315d78e3b5b712d8aadb7eedfb5edf5397a944bf5de8f0b8290c6a5ec",
     "skills/govtribe-file-templates/references/proposal-control-workbook-schema.md": "8d101666c288cfc7e4b61f8affbe2337c0e46feab0fc99cfe2eab62d89068599",
     "skills/govtribe-file-templates/references/proposal-control-workbook.md": "7656de9df1fb13588be4c472bb0ec2acb3529aeb35997093d05c732e7fc1f3d2",
-    "skills/govtribe-file-templates/references/proposal-response.md": "be028d80bcf2cee61ef380169c37170e48483c1e0b4db1137a926b46e065b2cf",
+    "skills/govtribe-file-templates/references/proposal-response.md": "591c6d27a1a795eced3848cf250d7c87f5ac62dac3a59ce236bbc031494dda75",
     "skills/govtribe-file-templates/references/rfi-sources-sought-response.md": "b32c02cd136db69511ec59911b0a435c661e279b1d46862a6ccdfc9779005f3f",
     "skills/govtribe-file-templates/references/rfq-quotation-response.md": "46188fd6ae9c5478b79588bcc3e06896ed56eed57c85a2d96eba07855fa46ace",
     "skills/govtribe-file-templates/references/system-program-research.md": "7410a198edc196be69a537cb197f31c3c881aad7115f0a14a515727f2481140f",
@@ -162,24 +155,53 @@
     "skills/govtribe-pricing-data/references/price-to-win-analysis.md": "9bd18aeddd1b1d9ebb7a3e4fe0c22be25ea659ae47aba4990dc17e1171c0d497",
     "skills/govtribe-pricing-data/references/pricing-model-workflow.md": "6950f70741d84bfef2eeb33a059fc2f7cdc7d1eaa23cd3e97e41ef4d6ae140cf",
     "skills/govtribe-pricing-data/references/staffing-wage-and-labor-category-workflow.md": "3d99c1105f2d6939e96db98f4a256e2016915cbecd356e4acbcce3634ea08a5b",
-    "skills/govtribe-proposal-workflows/SKILL.md": "e2475d7208defa03c8d71e31271b927df025f18f8ed354f845116980d648127d",
+    "skills/govtribe-proposal-workflows/SKILL.md": "787d15bb104a5292a5ce2fb31ea2a86a0014c3afe423e22ad1f04f19eafbe4a5",
     "skills/govtribe-proposal-workflows/assets/annotated-proposal-compliance-matrix-template.csv": "1ac9aa6dc8338793922b08b0c7d10456444bf70f53e86f3a6281c5e5668c3478",
     "skills/govtribe-proposal-workflows/assets/annotated-proposal-outline-schema.json": "2260dc825a6aae366153ced2f4400a0223748eadc2e5ac24991a014b325435fc",
     "skills/govtribe-proposal-workflows/assets/annotated-proposal-requirement-types.yaml": "a1e9507175f7a8cb6bf2873ec119c1659bd3a2893d7c51e1077dadd2a15ee418",
     "skills/govtribe-proposal-workflows/assets/proposal-control-workbook.xlsx": "5d11d9e1ccecbb885a6646847e0d9b69949ec0cfab985ef79e008af872de29ef",
-    "skills/govtribe-proposal-workflows/references/build-proposal-control-workbook.md": "2ac3d7b175e93e695786a59d613387335b4434b16249b64025c208de11dd158a",
+    "skills/govtribe-proposal-workflows/references/build-proposal-control-workbook.md": "a3a9fc82dec35b99d17b8e4cb080222501b4ad97fb2e3ed8c3d072c2cc9c38c6",
     "skills/govtribe-proposal-workflows/references/govtribe-docs-federal-contract-opportunity-notice-chains.md": "1e60fe5c0a6240f9ba7fad1b270643fa6a09ed5f96388eef1dd28cb710303356",
     "skills/govtribe-proposal-workflows/references/govtribe-docs-manage-search-context.md": "61b95a325f73f97dd8cccb2d80bfa1c1982a5eb5ed131f23a3f386e1eaa4add4",
     "skills/govtribe-proposal-workflows/references/govtribe-docs-source-identifiers-and-record-matching.md": "3b9d735936fa2feab49dccb38ce9911827fe5aca0858e192b5836bdd9ae4ff1e",
     "skills/govtribe-proposal-workflows/references/govtribe-docs-vector-store-content-retrieval.md": "017d6459ad28db10820202e52abe6d4a9aa8c0f2ca451a6e9a21a737ab942744",
-    "skills/govtribe-proposal-workflows/references/solicitation-intelligence-and-compliance-extraction.md": "84e08dffdbe3c3f6de747ebc0cd324caab08047d1a84a264e1746fc5bc863f83",
+    "skills/govtribe-proposal-workflows/references/solicitation-intelligence-and-compliance-extraction.md": "e111ee9f33dc32056ec0addf81c07e1ae01f85ece8e3020d773fd96f7fd0488d",
     "skills/govtribe-proposal-workflows/scripts/delivery_evidence.py": "83489cc450007f512bcff9c6e2ec7cc1125d843bcc8af9b82313c75fe3c203f5",
     "skills/govtribe-proposal-workflows/scripts/prepare_proposal_workbook_render.py": "dbe995d7b2ef517e4865df5e0f22914d0ff0b521297d4c63988c952d4ceceee1",
     "skills/govtribe-proposal-workflows/scripts/validate_annotated_outline.py": "1138456590a7affb14d9a72c3e627deec9ca9cfb1d22357850140b2b0eee3851",
     "skills/govtribe-proposal-workflows/scripts/validate_proposal_workbook.py": "618479d1c6f5faf91b782c86d77fccf683ce5ae77b41620d9d882f38d2618134"
   },
-  "adapted_files": [],
+  "adapted_files": [
+    "skills/govtribe-file-templates/SKILL.md",
+    "skills/govtribe-file-templates/assets/catalog.json",
+    "skills/govtribe-file-templates/references/proposal-response.md",
+    "skills/govtribe-proposal-workflows/SKILL.md",
+    "skills/govtribe-proposal-workflows/references/build-proposal-control-workbook.md",
+    "skills/govtribe-proposal-workflows/references/solicitation-intelligence-and-compliance-extraction.md"
+  ],
   "provider_configuration_adaptations": {
     ".claude-plugin/plugin.json": "Explicit ./skills/ declaration and existing Apache-2.0 repository license retained for marketplace installation. Seven imported skill trees match the generated release archive byte-for-byte. The support URL is explicit because directory README extraction selected a malformed URL."
-  }
+  },
+  "candidate_projection": {
+    "kind": "claude-only-template-exclusion",
+    "upstream_plugin_commit": "b1611719f0d69c7a899b5ba5c85dd7c5b929cc2a",
+    "omitted_template_id": "annotated-proposal-outline",
+    "omitted_files": {
+      "skills/govtribe-file-templates/assets/annotated-proposal-outline/annotated-proposal-outline.docx": "15b5a4124678e4218e4e5592d64ed28741961f9203383c1127149023b00fc84c",
+      "skills/govtribe-file-templates/assets/annotated-proposal-outline/illustrative-annotated-proposal-outline.docx": "264311198e2c1429baf155e34a38dd95ccbde085827d22f21ba4cf26fb4d47ef",
+      "skills/govtribe-file-templates/assets/annotated-proposal-outline/preview.png": "f364598091db4015475b25843f66b5570d128e831045585c47ded24b7e45cfc2",
+      "skills/govtribe-file-templates/references/annotated-proposal-outline.md": "8225044a321f3483bce08d7db5987c9fe903223b663eba60d9f1897ffd1c0944"
+    },
+    "adapted_upstream_files": {
+      "skills/govtribe-file-templates/SKILL.md": "67e0ffba3ada15901cf695a171825d35ba04240176c6e50a4bc0d9b4e99cff60",
+      "skills/govtribe-file-templates/assets/catalog.json": "76afd3fa5c009d05a3be610d61dc8fb4c33e467bd6bbf3727b96b18d9fa908b0",
+      "skills/govtribe-file-templates/references/proposal-response.md": "be028d80bcf2cee61ef380169c37170e48483c1e0b4db1137a926b46e065b2cf",
+      "skills/govtribe-proposal-workflows/SKILL.md": "e2475d7208defa03c8d71e31271b927df025f18f8ed354f845116980d648127d",
+      "skills/govtribe-proposal-workflows/references/build-proposal-control-workbook.md": "2ac3d7b175e93e695786a59d613387335b4434b16249b64025c208de11dd158a",
+      "skills/govtribe-proposal-workflows/references/solicitation-intelligence-and-compliance-extraction.md": "84e08dffdbe3c3f6de747ebc0cd324caab08047d1a84a264e1746fc5bc863f83"
+    }
+  },
+  "upstream_archive_sha256": "86cb40513ad6e94d8c36ebea154c7bef88573944118850fc1a9f01b39573538b",
+  "upstream_prepared_input_digest": "48ed183dbb951adc267df84fb030218850b8c9e4c57f44f4a9b4a0d29d064404",
+  "upstream_distribution_workflow_digest": "bbf953287769bf91baf230ed61a1636dab74c40c281b34a971574792c80db8ea"
 }

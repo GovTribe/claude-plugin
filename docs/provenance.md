@@ -1,26 +1,23 @@
-# Release candidate provenance
+# Claude-only template exclusion experiment
 
-Claude 1.2.0 is prepared for directory review. It is not published.
+This is an alternative 1.2.0 candidate for directory validation only. It is not
+submitted, published, or a replacement for the original held candidate.
 
-Web source: `8afb46ea93e42abb9e04d2b0bff924395abe7690`. Portable digest:
-`48ed183dbb951adc267df84fb030218850b8c9e4c57f44f4a9b4a0d29d064404`.
+Parent Claude commit: `b1611719f0d69c7a899b5ba5c85dd7c5b929cc2a`.
+The permanent metadata PR retains all 158 imported files and all 15 masters.
+This child removes only Annotated Proposal Outline's master, example, preview
+and completion guide; six catalog/router/reference files are adapted so nothing
+requests the omitted template. It retains seven skills, 154 skill files and
+14 byte-identical template masters. Outline work can use the existing requirement
+map and the host's native document capabilities.
 
-All 158 imported skill files match the generated Claude release archive exactly.
-`skill-source.json` records their hashes. The root manifest retains the repository's
-explicit skills declaration and Apache-2.0 license. No skill adaptations were made here.
+`skill-source.json` records the exact candidate inventory, original omitted and
+adapted hashes, upstream source digests and experimental status. Upstream archive
+hashes identify the original input, not this candidate or a new approval.
+The original held commit and the master remain preserved in Git history and the
+shared authoring source. ChatGPT, GTAI and all shared sources are unchanged.
 
-The collection contains seven skills and 15 unchanged template masters. Deep Dive
-routes through Market Intelligence; document revision uses native host capabilities.
-Existing repository validation and synthetic evaluation tooling is retained with
-retired skill-owner names mapped to their current owners.
-
-Source and package validation, template checksums, deterministic rebuilds and strict
-Claude structural validation pass. Existing research and artifact evidence is reused;
-CLI validation does not establish native behavior. Some model-output misses and host
-verification gaps remain recorded in the maintainer evidence. This submission follows
-the release owner's explicit integrity-only authorization and does not claim every
-acceptance case passed.
-
-Workbook engine discrepancies, inherited print clipping, broader automatic activation
-and arbitrary Office rendering remain limitations. No production tools, hosted
-skills, defaults or publication are changed by this release branch.
+Local structural checks do not prove that Anthropic will clear its binary-file
+hold. This experiment tests only whether omitting the named template changes the
+directory finding. No new model tests, source rewrites, deployment or publication
+are part of it.
