@@ -1,127 +1,42 @@
-# Conduct Price-to-Win Review
+---
+title: Capture Price-to-Win Review
+description: Apply pricing evidence, buyer evaluation criteria and competitive positioning to decide how to pursue a government contract.
+---
 
-## Overview
-- Use this workflow for price-to-win analysis, pricing posture review, recompete pricing, competitor-pricing inference, or a sanity check against a proposed price for one opportunity.
-- Prefer this workflow when the output should drive a capture or pricing decision, not just return one benchmark source.
-- Goal: produce an evidence-backed PTW range, explain confidence, and recommend concrete pricing and capture actions.
+# Capture Price-to-Win Review
 
-## Default output
-- For a standard or deep PTW review, prefer the structure in `assets/price-to-win-brief-template.md` from the skill root.
-- Open the brief with a decision snapshot: recommended target, proposed-price posture, confidence, and the primary pricing action.
-- Keep rendered Markdown/PDF briefs readable: use compact scenario, evidence, and competitor tables in the document.
-- Put the full comparable universe, detailed rate rows, and detailed normalization model in CSV/JSON companions when they would make the document table too wide or dense.
-- Before delivering a customer-facing brief or companion artifact, read [Final Capture Deliverable Quality Checks](./final-deliverable-quality-checks.md).
-- For a quick check, return only:
-  - recommended range or posture,
-  - confidence,
-  - top evidence points,
-  - next action.
-- If structured company inputs are needed, use `assets/price-to-win-intake.json` from the skill root as the preferred intake shape.
+## 1. Identify the opportunity and decision
 
-## Inputs to resolve
-Resolve as many of these as are available from the request, opportunity context, and source files. Do not block if some are missing.
-- Opportunity or solicitation identifier
-- Buying office, agency, vehicle, and competition context
-- Solicitation, amendments, Q&A, pricing sheets, CLIN structure, and evaluation method
-- Predecessor or incumbent signals
-- Proposed total price, labor mix, rates, or target margin if available
-- Known company differentiators, vehicle position, teaming notes, or likely competitors
-- Prior pricing notes, BOE templates, proposal pricing assumptions, or reusable pricing workbooks only when the user asks to reuse or compare against them. Read [Prior User File Context](./prior-user-file-context.md) before searching for prior files.
+Reuse the active opportunity or order, company context, proposed price and existing pricing analysis. If given a saved pursuit, resolve it with [Search_Pursuits](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuits-mcp-tool). Retrieve an unresolved opportunity with [Search_Federal_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-opportunities-mcp-tool) or [Search_State_And_Local_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-state-and-local-contract-opportunities-mcp-tool).
 
-If pricing documents or direct comparables are missing, still produce a bounded PTW hypothesis and label the confidence accordingly.
+Establish the decision: pursue, revise the proposed price, change the delivery approach, or partner. Ask for missing company context only when it could change that decision.
 
-## Read-on-demand references
-- Read [Price-to-Win Method](./price-to-win-method.md) before building scenarios or reconciling market and execution views.
-- Read [Price-to-Win Data Playbook](./price-to-win-data-playbook.md) before gathering awards, incumbent, competitor, and rate evidence.
-- Read [Price-to-Win Quality Checks](./price-to-win-quality-checks.md) before finalizing.
+## 2. Read the buyer's evaluation and pricing basis
 
-## Procedure
+Use [Search_Government_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-government-files-mcp-tool) for the solicitation, pricing schedule, amendments and Q&A. Reuse documents already read; compare file IDs, dates and amendment text to establish the controlling requirements. When snippets are insufficient, read the full file with native tools or [source-content retrieval](https://govtribe.com/docs/govtribe-for-agents/guides/vector-store-content-retrieval).
 
-### 1) Resolve the decision question first
-Identify whether the request is for:
-- a quick PTW sanity check,
-- a standard PTW brief,
-- a proposed-price comparison,
-- a recompete pricing posture review,
-- or a deeper pricing and capture strategy readout.
+Identify contract type, evaluated quantities and options, performance period, mandatory requirements, price weighting, applicable realism checks and disclosed funding constraints. Under [LPTA](https://www.acquisition.gov/far/15.101-2), concentrate on meeting requirements at a competitive evaluated price. Under a [tradeoff](https://www.acquisition.gov/far/15.101-1), identify benefits the stated evaluation factors could reward with a premium. Apply the solicitation's actual method.
 
-Do not force a deep PTW brief when the request only needs a directional answer.
+For [federal architect-engineer services](https://www.acquisition.gov/far/36.606), qualifications-based selection precedes price negotiation. Use the actual product, subscription, consumption or labor unit when assessing economics.
 
-### 2) Build the opportunity and evidence set
-Use [Price-to-Win Data Playbook](./price-to-win-data-playbook.md).
-At minimum, resolve:
-- the opportunity and buying office,
-- solicitation and pricing basis,
-- contract type and period of performance,
-- evaluation method,
-- incumbent or predecessor signals,
-- direct pricing artifacts or their absence.
+## 3. Reuse or obtain the pricing analysis
 
-If the request depends on exact solicitation wording for price evaluation, pricing instructions, or CLIN structure, follow the bundled [vector-store retrieval guide](./govtribe-docs-vector-store-content-retrieval.md): resolve the files, call `Add_To_Vector_Store`, then call `Search_Vector_Store` and cite returned source metadata through the host's native citation format.
+When pricing evidence is missing or material inputs have changed, read `govtribe-pricing-data` reference `references/price-to-win-analysis.md`. Pass the resolved target, current source package, proposed solution/price and company cost or margin assumptions. Pricing owns comparable-award research, transaction history, labor and unit-price evidence, normalization, cost modeling and sensitivities. Reuse completed work and investigate only gaps affecting this decision.
 
-### 3) Build the comparable universe
-- Prefer direct predecessor, same office, same vehicle, and same-scope comparables before widening.
-- Keep included and excluded comparables visible.
-- Label value basis carefully: obligated amount, total potential value, ceiling, evaluated price, hourly rate, or unit price.
+Select relevant tools within Pricing: [BLS_Occupational_Wage_Data](https://govtribe.com/docs/govtribe-for-agents/tools/bls-occupational-wage-data-mcp-tool) for occupation/location wages; [Search_GSA_Labor_Rates](https://govtribe.com/docs/govtribe-for-agents/tools/search-gsa-labor-rates-mcp-tool) for published labor-category ceilings; [Search_Service_Contract_Inventory](https://govtribe.com/docs/govtribe-for-agents/tools/search-service-contract-inventory-mcp-tool) for federal service-contract hours, FTEs and prime/subcontractor workshare; and [Search_Line_Items](https://govtribe.com/docs/govtribe-for-agents/tools/search-line-items-mcp-tool) for awarded state/local unit prices and quantities. Keep detailed research in the Pricing skill.
 
-### 4) Analyze incumbent and competitor posture
-- Identify likely bidders, incumbent advantage, vehicle access, and visible pricing posture.
-- Distinguish observed evidence from inferred pricing behavior.
-- If likely-bidder recovery or incumbent determination is still unresolved, use the related capture workflow first and then return to PTW.
+Carry forward its supported range, sources, value basis, scope/options, dates and assumptions. Keep historical spend, contract ceilings and evaluated prices distinct. If evidence cannot support a numerical target, identify the missing pricing inputs and continue with the capture implications that can be assessed.
 
-### 5) Normalize pricing signals
-- Normalize for scope, option structure, contract type, location, labor mix, units, and escalation where the evidence supports it.
-- Use the `govtribe-pricing-data` skill when PTW needs staffing or wage model support, labor-category mapping, BLS/GSA rate comparisons, labor-rate benchmarks, MAS ceiling-rate evidence, awarded state/local line-item pricing support, or Service Contract Inventory context for service-labor footprint, FTEs, contractor reliance, workshare, and derived hourly-rate checks.
-- Flag outliers and explain why they were excluded or down-weighted.
+## 4. Compare our position with credible competitors
 
-### 6) Reconcile market view and execution view
-Use [Price-to-Win Method](./price-to-win-method.md).
-- Build the top-down market view from awards, rates, and buyer history.
-- Build the bottom-up execution view from CLINs, labor, deliverables, and realism constraints when enough inputs exist.
-- If the two views diverge materially, surface the gap and explain the likely capture or staffing implications instead of hiding it inside one midpoint number.
-- In the rendered brief, include a visible market/execution reconciliation table with top-down range, bottom-up range, reconciled PTW range, and confidence notes.
+Reuse [Find Incumbent](find-incumbent-for-federal-contract-opportunity.md) and [Likely Bidders](likely-bidders.md) where needed. Compare relevant experience, buyer access, delivery approach, transition costs and material advantages against ours. Explain how each difference affects evaluated value or execution cost; base competitor pricing assumptions on observed evidence.
 
-### 7) Produce the PTW scenarios
-Provide:
-- aggressive / low,
-- competitive midpoint,
-- premium / value-based.
+When a related procurement's selection decision could clarify the buyer's tradeoffs, use [Search_GAO_Bid_Protests](https://govtribe.com/docs/govtribe-for-agents/tools/search-gao-bid-protests-mcp-tool) for public decision text and disclosed price/technical comparisons. Read the decision in context before applying its findings to this competition.
 
-For each scenario, explain:
-- the range,
-- when to use it,
-- the main risk,
-- and which scenario best matches the opportunity and company position.
+## 5. Recommend how to compete
 
-If a proposed price is available, compare it directly to the range and label the posture clearly.
+Compare the competitive price with our delivery economics and business objectives. If they do not overlap, quantify the gap where possible and assess changes to staffing, technical approach, transition, workshare, teaming or margin expectations. Explain unresolved economics when company cost inputs are missing. Support any premium with benefits the buyer evaluates; assess alternatives that could change the decision.
 
-### 8) Keep rendered evidence tables compact
-- In the Markdown brief, summarize comparable evidence with a narrow table focused on `Signal`, `Value basis`, `PTW implication`, and `Source`.
-- Keep document evidence tables to 6 rows or fewer by default. Prioritize the direct predecessor, strongest same-office/same-vehicle comparables, major exclusions, and rate signals that materially change the recommendation.
-- Keep likely-competitor coverage compact. Prefer concise response notes when a competitor table would wrap heavily or split across pages.
-- If the comparable universe has more than 6 rows, state that the full evidence set is delivered in a CSV/JSON companion.
-- If the user explicitly asks for every comparable in the rendered document, split evidence by tier or value basis rather than forcing one wide table.
+Recommend the next actions and use [Bid / No-Bid Review](conduct-bid-no-bid-review.md) when the findings change whether or how to pursue. Revisit the recommendation when amendments, pricing evidence or solution assumptions materially change.
 
-### 9) Recommend actions and validate
-- Recommend specific capture and pricing next steps: questions to resolve, evidence to pull, labor mix checks, vehicle-rate checks, teaming decisions, or bid / no-bid implications.
-- Run the checklist in [Price-to-Win Quality Checks](./price-to-win-quality-checks.md).
-- If a structured PTW JSON output is created, run `python3 scripts/validate_price_to_win_output.py path/to/ptw.json` before final delivery.
-- Correct weak value-basis labels, unsupported assumptions, or missing confidence statements before finalizing.
-
-## Output rules
-- Use a range, not a single unsupported magic number.
-- Separate facts, assumptions, and inferred competitor posture.
-- Keep evidence traceable to GovTribe records, solicitation text, or clearly labeled company-provided inputs.
-- Tie pricing posture to the actual evaluation method and solicitation structure.
-- Flag low-confidence conditions and missing pricing documents directly.
-- Do not use non-public competitor pricing or other impermissible inputs.
-
-## Common failure modes to avoid
-- Treating PTW as only a labor-rate benchmark
-- Treating IDIQ ceiling values as likely award values
-- Ignoring evaluation method, option years, or contract type
-- Recommending a premium without clear evaluation support
-- Producing a market overview without a usable pricing posture recommendation
-- Hiding sparse evidence behind confident language
-- Burying the top-down versus bottom-up reconciliation in prose or an appendix
-- Delivering a rendered brief that feels like a raw table dump instead of a pricing decision memo
+Prepare an appropriate GovCon report explaining the recommended capture action, decisive evidence, unresolved questions and next steps. Let the requested use determine the format.

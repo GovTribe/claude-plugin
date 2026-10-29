@@ -1,8 +1,8 @@
-<img src="assets/govtribe-logo.png" alt="GovTribe" width="96" />
+![GovTribe](assets/govtribe-logo.png)
 
 # GovTribe
 
-Claude plugin containing the GovTribe MCP connection and eight government contracting skills.
+Claude plugin containing the GovTribe MCP connection and seven government contracting skills.
 
 ## Requirements
 
@@ -42,16 +42,15 @@ If GovTribe is already connected through your Claude.ai account, the skills can 
 
 | Skill | Scope |
 | --- | --- |
-| `govtribe-market-intelligence` | Market sizing, buyers, vendors, forecasts, and recompetes |
+| `govtribe-market-intelligence` | Market sizing, buyers, vendors, forecasts, recompetes, and individual-record Deep Dive research |
 | `govtribe-capture-workflows` | Opportunity discovery, pipeline, bid/no-bid, incumbents, competitors, and teaming |
 | `govtribe-pricing-data` | Labor rates, staffing, pricing models, and price-to-win evidence |
-| `govtribe-deep-dive` | Research on an individual opportunity, award, agency, vendor, program, or jurisdiction |
 | `govtribe-proposal-workflows` | Solicitation extraction, compliance matrices, outlines, and proposal documents |
 | `govtribe-file-templates` | Templates for documents, workbooks, and presentations |
-| `govtribe-document-editing` | Requested edits, review annotations, revision checks, and artifact validation |
 | `govtribe-govcon-writing` | Source-backed proposal narratives, RFI replies, and official correspondence |
+| `govtribe-docs` | GovTribe product guides, data definitions, query guidance, and MCP tool documentation |
 
-In Claude Code, skills use the `/govtribe:` prefix, for example `/govtribe:govtribe-deep-dive`.
+In Claude Code, skills use the `/govtribe:` prefix, for example `/govtribe:govtribe-market-intelligence`.
 
 Example requests:
 
@@ -69,6 +68,10 @@ The plugin connects to `https://govtribe.com/mcp`. Available tools depend on the
 - [GovTribe MCP documentation](https://govtribe.com/docs/govtribe-user-guide/govtribe-mcp/)
 - [GovTribe support](https://govtribe.com/docs/govtribe-user-guide/contact-govtribe/)
 - [Plugin issues](https://github.com/GovTribe/claude-plugin/issues)
-- [Privacy policy](https://govtribe.com/docs/govtribe-user-guide/privacy-policy/) and [MCP data handling](https://govtribe.com/docs/govtribe-user-guide/ai-data-handling-and-subprocessors/)
+- [Privacy policy](https://www.govexec.com/about/privacy-policy/) and [MCP data handling](https://govtribe.com/docs/govtribe-user-guide/ai-data-handling-and-subprocessors/)
 
 Do not include credentials or private account data in GitHub issues. The plugin is licensed under [Apache-2.0](LICENSE). GovTribe service access is subject to the [GovTribe Terms of Use](https://govtribe.com/docs/govtribe-user-guide/terms-of-use/).
+
+## Prepared seven-skill update
+
+This 1.2.0 release candidate contains Market Intelligence (including Deep Dive), Capture, Pricing, Proposal Workflows, File Templates, GovCon Writing and GovTribe Docs. It retains 15 approved template masters and uses native host editing. See [candidate provenance](docs/provenance.md) for integrity checks and known limitations. This branch is for review; it does not publish 1.2.0.

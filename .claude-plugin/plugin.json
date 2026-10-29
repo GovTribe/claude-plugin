@@ -1,13 +1,16 @@
 {
-    "name": "govtribe",
-    "displayName": "GovTribe",
-    "version": "1.1.0",
-    "description": "GovCon research and capture",
-    "author": {
-        "name": "Government Executive Media Group LLC"
-    },
-    "homepage": "https://govtribe.com/docs/govtribe-for-agents",
-    "repository": "https://github.com/GovTribe/claude-plugin",
-    "license": "Apache-2.0",
-    "skills": "./skills/"
+  "name": "govtribe",
+  "displayName": "GovTribe Skills",
+  "version": "1.2.0",
+  "description": "GovCon research and capture",
+  "author": {
+    "name": "Government Executive Media Group LLC"
+  },
+  "homepage": "https://govtribe.com/docs/govtribe-for-agents",
+  "repository": "https://github.com/GovTribe/claude-plugin",
+  "skills": "./skills/",
+  "license": "Apache-2.0",
+  "supportUrl": "https://govtribe.com/docs/govtribe-user-guide/contact-govtribe",
+  "privacyPolicyUrl": "https://www.govexec.com/about/privacy-policy/",
+  "icon": "./assets/govtribe-icon.png"
 }

@@ -13,13 +13,54 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def skill_directory():
-    """Return this bundled validator's declared owner, including relocated copies.
+def mounted_skill_script_directories(start):
+    """Every ``skills/<skill>/scripts`` directory visible from ``start`` or one
+    of its ancestors, without assuming where the host mounts skills."""
+    seen = []
+    for ancestor in [start, *start.parents]:
+        for pattern in ("skills/*/scripts", "*/skills/*/scripts", "*/*/skills/*/scripts"):
+            try:
+                found = sorted(ancestor.glob(pattern))
+            except OSError:
+                continue
+            for candidate in found:
+                if candidate.is_dir() and candidate not in seen:
+                    seen.append(candidate)
+    return seen
 
-    Keep this skill's scripts together. Receipt hashes bind the artifact and
-    contract; no ancestor or neighboring-skill search is needed for ownership.
-    """
-    return "govtribe-proposal-workflows"
+
+def skill_directory():
+    """The mounted skill directory this validator belongs to, so a receipt names
+    the skill whose checks it records instead of leaving that to inference.
+
+    In place, the skill directory is the ancestor holding SKILL.md above this
+    scripts directory. When the documented whole-directory relocation copied
+    scripts/ into a task workspace, that ancestor is gone, so the copy is
+    matched byte-for-byte against the scripts of each mounted skill that is
+    visible from the workspace; an ambiguous or modified copy yields None
+    rather than a guess."""
+    try:
+        here = Path(__file__).resolve()
+    except OSError:
+        return None
+    for ancestor in here.parents[1:]:
+        if (ancestor / "SKILL.md").is_file() and (ancestor / "scripts" / here.name).is_file():
+            return ancestor.name or None
+    try:
+        local = {p.name: p.read_bytes() for p in here.parent.glob("*.py")}
+    except OSError:
+        return None
+    matches = []
+    for candidate in mounted_skill_script_directories(here.parent):
+        try:
+            names = {p.name for p in candidate.glob("*.py")}
+            if names == set(local) and all(
+                (candidate / name).read_bytes() == body for name, body in local.items()
+            ):
+                matches.append(candidate.parent.name)
+        except OSError:
+            continue
+    return matches[0] if len(matches) == 1 else None
 
 
 def contract_digest(contract):

@@ -1,90 +1,73 @@
 ---
 title: Find Early Federal Procurement Signals
-description: How to surface expiring awards, forecasts, early notices, active solicitations, and corroborating budget or news signals for a federal market slice.
+description: Find upcoming federal contracts and grants through forecasts, notices, expiring contracts, recurring programs, and funding plans.
 ---
 
 # Find Early Federal Procurement Signals
 
-Use this reference when the user wants early federal demand signals before a requirement matures into a fully active solicitation.
+## 1. Define the agency, work, and timeframe
 
-## Goal
-- Resolve the target scope, then surface distinct evidence buckets:
-  - expiring awards, IDVs, or vehicles
-  - federal forecasts
-  - early notices
-  - active solicitations
-  - corroborating budget, web, or government-related news signals
-- Keep stage progression explicit instead of collapsing everything into one undifferentiated list.
+For cross-government research, start with topic terms and synonyms; identify buyers from the results. Resolve agencies or contract categories when needed with [Search_Federal_Agencies](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-agencies-mcp-tool), [Search_Naics_Categories](https://govtribe.com/docs/govtribe-for-agents/tools/search-naics-categories-mcp-tool), or [Search_Psc_Categories](https://govtribe.com/docs/govtribe-for-agents/tools/search-psc-categories-mcp-tool). For grants, use [Search_Federal_Grant_Programs](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-programs-mcp-tool) and scope by program, topic, and applicant eligibility. Reuse supplied record IDs.
 
-## Workflow
+Use the requested dates; otherwise apply these windows:
 
-### 1. Resolve the target scope first
-- Normalize the topic, capability, agency, NAICS, PSC, or related seed record into a search-ready scope.
-- Resolve agencies and classifications into reusable IDs when they materially improve filtering.
-- Keep the default windows bounded. Use the next 12 to 24 months for lifecycle signals and shorter recent windows for notices, budget signals, and news.
-- If the scope is too vague to search well, ask for the minimum missing detail and stop.
+- **Upcoming:** today through the next 24 months: `{"from": "now/d", "to": "now+24M/d"}`.
+- **Recent:** the previous six months through now: `{"from": "now-6M/d", "to": "now"}`.
+- **History:** the last three completed U.S. federal fiscal years. Calculate explicit October 1–September 30 bounds; exclude the current partial fiscal year.
 
-### 2. Run the lifecycle pass first
-- Use `Search_Federal_Contract_Awards` with `ultimate_completion_date_range` to find awards expiring in the next 12 to 24 months.
-- Use `Search_Federal_Contract_IDVs` and `Search_Federal_Contract_Vehicles` with `last_date_to_order_range` to find expiring instruments in the same window.
-- Carry the strongest agency, office, NAICS, PSC, vendor, vehicle, or IDV filters into this pass.
-- Treat expiring lifecycle records as lead indicators, not as proof that near-term demand already exists.
+See [date filtering](https://govtribe.com/docs/govtribe-for-agents/guides/date-filtering).
 
-### 3. Run the forecast pass second
-- Use `Search_Federal_Forecasts` as the formal planning surface.
-- Start with an aggregation-first view when the slice is broad, then pull rows with release timing, agency context, set-aside posture, and contacts.
-- Use the forecast pass to understand formal planned demand before looking at notices.
+## 2. Find planned contracts and grants
 
-### 4. Run the early-notice pass third
-- Use `Search_Federal_Contract_Opportunities` with early-stage notice types such as `Pre-Solicitation` and `Special Notice`.
-- Carry concrete topic, agency, NAICS, PSC, and requirement language into this pass.
-- Keep this pass future-facing or very recent. When notice rows expose due dates, prefer future due dates or notices that closed within roughly the last 6 months.
-- Use `posted_date_histogram`, `top_opportunity_types_by_doc_count`, `top_opportunity_states_by_doc_count`, and `top_federal_contract_vehicles_by_doc_count` when a broad early-notice cohort needs posted-month volume, lifecycle mix, or vehicle concentration before row review.
-- Exclude stale early notices that are no longer informative.
-- Treat RFI or sources-sought style asks as query language, not as a guaranteed dedicated notice enum.
+**Contracts:** use [Search_Federal_Forecasts](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-forecasts-mcp-tool) using topic wording; add `federal_agency_ids` or NAICS when narrowing.
 
-### 5. Run the active-solicitation pass fourth
-- Use `Search_Federal_Contract_Opportunities` again with `Solicitation` plus a future-facing due-date filter.
-- Use `due_date_histogram`, `top_opportunity_states_by_doc_count`, `top_opportunity_types_by_doc_count`, and `top_federal_contract_vehicles_by_doc_count` when the user needs active solicitations by due month, status, type, or vehicle concentration.
-- Use this pass only to show active demand that appears to belong to the same market slice.
+- Use the upcoming window for expected releases (`estimated_solicitation_release_date_range`) or awards (`anticipated_award_start_date_range`).
+- Request `govtribe_id`, `name`, `govtribe_url`, `source_url`, `forecast_type`, `estimated_solicitation_release_date`, `estimated_award_start_date`, `estimated_award_value`, `set_aside`, and `federal_agency` in `fields_to_return`. Preserve estimated value ranges; expand promising records with `descriptions` and `points_of_contact`.
+- For broad searches, use `top_federal_agencies_by_doc_count`, `top_naics_codes_by_doc_count`, or `top_set_aside_types_by_doc_count` to identify concentrations.
 
-### 6. Run the budget and news pass fifth
-- Use `Search_Government_Related_News_Articles` over a recent window with the strongest topic, agency, NAICS, PSC, or requirement terms.
-- Use the host's provider-neutral web-browsing or search capability for official budget, appropriations, and planning pages that signal funded or prioritized demand.
-- Start with these shared source lists:
-  - [Federal Budget Data](./federal-budget-data.md)
-  - [State Budget Data](./state-budget-data.md)
-- Federal budget sites to inspect:
-  - OMB and President's Budget materials
-  - agency congressional budget justifications, budget office pages, and CFO pages
-  - House and Senate appropriations bills, reports, and explanatory statements
-  - agency acquisition forecasts, strategic plans, and IT or capital planning pages
-- State budget sites when the workflow expands into adjacent state or comparative signals:
-  - governor budget office or OMB pages
-  - legislative appropriations or fiscal committee pages
-  - statewide capital budget or capital improvement plan pages
-  - agency budget request and strategic planning pages
-- Treat budget, web, and news results as corroborating context. Do not let them outweigh forecasts, notices, solicitations, or expiring lifecycle records.
-- If web browsing is unavailable, use the bundled official source lists, GovTribe forecasts and news, and the evidence already retrieved. Label unverified budget context, provide the relevant official source links, and request a supported document export only when the missing budget evidence would materially change the conclusion.
+**Grants:** use [Search_Federal_Grant_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-opportunities-mcp-tool) with `opportunity_types: ["Forecasted"]`, scoped by `federal_agency_ids`, `federal_grant_program_ids`, topic, or `applicant_types`. Use the upcoming window for expected announcements (`forecast_posting_date_range`) or application deadlines (`forecast_due_date_range`). Retrieve `forecast_posting_date`, `forecast_due_date`, `applicant_types`, `funding_instruments`, `award_floor`, `award_ceiling`, `description`, `govtribe_url`, and `source_url`.
 
-### 7. Use stage-progression recovery before generic semantic broadening
-- If one stage is strong and another stage is unexpectedly thin, prefer one same-family `similar_filter` recovery pass before a broad semantic pass.
-- Only after that should you use `search_mode: "semantic"` for conceptual or synonym-heavy topics.
-- Keep structural filters in place and do not let semantic expansion flatten stage distinctions.
+For either forecast search, run release and deadline/award windows separately and merge by `govtribe_id` when either date qualifies.
 
-### 8. Dedupe and stage the findings
-- Keep expiring lifecycle records, forecasts, early notices, active solicitations, budget or web signals, and news in separate buckets.
-- If multiple records appear to describe the same requirement, keep the stage progression explicit rather than collapsing the records into one row.
-- Remove weak or off-topic news and loose keyword matches from the final set.
+## 3. Find notices and check current status
 
-## Output contract
-- Return a short scope summary, a concise search approach, a stage-by-stage signal summary, compact tables for each populated stage, key progression notes, risks or gaps, and confidence.
-- Keep the stage labels explicit:
-  - `Expiring Award / IDV / Vehicle`
-  - `Forecast`
-  - `Pre-Solicitation`
-  - `Special Notice / RFI / Sources Sought`
-  - `Active Solicitation`
-  - `Budget / Funding Signal`
-  - `Government-Related News`
-- If one stage is empty, say so clearly instead of implying demand exists at that stage.
+Use [Search_Federal_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-opportunities-mcp-tool):
+
+- Early notices: `opportunity_types: ["Pre-Solicitation", "Special Notice"]`, with `posted_date` in the recent window. Search RFI and sources-sought wording in `query`; neither is an opportunity-type enum. Early notices may lack due dates.
+- Active solicitations: `opportunity_types: ["Solicitation"]`, `opportunity_states: ["Posted", "Updated"]`, and `due_date_range` in the upcoming window.
+
+Request `govtribe_id`, `name`, `govtribe_url`, `source_url`, `solicitation_number`, `opportunity_type`, `opportunity_state`, `posted_date`, `due_date`, `federal_agency`, and `federal_meta_opportunity_id`. For broad results, `posted_date_histogram`, `due_date_histogram`, and `top_opportunity_states_by_doc_count` summarize timing and status.
+
+For posted grants, use `Search_Federal_Grant_Opportunities` with `opportunity_types: ["Posted"]` and `due_date_range` in the upcoming window. Check eligibility and application instructions in the announcement.
+
+## 4. Identify follow-on contracts and recurring grants
+
+Search the upcoming window with [Search_Federal_Contract_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-awards-mcp-tool) using `ultimate_completion_date_range`, and [Search_Federal_Contract_IDVs](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-idvs-mcp-tool) or [Search_Federal_Contract_Vehicles](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-vehicles-mcp-tool) using `last_date_to_order_range`.
+
+Search the web by contract/solicitation number, program, agency, and incumbent for agency forecasts, SAM.gov notices, industry-day materials, extensions, and successor plans. Use these sources to establish whether expiring work will continue. See [Find Federal Recompete Opportunities](./find-federal-recompete-opportunities.md).
+
+For recurring grants, use [Search_Federal_Grant_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-awards-mcp-tool) with `federal_grant_program_ids` and `award_date_range` in the history window to examine previous recipients and their awards. Use `Search_Federal_Grant_Opportunities` with the same program IDs and no date/type filters to check the latest announcement, including closed rounds, for future funding or competitions.
+
+Look for industry-specific demand signals, such as equipment replacement, product end-of-support, software renewal or migration, service bridges, and funded project phases.
+
+## 5. Read source material and connect related records
+
+Use [Search_Government_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-government-files-mcp-tool) with `federal_contract_opportunity_ids` or `federal_grant_opportunity_ids` to find attachments. Read original files through `download_url` with native file tools, or follow [vector-store content retrieval](https://govtribe.com/docs/govtribe-for-agents/guides/vector-store-content-retrieval). Look for scope, eligibility, response dates, acquisition schedules, and funding details.
+
+Group notices for the same requirement or event even when their IDs differ; retain distinct deadlines. Connect contract notices through `federal_meta_opportunity_ids` and solicitation numbers; retrieve related awards/IDVs with `federal_contract_opportunity_ids`. Contract forecasts lack direct notice/award links: compare agency, requirement text, dates, and source documents. Use [similarity](https://govtribe.com/docs/govtribe-for-agents/guides/find-similar-records) or semantic queries when links or wording are insufficient. For grants, a shared program connects funding history; confirm any specific opportunity-to-award relationship from source documents.
+
+## 6. Explain funding, timing, and implications
+
+Use [Federal Budget Data](./federal-budget-data.md) for official funding sources.
+
+For DoD requests, use [Search_Major_Defense_Programs](https://govtribe.com/docs/govtribe-for-agents/tools/search-major-defense-programs-mcp-tool) for relevant acquisition context and review official budget justification books for funding changes, new initiatives, planned solicitations/awards, and acquisition milestones. Use the latest available publication cycle for fiscal years covering the upcoming window; compare those same fiscal years with the previous cycle. Retain units and distinguish actual, enacted, requested, and projected funding. Retrieve budget amounts from the source books.
+
+For grants, distinguish `award_floor`/`award_ceiling` per award from total available funding and expected award counts in the announcement. Historical obligations describe money already awarded.
+
+Search reporting with [Search_Government_Related_News_Articles](https://govtribe.com/docs/govtribe-for-agents/tools/search-government-related-news-articles-mcp-tool), using relevant terms in `query` and `date_published` in the recent window. Connect funding decisions to announced procurement or grant schedules.
+
+## Report
+
+Produce a GovCon business report organized by requirement or funding program. Explain current stage, expected release/award timing or application deadline, value range, incumbent/vehicle or applicant eligibility, and useful next action. Preserve original sources' date precision (year, quarter, or day) and links. Identify gaps affecting conclusions.
+
+For a contract-spending estimate over the next 24–36 months, use [Spending Forecast](./spending-forecast.md) to turn historical obligations and known changes into scenarios.

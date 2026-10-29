@@ -1,72 +1,49 @@
 ---
-title: SBA Certification Graduation Dashboard
-description: How to build a scoped certification-expiration exposure view for awards and IDVs using a selected SBA certification date.
+title: SBA Certification Expiration Analysis
+description: Find incumbent work to pursue as contractors approach SBA certification expiration, then identify follow-on opportunities and eligibility.
 ---
 
-# SBA Certification Graduation Dashboard
+# SBA Certification Expiration Analysis
 
-Use this reference when the user wants a scoped exposure analysis for awards and IDVs whose lifecycle extends beyond a selected SBA certification expiration date.
+Help 8(a) participants and other small firms find work to pursue as incumbents leave SBA programs. Use the requested certification window; otherwise use **today through 12 months**: `{"from":"now/d","to":"now+12M/d"}`. Apply this window to certification dates, not contract end dates.
 
-## Goal
-- Apply one shared scope bundle to awards and IDVs, compute `gap_days` between lifecycle and the selected certification expiration date, and surface the strongest vendor and record-level exposures.
-- Keep awards and IDVs separate throughout the workflow and the output.
+## 1. Clarify the pursuit scope
 
-## Workflow
+Use the user's capabilities, customers, geography and certifications to focus the search. Ask clarifying questions only where needed, including which program they mean by "small business." Small Disadvantaged Business is a specific designation, not a synonym for every small firm.
 
-### 1. Choose the certification track first
-- If the user names a certification date explicitly, use it.
-- If the user says only `SBA certification`, prefer `Show_Question_Flow` or `Show_Option_List` to collect which certification date should anchor the analysis before searching.
-- Supported certification tracks for awards and IDVs:
-  - 8(a): filter awards/IDVs with `vendor_sba_8a_expiration_date_range`; retrieve vendor rows with `sba_cert_8a_expiration_date`
-  - 8(a) Joint Venture: filter awards/IDVs with `vendor_sba_8a_joint_venture_expiration_date_range`; retrieve vendor rows with `sba_cert_8a_joint_venture_expiration_date`
-  - HUBZone: filter awards/IDVs with `vendor_sba_hubzone_expiration_date_range`; retrieve vendor rows with `sba_cert_hubzone_expiration_date`
-  - Small Disadvantaged Business: filter awards/IDVs with `vendor_sba_small_disadvantaged_business_expiration_date_range`; retrieve vendor rows with `sba_cert_small_disadvantaged_business_expiration_date`
-- Award and IDV rows do not return vendor certification date fields directly. After retrieving award/IDV rows, use `awardee.govtribe_id` values to call `Search_Vendors` and retrieve the selected vendor certification field.
-- If the user says only `small`, use the same interactive input pattern to confirm whether they mean the small disadvantaged business expiration date before searching.
-- Use one certification track per run unless the user explicitly wants a comparison.
-- Default the certification and lifecycle windows to the next 12 months unless the user clearly requested a different defensible shared window.
+The supported award/IDV filters and corresponding vendor fields are:
 
-### 2. Build one shared scope bundle
-- Convert the user scope into the narrowest defensible bundle you can apply symmetrically to both datasets.
-- If a requested filter cannot be applied cleanly to both awards and IDVs, say so clearly and prefer `Show_Question_Flow` or `Show_Option_List` for the scope clarification before searching.
+| Program | Award/IDV filter | Vendor date field |
+| --- | --- | --- |
+| 8(a) | `vendor_sba_8a_expiration_date_range` | `sba_cert_8a_expiration_date` |
+| 8(a) joint venture | `vendor_sba_8a_joint_venture_expiration_date_range` | `sba_cert_8a_joint_venture_expiration_date` |
+| HUBZone | `vendor_sba_hubzone_expiration_date_range` | `sba_cert_hubzone_expiration_date` |
+| Small Disadvantaged Business | `vendor_sba_small_disadvantaged_business_expiration_date_range` | `sba_cert_small_disadvantaged_business_expiration_date` |
 
-### 3. Remember the dataset-specific lifecycle fields
-- Awards:
-  - filter with `ultimate_completion_date_range`
-  - display `ultimate_completion_date`
-  - output `set_aside_type`
-- IDVs:
-  - filter with `last_date_to_order_range`
-  - display `last_date_to_order`
-  - output `set_aside`
-- Do not assume the two datasets share interchangeable lifecycle or set-aside field names.
+## 2. Find relevant incumbent work
 
-### 4. Run count and aggregation passes first
-- Use `Search_Federal_Contract_Awards` with the shared scope bundle, the award lifecycle window, and the selected certification filter.
-- Use `Search_Federal_Contract_IDVs` with the shared scope bundle, the IDV lifecycle window, and the selected certification filter.
-- Use aggregation-only passes to understand cohort size, dominant agencies, set-aside posture, vehicles, and whether the pool is too broad to review defensibly.
-- If the cohort is too large, ask the user to de-scope before row retrieval, preferably with a bounded interactive choice when the narrowing options are clear.
+Use [Search_Federal_Contract_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-awards-mcp-tool) and [Search_Federal_Contract_IDVs](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-idvs-mcp-tool) with the selected certification filter and relevant vendor, agency, NAICS or requirement filters.
 
-### 5. Pull rows and compute `gap_days`
-- Retrieve award rows sorted by `ultimate_completion_date`.
-- Retrieve IDV rows sorted by `last_date_to_order`.
-- Exclude rows missing the lifecycle date, `awardee.govtribe_id`, or the selected certification date on the joined vendor row.
-- Compute `gap_days` from the award/IDV lifecycle date and the joined vendor certification date:
-  - positive: lifecycle extends past certification expiration
-  - zero or negative: work ends on or before certification expiration
+For ongoing work, set `ultimate_completion_date_range` (awards) or `last_date_to_order_range` (IDVs) to `{"from":"now/d","to":null}`. Leave the lifecycle filter off when investigating records with missing end dates. Retrieve identifiers, buyer, `awardee`, `govtribe_url` and `dollars_obligated`, plus award `descriptions`, `completion_date`, `ultimate_completion_date`, `set_aside_type`, or IDV `description`, `last_date_to_order`, `set_aside`. Use `fields_to_return` to expand promising records and paginate the relevant results.
 
-### 6. Rank and trim
-- Rank rows by `gap_days` descending, then by value.
-- Keep awards and IDVs in separate ranked sections.
-- Add a set-aside alignment label using returned text only.
-- For IDVs, flag MAS, FSS, GWAC, OASIS, or similar shared-vehicle ceilings and avoid treating those ceilings as simple comparable exposure totals.
-- Lower confidence when the remaining cohort is sparse, MAS-heavy, dependent on ambiguous parent-child identity, or mixes multiple certification interpretations.
+## 3. Compare certification and contract dates
 
-## Output contract
-- Return a certification-track and scope summary, a concise search approach, a cohort overview, separate awards and IDV exposure views, key patterns, risks or gaps, and confidence.
-- Prefer `Show_Stats_Display` for the cohort overview.
-- Use `Show_Chart` for standard inline exposure distributions, comparisons, or leaderboards.
-- When the exposure view needs long labels, source notes, or presentation polish, use the host's provider-neutral document or presentation capability. If it is unavailable, return the validated Markdown table plus chart-ready rows and state that a polished rendering was not produced.
-- Keep awards and IDVs separate throughout the answer.
-- If the user explicitly wants multiple certification tracks compared, keep each certification in a separate section or table.
-- Do not turn the result into a JSON payload or second output format unless the user explicitly asks for a file deliverable.
+Call [Search_Vendors](https://govtribe.com/docs/govtribe-for-agents/tools/search-vendors-mcp-tool) with the direct `awardee.govtribe_id` values in `govtribe_ids`; request the selected certification field alongside identity and URLs. Use that entity's date, not its ultimate parent's.
+
+Calculate `gap_days = contract end date - certification date`, sorting locally. Positive gaps identify work extending beyond the reported certification date. Compare current and ultimate award completion separately to distinguish current performance from potential options/extensions. Check descriptions and notices for terminations or replacements before treating future end dates as ongoing work. Keep missing-date cases unassessed.
+
+## 4. Establish the opening for another contractor
+
+Check whether the contract's set-aside depends on the expiring certification. Verify promising incumbents' current status through [SBA sources](https://www.sba.gov/certifications/) and source notices: renewal, graduation and other exits have different implications. A date gap alone does not establish contract loss or a new competition.
+
+For 8(a), follow-on requirements generally remain in the program unless SBA releases them or an exception applies ([FAR 19.815](https://www.acquisition.gov/far/19.815)). That can create a pursuit for another eligible 8(a) firm; other small firms need to check the actual acquisition strategy and access requirements.
+
+## 5. Find and prioritize follow-on pursuits
+
+For the strongest matches, follow [Find Federal Recompete Opportunities](find-federal-recompete-opportunities.md) to locate successor forecasts and notices, verify the relationship, and check timing, eligibility and vehicle access. Distinguish an actionable opportunity, an early prospect to monitor, an already-awarded successor, and no follow-on found.
+
+Rank by capability fit, eligible access, competition timing and actual contract activity—not the longest date gap alone. Keep IDV ceilings separate from obligated spending and distinguish vehicle replacement from task-order recompetes. Identify the useful next step, such as responding to sources sought, researching the buying office or monitoring a forecast.
+
+## Report
+
+Prepare a GovCon business-development report explaining whose work is worth pursuing, why, when and through which opportunity or acquisition path. Include supporting links and material gaps; choose the format that best communicates the findings.

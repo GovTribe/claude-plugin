@@ -6,18 +6,11 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import struct
 import sys
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_SKILLS = {
-    "govtribe-capture-workflows", "govtribe-deep-dive",
-    "govtribe-market-intelligence", "govtribe-pricing-data",
-    "govtribe-proposal-workflows",
-    "govtribe-file-templates", "govtribe-document-editing",
-    "govtribe-govcon-writing",
-}
-
 
 def validate(root=ROOT):
     errors = []
@@ -33,11 +26,29 @@ def validate(root=ROOT):
             errors.append(f"{path}: {exc}")
             return {}
 
+    provenance = read_json("docs/skill-source.json")
+    expected_skills = set(provenance.get("skills", []))
+    check(bool(expected_skills), "Imported source must declare its skill inventory")
     plugin = read_json(".claude-plugin/plugin.json")
     check(plugin.get("name") == "govtribe", "Plugin identifier must be govtribe")
-    check(plugin.get("displayName") == "GovTribe", "Plugin display name must be GovTribe")
+    check(plugin.get("displayName") == provenance.get("package_display_name"), "Plugin display name must be GovTribe")
     check(bool(re.fullmatch(r"\d+\.\d+\.\d+", plugin.get("version", ""))), "Invalid release version")
     check(plugin.get("skills") == "./skills/", "Root marketplace plugin must explicitly declare skills")
+    privacy_url = urlsplit(plugin.get("privacyPolicyUrl", ""))
+    check(privacy_url.scheme == "https" and bool(privacy_url.hostname), "Missing HTTPS privacy policy URL")
+    check(plugin.get("icon") == "./assets/govtribe-icon.png", "Missing directory icon declaration")
+    icon = root / "assets/govtribe-icon.png"
+    if icon.is_file():
+        image = icon.read_bytes()
+        check(len(image) < 2 * 1024 * 1024, "Directory icon must be under 2 MiB")
+        if image.startswith(b"\x89PNG\r\n\x1a\n") and len(image) >= 24:
+            width, height = struct.unpack(">II", image[16:24])
+            check(width == height and 512 <= width <= 2048,
+                  "Directory icon must be square and between 512 and 2048 pixels")
+        else:
+            check(False, "Directory icon must be a PNG")
+    else:
+        check(False, "Missing directory icon file")
     check(not any(k in plugin for k in ("hooks", "agents", "dependencies")), "Unexpected executable components")
     mcp = read_json(".mcp.json")
     check(mcp == {"mcpServers": {"govtribe": {"type": "http", "url": "https://govtribe.com/mcp"}}},
@@ -49,7 +60,7 @@ def validate(root=ROOT):
     check(bool(marketplace.get("description")), "Marketplace description is required")
     check(not (root / "hooks").exists(), "Unexpected hook directory")
     skills = sorted((root / "skills").glob("*/SKILL.md"))
-    check({p.parent.name for p in skills} == EXPECTED_SKILLS, "Expected exactly the eight GovTribe skills")
+    check({p.parent.name for p in skills} == expected_skills, "Skill inventory differs from imported source")
     for path in skills:
         body = path.read_text()
         match = re.match(r"\A---\n(.*?)\n---\n", body, re.S)
@@ -80,7 +91,6 @@ def validate(root=ROOT):
                 resolved = (path.parent / target).resolve()
                 check(resolved.is_relative_to(root.resolve()) and resolved.exists(),
                       f"Broken or escaping relative link: {path.relative_to(root)} -> {target}")
-    provenance = read_json("docs/skill-source.json")
     originals = provenance.get("files", {})
     adaptations = set(provenance.get("adapted_files", []))
     actual = {str(p.relative_to(root)) for p in (root / "skills").rglob("*") if p.is_file()}

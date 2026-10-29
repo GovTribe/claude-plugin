@@ -6,7 +6,6 @@ import json
 import sys
 import argparse
 from pathlib import Path
-from proposal_contract import read_contract, validate as validate_contract
 from delivery_evidence import finish, verify_receipt
 
 EXPECTED_SHEETS = [
@@ -108,9 +107,12 @@ def load_openpyxl_workbook(path: Path, data_only: bool = False):
         from openpyxl import load_workbook
     except ModuleNotFoundError as exc:
         print(
-            "DEGRADED: openpyxl is unavailable. Validate the workbook manually against "
-            "references/workbook-schema.md and references/quality-checks.md, and "
-            "deliver Markdown or CSV control views when workbook validation cannot run.",
+            "DEGRADED: optional scripted validation is unavailable because openpyxl is missing. "
+            "Review the workbook with native spreadsheet capabilities using "
+            "references/build-proposal-control-workbook.md and the sheet map at "
+            "govtribe-file-templates references/proposal-control-workbook-schema.md. "
+            "Report this scripted check as unperformed. If workbook authoring is also unavailable, "
+            "provide supported Markdown or CSV controls.",
             file=sys.stderr,
         )
         raise SystemExit(2) from exc
@@ -255,9 +257,8 @@ def main() -> int:
     )
     parser.add_argument("workbook", type=Path, help="Input .xlsx workbook")
     parser.add_argument(
-        "--profile", choices=("eleven-sheet", "contract"), default="eleven-sheet"
+        "--profile", choices=("eleven-sheet",), default="eleven-sheet"
     )
-    parser.add_argument("--contract", type=Path)
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--verify-receipt", type=Path)
     args = parser.parse_args()
@@ -268,18 +269,9 @@ def main() -> int:
         return 1
 
     try:
-        contract = read_contract(args.contract) if args.contract else None
-        if args.profile == "contract" and contract is None:
-            raise ValueError("Contract profile requires --contract")
-        if args.profile == "eleven-sheet" and contract is not None:
-            raise ValueError("Use --profile contract with --contract")
         if args.verify_receipt:
-            verify_receipt(path, json.loads(args.verify_receipt.read_text()), contract)
-        summary = (
-            validate_contract(path, contract)
-            if contract
-            else finish(validate(path), path, checks=["eleven-sheet-structure"])
-        )
+            verify_receipt(path, json.loads(args.verify_receipt.read_text()), None)
+        summary = finish(validate(path), path, checks=["eleven-sheet-structure"])
     except Exception as exc:
         summary = {"status": "failed", "errors": [str(exc)], "warnings": []}
     print(json.dumps(summary, indent=2))

@@ -1,61 +1,54 @@
 ---
 title: Relevant Opportunities
-description: How to rank open federal contract or grant opportunities against a target company, solution, or capability profile.
+description: Find and qualify government opportunities and forecasts using company experience, capabilities and pipeline context; set up saved searches for ongoing monitoring.
 ---
 
 # Relevant Opportunities
 
-Use this reference when the user wants a ranked short list of open federal contract or grant opportunities for a target company, solution, or capability profile.
+## 1. Build the company profile from its work
 
-## Goal
-- Resolve the target profile, extract reusable signals, search the open market, and rank only meaningfully relevant opportunities.
-- Keep the result capture-oriented. Exclude broad market scans, buyer-expansion analysis, and single-record deep dives.
-- Before delivering a customer-facing ranked list, workbook, or companion artifact, read [Final Capture Deliverable Quality Checks](./final-deliverable-quality-checks.md).
+Reuse established company research and fill only material gaps. For new research, use the past five years of awards, plus older active work and held vehicles, unless the user specifies another period.
 
-## Workflow
+- Resolve the company with [Search_Vendors](https://govtribe.com/docs/govtribe-for-agents/tools/search-vendors-mcp-tool). Review identity, registrations, `sba_certifications`, `business_types` and certification dates. Supplement with the company website and supplied context.
+- Review [Search_Federal_Contract_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-awards-mcp-tool), [Search_Federal_Grant_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-awards-mcp-tool), [Search_Federal_Contract_Sub_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-sub-awards-mcp-tool) and [Search_Federal_Grant_Sub_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-sub-awards-mcp-tool) using `vendor_ids`. Use representative scopes across buyers and work types, dates, scale and prime/subrecipient roles to identify demonstrated capabilities beyond registered classifications. Confirm the company is the subrecipient in subaward records.
+- Retrieve held [Search_Federal_Contract_IDVs](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-idvs-mcp-tool) and [Search_Federal_Contract_Vehicles](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-vehicles-mcp-tool) with `vendor_ids`; check holder identity and ordering dates for usable access.
+- For the company's workspace, resolve its [Search_Pipelines](https://govtribe.com/docs/govtribe-for-agents/tools/search-pipelines-mcp-tool) and [Search_Stages](https://govtribe.com/docs/govtribe-for-agents/tools/search-stages-mcp-tool). Use [Search_Pursuits](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuits-mcp-tool) with `pipeline_ids`/`stage_ids` to review active, won, lost and abandoned pursuits. Read relevant [Search_Pursuit_Discussions](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuit-discussions-mcp-tool) and [Search_Pursuit_Comments](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuit-comments-mcp-tool) for reasons, constraints and buyer experience; corroborate reported wins with linked awards.
+- Review a reasonable selection of relevant, already-visible company files, focusing on gaps in capabilities and past performance. For indexed files, scope [Search_User_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-user-files-mcp-tool) to their `user_file_ids` with the keyword query `quals | qualification* | "past performance" | "capability statement"`. Read names/snippets before contents; read supplied files directly. Skip when no relevant files are visible.
 
-### 1. Resolve the target profile first
-- Resolve a vendor with `Search_Vendors` when the input maps cleanly to a company.
-- Reuse company identity, offerings, customer alignment, classifications, certifications, geography, and recent relevant awards when they materially sharpen fit.
-- If the target is only a website or plain-language profile, work from user-provided text and do not invent external website retrieval.
-- If the target is too vague to search well, ask for the minimum missing detail and stop. Prefer `Show_Question_Flow` when the missing profile fields are a small structured set.
+## 2. Set the scope and dates
 
-### 2. Pull prior user-file evidence only when it sharpens the profile
-- Read [Prior User File Context](./prior-user-file-context.md) before searching user files.
-- Use `Search_User_Files` only when capability statements, one-pagers, uploaded target material, prior capture briefs, or reusable company evidence materially sharpen the fit profile.
-- Reuse `content_snippet` first.
-- When file content is necessary to capture exact mission language, delivery model, or technical phrases, follow the bundled [vector-store retrieval guide](./govtribe-docs-vector-store-content-retrieval.md): call `Add_To_Vector_Store`, then `Search_Vector_Store`, and cite returned source metadata through the host's native citation format.
+Establish capabilities sought, buyers, geography, eligibility, value/scale, vehicle access and response time. Resolve buyers with [Search_Federal_Agencies](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-agencies-mcp-tool) or [Search_Jurisdictions](https://govtribe.com/docs/govtribe-for-agents/tools/search-jurisdictions-mcp-tool); resolve grant programs with [Search_Federal_Grant_Programs](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-programs-mcp-tool). Use documented classification-code filters.
 
-### 3. Resolve structured constraints before broad retrieval
-- Resolve user-supplied agencies, NAICS, PSC, grant programs, geography, due-date, and eligibility constraints into reusable IDs when they materially tighten the market slice.
-- Keep contract and grant filters separate instead of forcing one mixed search surface.
+Search open opportunities from today (`due_date_range.from: "now/d"`); apply required preparation time to the earliest mandatory deadline. Use `posted_date` for requested recency and check rolling/undated calls separately. Also search forecasts for the next 24 months: `{"from":"now/d","to":"now+24M/d"}`, unless the user specifies another horizon or only wants open bids.
 
-### 4. Start with keyword and filter-first open-opportunity retrieval
-- Contract path: use `Search_Federal_Contract_Opportunities` with the strongest agency, NAICS, PSC, set-aside, location, due-date, and opportunity-type filters.
-- Grant path: use `Search_Federal_Grant_Opportunities` with the strongest agency, program, funding-instrument, eligibility, and due-date filters.
-- Request explicit row fields needed for scope, timing, agency, classification, and opportunity text.
-- If the user asked for only active or open results, make that an explicit filter decision.
+### Starting from a pipeline
 
-### 5. Use aggregation only when the scoped cohort is still broad
-- Run an aggregation-first pass only when market sizing, concentration, or narrowing materially improves the ranking.
-- Use cohort-shape aggregations to understand dominant agencies, classifications, programs, locations, and set-aside posture before row review.
+For seed/grow requests, use the pipeline's `name`, `description` and `tags`, plus existing pursuits and relevant outcomes, to set its intended market. Request these through the workspace searches in step 1 using `fields_to_return`, including pursuit `stage` and `associated_records`. An empty pipeline can start from its description and known company capabilities.
 
-### 6. Broaden only after the direct pass
-- If the filter-first cohort is thin or repetitive, run one seeded `similar_filter` pass from the strongest kept contract or grant opportunity before generic semantic broadening.
-- Use `search_mode: "semantic"` only after the direct pass and keep the strongest structural filters in place.
-- Do not let semantic expansion replace the keyword and filter-first pass.
+After steps 3–4, compare candidates with active and relevant closed pursuits by linked records and business scope. Keep the same acquisition's forecast and solicitation together. Recommend suitable additions to Triage with a next qualification action; use [Manage Pipelines and Pursuits](workspace-pipeline-operations.md) when the user asks to add them.
 
-### 7. Validate and rank the surviving opportunities
-- Compare each candidate against direct scope fit, mission fit, delivery model, classification overlap, contract or funding structure, eligibility, geography, and due-date practicality.
-- Use `Search_Federal_Contract_Awards` or `Search_Federal_Grant_Awards` only when incumbent, prior-delivery, or market validation materially changes the ranking.
-- Exclude weak keyword matches, broad adjacent work, and opportunities that are only tenuously connected to the target.
-- Keep only opportunities that are genuinely pursuit-worthy.
-- For top-ranked opportunities where teaming is a credible pursuit posture, use `references/team-on-an-opportunity.md` to discover existing teaming interests and coordinate matches.
+## 3. Find and expand candidates
 
-## Output contract
-- Return a short target-profile summary, a compact search-approach note, a market-slice summary, a ranked opportunities table, a short rejection section, and confidence.
-- Prefer `Show_Stats_Display` for KPI summaries.
-- Use `Show_Chart` when the cohort view fits a standard inline `trend`, `comparison`, or `leaderboard`.
-- If `Show_Chart` cannot support long labels, annotations, or presentation styling, use the host's provider-neutral chart capability. When no such capability exists, preserve the cohort as a labeled Markdown table and provide CSV or JSON companion data.
-- Keep fit labels evidence-based and explain caveats on the top opportunities.
-- If the evidence is too thin for a credible ranking, say so clearly instead of padding the list.
+- [Search_Federal_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-opportunities-mcp-tool): use `opportunity_states: ["Posted", "Updated"]`, dates, buyers, NAICS/PSC, set-asides, geography and vehicle access.
+- [Search_State_And_Local_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-state-and-local-contract-opportunities-mcp-tool): use jurisdictions, classifications, scope and due dates; verify current status from the record/source.
+- [Search_Federal_Grant_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-opportunities-mcp-tool): use `opportunity_types: ["Posted"]`, dates, programs, `applicant_types` and `funding_instrument_types`. Check source eligibility, including for `Other` applicant classifications.
+- **Forecasts:** use [Search_Federal_Forecasts](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-forecasts-mcp-tool) with `estimated_solicitation_release_date_range` or `anticipated_award_start_date_range`. For grants, use `Search_Federal_Grant_Opportunities` with `opportunity_types: ["Forecasted"]` and `forecast_posting_date_range` or `forecast_due_date_range`. Apply the forecast window in separate queries for each date field and merge by `govtribe_id`.
+
+Use progressive disclosure: request IDs, names, URLs, deadlines, scope and eligibility through `fields_to_return`, then retrieve fuller records and source files for promising matches. Use aggregations to narrow broad results; broaden thin results with documented `similar_filter` or semantic search while retaining essential constraints.
+
+Use `govtribe-market-intelligence`’s **Federal Buying Pattern Analysis** for buyer/market context and **Find Early Federal Procurement Signals** for deeper forecast, follow-on and funding research.
+
+## 4. Assess fit and recommend next actions
+
+Compare scope and delivery needs with actual award experience, certifications, access, capacity, location and timing. Verify status and timing against current source documents; explain strong matches and material gaps. Keep credible partner-dependent opportunities; use [Likely Bidders](likely-bidders.md) and [Past Performance Match](past-performance-match.md) to assess complementary partners. Carry forward relevant loss/abandonment reasons; distinguish missing information from a confirmed mismatch. Use [Bid / No-Bid Review](conduct-bid-no-bid-review.md) for a pursuit decision.
+
+Prepare an appropriate GovCon report distinguishing open bids from forecasts, with recommended opportunities, source links, fit rationale, material gaps and next actions. Let the requested use determine the format.
+
+## 5. Set up recurring checks
+
+For ongoing monitoring:
+
+1. Find existing searches with [Search_Saved_Searches](https://govtribe.com/docs/govtribe-for-agents/tools/search-saved-searches-mcp-tool), using the relevant `scope`. Request `govtribe_id`, `name`, `q`, `filters`, `sorts`, `searches_govtribe_type`, `owner`, `frequency` and `govtribe_url` through `fields_to_return`. Compare owner and criteria to avoid duplicates.
+2. Reuse a step 3 `search_results_id` whose `search_results_id_can_generate_saved_search` is true. Use rolling date filters for ongoing monitoring; rerun with revised dates if needed. Keep separate monitors for distinct search types/date branches.
+3. Reuse an equivalent saved search. To refine an existing one, call [Update_Saved_Search](https://govtribe.com/docs/govtribe-for-agents/tools/update-saved-search-mcp-tool) with its `govtribe_id` as `saved_search_id` and the new `search_results_id`. Otherwise call [Create_Saved_Search](https://govtribe.com/docs/govtribe-for-agents/tools/create-saved-search-mcp-tool) with `search_results_id`, a descriptive `name` and `frequency`.
+4. Use the requested email cadence: `Instant`, `Daily`, `Weekly`, or `Never` for no email. Preserve existing cadence unless changing it is requested. Return the saved-search link. These are GovTribe email alerts; recurring agent analysis uses a separate host schedule.

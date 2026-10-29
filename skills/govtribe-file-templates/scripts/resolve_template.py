@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Resolve exact assets from the shared catalog without modifying the package."""
+"""Resolve exact template bytes and required host capabilities without modifying assets."""
 import argparse
 import hashlib
 import json
@@ -10,6 +10,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 ROLES = ("master", "example", "preview")
 FORMATS = {"docx": "host-document", "xlsx": "host-spreadsheet", "pptx": "host-presentation"}
+LEGACY_FORMATS = {"docx": "doc", "xlsx": "spreadsheet", "pptx": "slides"}
 
 
 def contained_path(root, relative):
@@ -28,30 +29,45 @@ def digest(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def valid_sha256(value):
+    return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None
+
+
 def load_catalog(root=ROOT, expected_catalog_sha256=None):
     data = contained_path(root, "assets/catalog.json").read_bytes()
     sha256 = digest(data)
     if expected_catalog_sha256 is not None and sha256 != expected_catalog_sha256:
         raise ValueError("Selected catalog revision is unavailable (catalog checksum mismatch)")
     catalog = json.loads(data)
-    if catalog.get("schema_version") != 1 or not isinstance(catalog.get("templates"), list):
+    if not isinstance(catalog, dict) or catalog.get("schema_version") not in (1, 2) or not isinstance(catalog.get("templates"), list):
         raise ValueError("Unsupported template catalog schema")
-    if not isinstance(catalog.get("library_revision"), str) or catalog.get("adaptation_skill") != "govtribe-document-editing":
-        raise ValueError("Invalid catalog identity or adaptation skill")
-    source_catalog_sha256 = catalog.get("source_catalog_sha256")
-    if not isinstance(source_catalog_sha256, str) or not re.fullmatch(r"[0-9a-f]{64}", source_catalog_sha256):
+    if not isinstance(catalog.get("library_revision"), str) or not catalog["library_revision"]:
+        raise ValueError("Invalid catalog identity")
+    neutral = catalog["schema_version"] == 2
+    if neutral:
+        if catalog.get("adaptation_capability") != "host-editing" or "adaptation_skill" in catalog:
+            raise ValueError("Invalid catalog adaptation capability")
+    elif not isinstance(catalog.get("adaptation_skill"), str) or not catalog["adaptation_skill"]:
+        raise ValueError("Invalid runtime catalog adaptation routing")
+    if "source_catalog_sha256" in catalog and not valid_sha256(catalog["source_catalog_sha256"]):
         raise ValueError("Invalid source catalog provenance")
     seen = set()
     for template in catalog["templates"]:
+        if not isinstance(template, dict):
+            raise ValueError("Invalid template entry")
         template_id = template.get("id", "")
-        if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", template_id) or template_id in seen:
+        if not isinstance(template_id, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", template_id) or template_id in seen:
             raise ValueError(f"Invalid or duplicate template ID: {template_id}")
         seen.add(template_id)
-        if template.get("format") not in FORMATS or template.get("format_skill") != FORMATS[template["format"]]:
-            raise ValueError(f"Invalid format mapping: {template_id}")
-        for field in ("display_name", "domain_skill", "completion_reference"):
-            if not isinstance(template.get(field), str) or not template[field]:
-                raise ValueError(f"Missing {field}: {template_id}")
+        field = "format_capability" if neutral else "format_skill"
+        mapping = FORMATS if neutral else LEGACY_FORMATS
+        if template.get("format") not in mapping or template.get(field) != mapping[template["format"]]:
+            raise ValueError(f"Invalid format capability or routing: {template_id}")
+        if neutral and "format_skill" in template:
+            raise ValueError(f"Runtime format routing in shared catalog: {template_id}")
+        for required in ("display_name", "domain_skill", "completion_reference"):
+            if not isinstance(template.get(required), str) or not template[required]:
+                raise ValueError(f"Missing {required}: {template_id}")
         if template["completion_reference"] != f"references/{template_id}.md":
             raise ValueError(f"Invalid completion reference: {template_id}")
         for role in ROLES:
@@ -60,10 +76,11 @@ def load_catalog(root=ROOT, expected_catalog_sha256=None):
                 raise ValueError(f"Missing {role}: {template_id}")
             if not asset["path"].startswith(f"assets/{template_id}/"):
                 raise ValueError(f"Unexpected {role} directory: {template_id}")
-            if not re.fullmatch(r"[0-9a-f]{64}", asset.get("sha256", "")) or type(asset.get("bytes")) is not int or asset["bytes"] <= 0:
+            if not valid_sha256(asset.get("sha256")) or type(asset.get("bytes")) is not int or asset["bytes"] <= 0:
                 raise ValueError(f"Invalid {role} integrity metadata: {template_id}")
-            if not re.fullmatch(r"[0-9a-f]{64}", asset.get("source_sha256", "")) or type(asset.get("source_bytes")) is not int or asset["source_bytes"] <= 0:
-                raise ValueError(f"Invalid {role} source provenance: {template_id}")
+            if "source_sha256" in asset or "source_bytes" in asset:
+                if not valid_sha256(asset.get("source_sha256")) or type(asset.get("source_bytes")) is not int or asset["source_bytes"] <= 0:
+                    raise ValueError(f"Invalid {role} source provenance: {template_id}")
             suffix = PurePosixPath(asset["path"]).suffix
             if suffix != (".png" if role == "preview" else "." + template["format"]):
                 raise ValueError(f"Invalid {role} extension: {template_id}")
@@ -79,9 +96,11 @@ def resolve(template_id, root=ROOT, expected_catalog_sha256=None, expected_maste
         raise ValueError(f"Unknown template ID: {template_id}")
     if expected_master_sha256 is not None and template["master"]["sha256"] != expected_master_sha256:
         raise ValueError("Selected master revision is unavailable (master checksum mismatch)")
-    result = dict(template, library_revision=catalog["library_revision"], catalog_sha256=catalog_sha256,
-                  adaptation_skill=catalog["adaptation_skill"],
-                  source_catalog_sha256=catalog["source_catalog_sha256"])
+    result = dict(template, library_revision=catalog["library_revision"], catalog_sha256=catalog_sha256)
+    route = "adaptation_capability" if catalog["schema_version"] == 2 else "adaptation_skill"
+    result[route] = catalog[route]
+    if "source_catalog_sha256" in catalog:
+        result["source_catalog_sha256"] = catalog["source_catalog_sha256"]
     result["completion_reference_path"] = str(contained_path(root, template["completion_reference"]))
     for role in ROLES:
         asset = template[role]

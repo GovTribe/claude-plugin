@@ -1,7 +1,33 @@
 # Proposal Compliance & Control
 
-Read only after resolving `proposal-control-workbook`.
+Use after selecting `proposal-control-workbook`.
 
-- Use this catalog’s master as the canonical workbook. Use `govtribe-proposal-workflows` from its own installed root. Read its build-proposal-control-workbook.md procedure from that skill's references directory and its conditional extraction, schema and quality guidance; use host discovery or an explicit host-supplied location, never ancestor searching.
-- Preserve the eleven-sheet structure, header-based mappings, formulas, validations, helper lists and print panels. Columns may differ from the legacy seed: bind by header names, not remembered column letters.
-- Populate Sources first; keep requirement IDs, verbatim text, citations, evaluation links, submission controls and amendment impacts traceable. Run the domain’s prepare_proposal_workbook_render.py and validate_proposal_workbook.py on the working output, using host-authorized input/output locations, plus the host's spreadsheet recalculation, rendering and validation. Follow the domain workflow's Markdown/CSV degradation if its optional Office dependencies are unavailable; do not install packages or claim unperformed validation. A blank master is not a completed or submission-ready matrix.
+1. **Read the workbook first.** Inspect Start Here, each working sheet's instructions, headers and dropdowns. The template explains its controls; the [sheet and field map](proposal-control-workbook-schema.md) locates them.
+2. **Reuse the requirements.** Start with the current source inventory, requirement register and amendments. For missing or changed requirements, use **Solicitation Intelligence and Compliance Extraction** (`govtribe-proposal-workflows` → `references/solicitation-intelligence-and-compliance-extraction.md`, from that skill's installed root).
+3. **Populate connected controls.** Fill Sources and Opportunity Setup, then the requirements, evaluation, submission, pricing/deliverables, questions and amendment tabs. Keep source and requirement IDs stable and propagate changes across linked controls. Record actual owners, evidence and response locations; distinguish compliance from drafting progress using the existing dropdowns.
+4. **Check and deliver.** Recalculate and reconcile Dashboard counts with the working rows. Preserve formulas, validations and print panels. When extending print ranges, update their matching `PrintEnd*` defined names so Dashboard's print-coverage check stays accurate. Use [Template adaptation and revision checks](template-adaptation-and-revisions.md) for selected revisions, saved-sheet inspection and delivery.
+
+For an optional structure check, run from the installed `govtribe-proposal-workflows` root (Python and `openpyxl` required):
+
+```bash
+python3 scripts/validate_proposal_workbook.py working.xlsx
+```
+
+This checks the eleven-sheet template's structure, selected formula bindings and print setup. Use native spreadsheet checks for custom layouts; source coverage, calculations and visual quality still need inspection.
+
+For a selected workbook revision, grow changed wrapped rows inside its retained
+print panels without replacing widths, print settings, formulas or embedded
+objects. From the installed `govtribe-proposal-workflows` root:
+
+```bash
+python3 scripts/prepare_proposal_workbook_render.py revised.xlsx --previous-workbook selected-original.xlsx --output revised-readable.xlsx
+```
+
+Keep the selected original unchanged. This mode sizes only changed wrapped text
+in visible working sheets' existing print areas; unchanged text, hidden content
+and cells outside those panels are left alone. Its sizes are estimates: inspect
+the saved output's affected normal-print panels at readable scale and confirm
+the final lines fit. A separately prepared fit-to-width preview does not verify
+the retained layout. For custom layouts or unsupported rotated/vertically merged
+text, use native row sizing and inspect the result. Reconcile calculations after
+content edits; row sizing itself preserves existing formula caches.
