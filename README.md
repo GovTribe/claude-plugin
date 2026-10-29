@@ -1,4 +1,4 @@
-<img src="assets/govtribe-logo.png" alt="GovTribe" width="96" />
+![GovTribe](assets/govtribe-logo.png)
 
 # GovTribe
 
@@ -68,7 +68,7 @@ The plugin connects to `https://govtribe.com/mcp`. Available tools depend on the
 - [GovTribe MCP documentation](https://govtribe.com/docs/govtribe-user-guide/govtribe-mcp/)
 - [GovTribe support](https://govtribe.com/docs/govtribe-user-guide/contact-govtribe/)
 - [Plugin issues](https://github.com/GovTribe/claude-plugin/issues)
-- [Privacy policy](https://govtribe.com/docs/govtribe-user-guide/privacy-policy/) and [MCP data handling](https://govtribe.com/docs/govtribe-user-guide/ai-data-handling-and-subprocessors/)
+- [Privacy policy](https://www.govexec.com/about/privacy-policy/) and [MCP data handling](https://govtribe.com/docs/govtribe-user-guide/ai-data-handling-and-subprocessors/)
 
 Do not include credentials or private account data in GitHub issues. The plugin is licensed under [Apache-2.0](LICENSE). GovTribe service access is subject to the [GovTribe Terms of Use](https://govtribe.com/docs/govtribe-user-guide/terms-of-use/).
 
