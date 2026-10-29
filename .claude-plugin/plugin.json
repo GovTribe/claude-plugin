@@ -10,5 +10,7 @@
   "repository": "https://github.com/GovTribe/claude-plugin",
   "skills": "./skills/",
   "license": "Apache-2.0",
-  "supportUrl": "https://govtribe.com/docs/govtribe-user-guide/contact-govtribe"
+  "supportUrl": "https://govtribe.com/docs/govtribe-user-guide/contact-govtribe",
+  "privacyPolicyUrl": "https://www.govexec.com/about/privacy-policy/",
+  "icon": "./assets/govtribe-icon.png"
 }
