@@ -180,7 +180,7 @@
     "skills/govtribe-proposal-workflows/references/solicitation-intelligence-and-compliance-extraction.md"
   ],
   "provider_configuration_adaptations": {
-    ".claude-plugin/plugin.json": "Explicit ./skills/ declaration and existing Apache-2.0 repository license retained for marketplace installation. Seven imported skill trees match the generated release archive byte-for-byte. The support URL is explicit because directory README extraction selected a malformed URL."
+    ".claude-plugin/plugin.json": "Explicit ./skills/ declaration and existing Apache-2.0 repository license retained for marketplace installation. The Claude-only projection explicitly omits four skill files and adapts six; the other 148 imported skill files retain their upstream bytes. The support URL is explicit because directory README extraction selected a malformed URL."
   },
   "candidate_projection": {
     "kind": "claude-only-template-exclusion",
