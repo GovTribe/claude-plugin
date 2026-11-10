@@ -83,7 +83,7 @@ Missing response values can mean different things. Do not assume the search fail
 | A related object is missing. | Confirm the selected record type actually exposes that relationship. |
 | A value appears under a different field name. | Check the tool page and related data-model attribute pages before guessing. |
 
-Use [Source identifiers and record matching](https://govtribe.com/docs/data-model/guides/source-identifiers-and-record-matching) when the issue is an identifier mismatch. Use [Federal contract record structure](https://govtribe.com/docs/data-model/guides/federal-contract-record-structure) when the user may be mixing forecasts, opportunities, IDVs, vehicles, awards, transactions, or sub-awards.
+Use [Source identifiers and record matching](https://govtribe.com/docs/data-model/guides/source-identifiers-and-record-matching) when the issue is an identifier mismatch. Use [Federal contract record structure](https://govtribe.com/docs/data-model/guides/federal-contract-record-structure) when the user may be mixing forecasts, opportunities, IDVs, vehicles, awards, transactions, or subawards.
 
 ## Filters narrowed more than expected
 

@@ -4,7 +4,7 @@
 
 - Canonical GovTribe Docs page: [https://govtribe.com/docs/data-model/guides/federal-grant-data-model](https://govtribe.com/docs/data-model/guides/federal-grant-data-model)
 
-GovTribe separates federal grant and federal financial assistance data by where a record fits in the funding lifecycle. Opportunities describe available or forecasted funding before an award. Transactions, awards, sub-awards, and programs describe awarded funding, pass-through activity, and Assistance Listing structure.
+GovTribe separates federal grant and federal financial assistance data by where a record fits in the funding lifecycle. Opportunities describe available or forecasted funding before an award. Transactions, awards, subawards, and programs describe awarded funding, pass-through activity, and Assistance Listing structure.
 
 ## Hierarchy
 
@@ -25,9 +25,9 @@ flowchart TB
 - [Federal grant program](https://govtribe.com/docs/data-model/data-types/federal-grant-program) records organize grant and assistance activity around recurring program entities, often aligned to an Assistance Listing Number (ALN, formerly CFDA Number) when source data supports it.
 - [Federal grant award](https://govtribe.com/docs/data-model/data-types/federal-grant-award) records are federal financial assistance awards made to recipients, including grants and other assistance award types GovTribe groups in the grant research area.
 - [Federal transaction](https://govtribe.com/docs/data-model/data-types/federal-transaction) records show award transaction activity tied to federal financial assistance awards.
-- [Federal grant sub-award](https://govtribe.com/docs/data-model/data-types/federal-grant-sub-award) records are reported pass-through awards under prime federal grant awards.
+- [Federal grant subaward](https://govtribe.com/docs/data-model/data-types/federal-grant-sub-award) records are reported pass-through awards under prime federal grant awards.
 
-Obligations are recorded through award transaction activity and summarized at the award level. Programs help explain the recurring funding lane above many awards or opportunities. Sub-awards branch down from prime awards when pass-through funding is reported.
+Obligations are recorded through award transaction activity and summarized at the award level. Programs help explain the recurring funding lane above many awards or opportunities. Subawards branch down from prime awards when pass-through funding is reported.
 
 Not every opportunity has a clean one-to-one award relationship, and not every forecasted grant opportunity becomes a posted Funding Opportunity Announcement (FOA). Some records connect through Assistance Listing numbers, program numbers, agency context, recipient context, dates, geography, files, or shared topical language.
 
@@ -47,9 +47,9 @@ Grant opportunities are upstream notice and application records rather than requ
 
 Awards summarize one or more assistance transactions that share an award identifier. They are usually easier to use than transaction-level records when the question is about recipients, total dollars, program participation, or award history.
 
-[Federal grant sub-award](https://govtribe.com/docs/data-model/data-types/federal-grant-sub-award) records show reported pass-through activity beneath prime federal grant awards. They are not another parent level above awards or programs. They branch down from prime award activity.
+[Federal grant subaward](https://govtribe.com/docs/data-model/data-types/federal-grant-sub-award) records show reported pass-through activity beneath prime federal grant awards. They are not another parent level above awards or programs. They branch down from prime award activity.
 
-Sub-awards can help identify subrecipients, prime-to-subrecipient relationships, pass-through networks, and downstream recipient activity connected to a federal grant program or prime award.
+Subawards can help identify subrecipients, prime-to-subrecipient relationships, pass-through networks, and downstream recipient activity connected to a federal grant program or prime award.
 
 ## Parent award types
 

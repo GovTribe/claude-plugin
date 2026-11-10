@@ -2,7 +2,7 @@
 
 Use when adapting a library template, revising a selected file or completing a buyer-provided form. Use the host's native document, spreadsheet, presentation or PDF tools.
 
-1. **Choose the starting file.** Use the buyer's original form or the user's selected working revision, even when a newer file exists. For a new library artifact, resolve the requested template and copy its verified blank master. Retain the original; populated examples illustrate the layout and are not company evidence.
+1. **Choose the starting file.** Use the buyer's original form or the user's selected working revision, even when a newer file exists. For a new artifact, if `template-library.md` is beside this guide, resolve the requested template through it and copy its verified blank master; otherwise start a new native file. Retain the original; populated examples illustrate the layout and are not company evidence.
 
 2. **Map content to sources.** Reuse the requirement register, company evidence and accepted edits. Match required fields or sections to supported answers and flag missing inputs. Keep the buyer, offeror, award recipient and teammate distinct; awarded scope alone does not establish the offeror's past performance. Refresh dated facts only where relevant to the request.
 
@@ -14,6 +14,6 @@ Use when adapting a library template, revising a selected file or completing a b
 
 ## Supporting notes
 
-- **Exact template selection:** from this skill's root, use `python3 scripts/resolve_template.py TEMPLATE_ID --expected-catalog-sha256 HASH --expected-master-sha256 HASH` when the handoff supplies expected hashes. Resolve missing or mismatched selected bytes before adapting. Without Python, verify catalog identity, contained paths, byte counts and SHA-256 values with native file/checksum tools. `--verify-all` checks the whole library.
-- **Proposal workbook row sizing:** when longer revised text clips, use the retained-layout revision recipe in [Proposal Compliance & Control](proposal-control-workbook.md). Grow affected rows in the saved working file while preserving its print panels; inspect those panels under their retained settings rather than relying on a differently prepared preview.
+- **Exact template selection:** where installed, `template-library.md` covers expected hashes and checksum verification.
+- **Proposal workbook row sizing:** when longer revised text clips, grow affected rows in the saved working file while preserving its print panels; where installed, `template-library.md` has the retained-layout recipe. Inspect those panels under their retained settings rather than relying on a differently prepared preview.
 - **Requested saved-file metadata changes:** locate the file with [Search_User_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-user-files-mcp-tool), then use [Update_User_File](https://govtribe.com/docs/govtribe-for-agents/tools/update-user-file-mcp-tool). Resolve a requested pursuit association with [Search_Pursuits](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuits-mcp-tool). These update metadata, not file contents.

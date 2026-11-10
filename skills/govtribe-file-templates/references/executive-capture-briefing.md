@@ -1,6 +1,6 @@
 # Executive Capture Briefing
 
-Use after resolving `executive-capture-briefing` to prepare an internal leadership decision deck.
+Use after resolving `executive-capture-briefing` to prepare an internal leadership decision deck. If `template-library.md` is not beside this guide, no template is installed: build these slides natively and ignore instructions to inspect or copy a template.
 
 1. **Read the deck and its speaker notes.** Inspect the selected master’s eight slides and embedded completion guidance before drafting. Work from the verified blank master or the selected working revision. The populated example illustrates layout and reasoning; its company capabilities, costs and conclusions are not inputs for yours.
 

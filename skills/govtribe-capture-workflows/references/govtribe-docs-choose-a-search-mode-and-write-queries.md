@@ -197,6 +197,8 @@ Tool: `Search_Federal_Contract_Opportunities`
 
 ## Handle semantic rate limits
 
+Elasticsearch-backed semantic retrieval can return `semantic_search_rate_limited` from `Search_GovTribe`, typed `Search_*` tools using semantic mode or similarity filters, and free-query `Documentation` searches.
+
 This error means the search did not complete. It contains no results, including partial keyword hits or hits from other datasets. `retryable: true` describes a temporary failure; it does not schedule a retry or specify a delay.
 
 Choose the next call based on the task: retry later, use a supported typed keyword search, or use known identifiers or exact documentation selectors. Check the selected tool's schema first. Keyword search and similarity search have different behavior: a `similar_filter` can still require semantic retrieval even with `search_mode: "keyword"`. Alternative retrieval may have different coverage, so disclose any gap that affects the answer.

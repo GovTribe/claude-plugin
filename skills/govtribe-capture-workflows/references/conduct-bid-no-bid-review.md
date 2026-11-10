@@ -27,6 +27,8 @@ Assess capacity in the units of the work: inventory, production and delivery for
 
 Establish which qualifications and access conditions the controlling sources impose before checking vehicle access, clearances, certifications, conflicts, cybersecurity, bonding and subcontracting limits. Treat a missing vehicle seat as a barrier only when the controlling source requires that access. Evaluate the actual bidding entity and proposed arrangement; a partner's credentials or vehicle seat do not automatically qualify the prime. Keep verified barriers, supported remedies and unknown company status or timing separate. A buyer requirement does not establish that the company lacks the qualification; conclude that a gap cannot close in time only from the actual required date and supported resolution timing.
 
+Some gates turn on a regulation: a set-aside, limitations on subcontracting, the nonmanufacturer rule, a cybersecurity clause or an OCI provision. For these, read the clause the solicitation incorporates, with its date and alternate. Use `Get_Regulation_Section` in the edition the buyer applies, and check the agency's deviation when that edition is unclear. Don't decide a gate from a recalled percentage or paragraph. Follow `govtribe-proposal-workflows` reference `references/acquisition-regulations.md` from its installed root for the edition, supplement and citation steps.
+
 Verify required authorizations against the proposed product or system, current status and required date. [FedRAMP certification](https://www.fedramp.gov/2026/agencies/use/) supplies reusable security evidence; the agency still authorizes its own system and use.
 
 ## 4. Assess whether the pursuit makes business sense

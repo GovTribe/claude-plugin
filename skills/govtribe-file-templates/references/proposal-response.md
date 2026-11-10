@@ -1,6 +1,6 @@
 # Proposal Response
 
-Use after selecting `proposal-response` for a new response or continuing a selected proposal draft. Use [Template adaptation and revision checks](template-adaptation-and-revisions.md) for native file work and delivery in GTAI or the connected host.
+Use after selecting `proposal-response` for a new response or continuing a selected proposal draft. Use [Template adaptation and revision checks](template-adaptation-and-revisions.md) for native file work and delivery in GTAI or the connected host. If `template-library.md` is not beside this guide, no template is installed: create the response natively from the buyer's structure and ignore instructions to inspect or copy a template.
 
 1. **Establish the scope and requirement shred.** Identify the requested proposal, volume, section, revision or review and its deliverables. Distinguish buyer instructions, prior proposals, supporting evidence and the selected draft. Before drafting a full response, complete or refresh **Solicitation Intelligence and Compliance Extraction** (`govtribe-proposal-workflows`, `references/solicitation-intelligence-and-compliance-extraction.md`) from its installed root. Reuse a current requirement register and preserve IDs and source locators. Stop full-response drafting if missing, unreadable or conflicting controlling sources leave material requirements unresolved; identify the specific gap. For scoped requests, cover the applicable requirements, including package-wide instructions.
 

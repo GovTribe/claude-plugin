@@ -36,7 +36,7 @@ Calculate `gap_days = contract end date - certification date`, sorting locally. 
 
 Check whether the contract's set-aside depends on the expiring certification. Verify promising incumbents' current status through [SBA sources](https://www.sba.gov/certifications/) and source notices: renewal, graduation and other exits have different implications. A date gap alone does not establish contract loss or a new competition.
 
-For 8(a), follow-on requirements generally remain in the program unless SBA releases them or an exception applies ([FAR 19.815](https://www.acquisition.gov/far/19.815)). That can create a pursuit for another eligible 8(a) firm; other small firms need to check the actual acquisition strategy and access requirements.
+For 8(a), follow-on requirements generally remain in the program unless SBA releases them or an exception applies (codified FAR 19.815). That can create a pursuit for another eligible 8(a) firm; other small firms need to check the actual acquisition strategy and access requirements. Before a pursuit recommendation relies on the 8(a) rule, read it with `Get_Regulation_Section` in the edition the agency applies.
 
 ## 5. Find and prioritize follow-on pursuits
 

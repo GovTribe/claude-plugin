@@ -1,26 +1,27 @@
-# Release candidate provenance
+# Release provenance
 
-Claude 1.2.0 is prepared for directory review. It is not published.
+Claude 1.2.1 replaces the unpublished 1.2.0 candidate.
 
-Web source: `8afb46ea93e42abb9e04d2b0bff924395abe7690`. Portable digest:
-`48ed183dbb951adc267df84fb030218850b8c9e4c57f44f4a9b4a0d29d064404`.
+Web source: `57e460cb1545017fb06822c109860758ad06835b`. Portable digest:
+`36a33c5da1955f14275ab3d06ef55c107cf1d673a44d3aae1aadf1b541661f6a`.
 
-All 158 imported skill files match the generated Claude release archive exactly.
-`skill-source.json` records their hashes. The root manifest retains the repository's
-explicit skills declaration and Apache-2.0 license. No skill adaptations were made here.
+All 104 skill files match the generated, structurally validated Claude candidate
+exactly. `skill-source.json` records their hashes. The root manifest retains the
+repository's explicit skills declaration, Apache-2.0 license and directory listing
+fields. No skill adaptations were made here.
 
-The collection contains seven skills and 15 unchanged template masters. Deep Dive
-routes through Market Intelligence; document revision uses native host capabilities.
-Existing repository validation and synthetic evaluation tooling is retained with
-retired skill-owner names mapped to their current owners.
+The Claude build leaves out the template library: the 15 Office template masters,
+their previews, the template catalog and the Python helpers. The template guides
+detect that the library is absent and describe each document's sections instead.
+ChatGPT and GovTribe AI keep the library.
 
-Source and package validation, template checksums, deterministic rebuilds and strict
-Claude structural validation pass. Existing research and artifact evidence is reused;
-CLI validation does not establish native behavior. Some model-output misses and host
-verification gaps remain recorded in the maintainer evidence. This submission follows
+Strict Claude structural validation passes. The skill text was compared with 1.2.0
+on the repository's synthetic evaluation cases and on GovTribe's internal analyst
+benchmark, with no regression found. No case builds a file, so the simpler
+workbooks Claude produces without the masters are not measured. This release follows
 the release owner's explicit integrity-only authorization and does not claim every
 acceptance case passed.
 
-Workbook engine discrepancies, inherited print clipping, broader automatic activation
-and arbitrary Office rendering remain limitations. No production tools, hosted
-skills, defaults or publication are changed by this release branch.
+Workbook formulas, validations and formatting are rebuilt by Claude rather than
+copied from a master, so complex workbooks are simpler than GovTribe's templates.
+No production tools, hosted skills or defaults are changed by this release.

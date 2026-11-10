@@ -1,6 +1,6 @@
 # Company Profile & Due Diligence
 
-Use after resolving `company-profile` to prepare a sourced company assessment for the reader's decision.
+Use after resolving `company-profile` to prepare a sourced company assessment for the reader's decision. If `template-library.md` is not beside this guide, no template is installed: create these sections natively and ignore instructions to inspect or copy a template.
 
 1. **Read the template and define the scope.** Inspect its instructions, tables, source list and headers before filling the verified blank master or selected working revision. Establish the reader's purpose, exact legal entity, related entities included and research date. The example illustrates the format; its company facts are not inputs for this profile.
 

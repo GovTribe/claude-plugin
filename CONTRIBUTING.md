@@ -1,16 +1,16 @@
 # Contributing
 
-Use Python 3.12 or later and Claude Code 2.1.273 or later to validate a checkout:
+Use Claude Code 2.1.292 or later to validate a checkout:
 
 ```sh
-python3 scripts/validate.py
 claude plugin validate . --strict
 claude plugin validate .claude-plugin/plugin.json --strict
 claude plugin validate skills --strict
-python3 scripts/package.py
 ```
 
-The package is written to `dist/`. The validator checks manifests, skill inventory, source hashes, relative links, and Python syntax.
+The plugin folder must contain only text files and PNG, JPEG, GIF or WebP images. Do not add scripts, Office files, archives or files that start with `#!`; the Claude directory holds or refuses them. CI runs the commands above and checks file types.
+
+Skill files are generated from GovTribe's shared skill source. Change them there rather than editing `skills/` here; `docs/skill-source.json` records the hash of every shipped skill file.
 
 The cases in `evals/` use synthetic inputs to check skill selection and responses. To run them:
 

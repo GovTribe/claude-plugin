@@ -31,7 +31,7 @@ flowchart TB
 - [Federal contract IDV](https://govtribe.com/docs/data-model/data-types/federal-contract-idv) records are indefinite delivery vehicles: indefinite delivery contracts or agreements that allow agencies to place orders. In GovTribe, this includes parent instruments such as IDIQs, Federal Supply Schedule contracts, GWACs, BOAs, BPAs, requirements contracts, and definite quantity contracts. Some IDVs can also be parents of other IDVs.
 - [Federal contract award](https://govtribe.com/docs/data-model/data-types/federal-contract-award) records are awarded contracts and orders, including delivery or task orders, purchase orders, definitive contracts, and BPA calls.
 - [Federal transaction](https://govtribe.com/docs/data-model/data-types/federal-transaction) records show obligation, modification, and other spending activity behind federal awards or IDVs.
-- [Federal contract sub-award](https://govtribe.com/docs/data-model/data-types/federal-contract-sub-award) records are reported subcontracting activity beneath prime federal contract awards.
+- [Federal contract subaward](https://govtribe.com/docs/data-model/data-types/federal-contract-sub-award) records are reported subcontracting activity beneath prime federal contract awards.
 
 Obligations are recorded through federal transaction activity and summarized on the award or IDV records they belong to. Awards are usually the best starting point for obligation movement. IDVs and vehicles help explain contract structure, buying lanes, holder access, and parent relationships.
 
@@ -57,9 +57,9 @@ Forecasts and contract opportunities are upstream records rather than required p
 
 Awards can include direct contracts such as definitive contracts and purchase orders. They can also include task-order activity such as delivery orders and BPA calls.
 
-[Federal contract sub-award](https://govtribe.com/docs/data-model/data-types/federal-contract-sub-award) records show reported subcontracting activity beneath prime federal contract awards. They are not another parent level above awards, IDVs, or vehicles. They branch down from prime award activity.
+[Federal contract subaward](https://govtribe.com/docs/data-model/data-types/federal-contract-sub-award) records show reported subcontracting activity beneath prime federal contract awards. They are not another parent level above awards, IDVs, or vehicles. They branch down from prime award activity.
 
-Sub-awards can help identify subcontractors, prime-to-subcontractor relationships, teaming patterns, and agency-scoped subcontract history.
+Subawards can help identify subcontractors, prime-to-subcontractor relationships, teaming patterns, and agency-scoped subcontract history.
 
 ## Parent award types
 
@@ -71,7 +71,7 @@ Some IDVs also sit below another IDV. In GSA MAS-style data, a [Federal contract
 
 [Federal contract vehicle subcategory](https://govtribe.com/docs/data-model/data-types/federal-contract-vehicle-subcategory) records add more detail inside a vehicle, such as pools, SINs, tracks, or other segments that shape eligibility or scope.
 
-[DOD acquisition program](https://govtribe.com/docs/data-model/data-types/dod-acquisition-program) records provide DoD acquisition program context that GovTribe surfaces in product areas such as Major Defense Programs. They are part of federal contract research, but they are not another parent level above awards, IDVs, or vehicles. Use them as a defense-program lens for related awards, transactions, agencies, vendors, and categories.
+[Major defense program](https://govtribe.com/docs/data-model/data-types/dod-acquisition-program) records provide DoD acquisition program context that GovTribe surfaces in product areas such as Major Defense Programs. They are part of federal contract research, but they are not another parent level above awards, IDVs, or vehicles. Use them as a defense-program lens for related awards, transactions, agencies, vendors, and categories.
 
 Federal contract vehicle opportunities attach pre-award demand to this vehicle context. Use them when the question is about work currently being competed through a vehicle or subcategory. Use vehicles and IDVs when the question is about the master contract family, holder access, ordering window, or awarded task-order structure.
 
@@ -79,8 +79,8 @@ Federal contract vehicle opportunities attach pre-award demand to this vehicle c
 
 - [Contracting and funding federal agencies](https://govtribe.com/docs/data-model/guides/contracting-and-funding-federal-agencies): Choose the right federal agency field when researching procurement ownership, funding responsibility, and customer demand.
 - [Federal award values and transactions](https://govtribe.com/docs/data-model/guides/federal-award-values-and-transactions): Distinguish award summaries, transaction events, obligations, potential values, and transaction value splits.
-- [Vendor, awardee, recipient, and subcontractor roles](https://govtribe.com/docs/data-model/guides/vendor-awardee-recipient-and-subcontractor-roles): Interpret organization roles on prime awards, sub-awards, and vendor records.
-- [Federal contract record structure](https://govtribe.com/docs/data-model/guides/federal-contract-record-structure): Choose between forecasts, opportunities, vehicles, IDVs, awards, transactions, and sub-awards.
+- [Vendor, awardee, recipient, and subcontractor roles](https://govtribe.com/docs/data-model/guides/vendor-awardee-recipient-and-subcontractor-roles): Interpret organization roles on prime awards, subawards, and vendor records.
+- [Federal contract record structure](https://govtribe.com/docs/data-model/guides/federal-contract-record-structure): Choose between forecasts, opportunities, vehicles, IDVs, awards, transactions, and subawards.
 - [Source identifiers and record matching](https://govtribe.com/docs/data-model/guides/source-identifiers-and-record-matching): Use GovTribe IDs, source identifiers, UEIs, source URLs, and originating links when comparing records.
 
 ---

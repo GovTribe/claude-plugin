@@ -35,7 +35,7 @@ For leading candidates, inspect major awards' `completion_date` and `ultimate_co
 
 For subcontractor candidates, use subaward `vendor_ids` and inspect `prime_contractor` to identify dependence on particular primes. To examine subcontracting under a target's prime contracts, use its `federal_contract_award_ids`. Subaward records provide relationships and counts; use transactions for reported amounts.
 
-Where the thesis depends on certifications or purchasing access, investigate ownership-sensitive eligibility and contract-transfer requirements using current [SBA](https://www.sba.gov/certifications/) and [FAR guidance](https://www.acquisition.gov/far/42.1204). Make these specific diligence questions for the proposed acquisition.
+Where the thesis depends on certifications or purchasing access, investigate ownership-sensitive eligibility and contract-transfer requirements using current [SBA](https://www.sba.gov/certifications/) guidance. Read two rules with `Get_Regulation_Section`, in the edition the main buyers apply: novation (codified FAR subpart 42.12) and postaward size rerepresentation after a merger or acquisition (FAR 52.219-28). Make these specific diligence questions for the proposed acquisition.
 
 ## 6. Prioritize and explain the acquisition case
 

@@ -1,6 +1,6 @@
 # Contract Awards & Spend Analysis
 
-Use after resolving `contract-awards-spend-analysis` to build an editable workbook for the user's market or buyer decision.
+Use after resolving `contract-awards-spend-analysis` to build an editable workbook for the user's market or buyer decision. If `template-library.md` is not beside this guide, no template is installed: build these sheets natively with live formulas for the calculations described, and ignore instructions to inspect or copy a template.
 
 1. **Read the workbook and set the scope.** Inspect Dashboard, Trends, Vendors & Buyers, Awards and Transactions, including grouped input/calculation columns, dropdowns and chart sources. Use the verified master or selected working revision; the NSF example illustrates the format, not current research. Establish buyer, funding versus contracting agency, work categories, date window and retrieval date. For a supplied list or working workbook, preserve its cohort, identifiers and requested field locations. For federal spending, define fiscal years by transaction dates—October 1 through September 30—including actions on older awards.
 

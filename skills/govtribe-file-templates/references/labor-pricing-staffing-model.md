@@ -1,6 +1,6 @@
 # Labor Pricing & Staffing
 
-Use after resolving `labor-pricing-staffing-model` to build or revise an editable labor-cost and pricing workbook.
+Use after resolving `labor-pricing-staffing-model` to build or revise an editable labor-cost and pricing workbook. If `template-library.md` is not beside this guide, no template is installed: build these sheets natively with live formulas for the calculations described, and ignore instructions to inspect or copy a template.
 
 1. **Read the model and establish the pricing basis.** Inspect Summary, Assumptions, Staffing, Labor Rates, Pricing and Source Data. Reuse the buyer's pricing instructions, staffing requirements, company assumptions and selected working revision. The master has six role slots, a base plus four options, and a separate extension; adapt the working copy if the required structure differs. Identify the buyer, project, location, pricing date, periods and requested decision. Identify any required nonlabor charges or buyer-specific evaluation totals that need an expanded model. Use the buyer's original pricing form when required; the library example supplies no market or company evidence.
 

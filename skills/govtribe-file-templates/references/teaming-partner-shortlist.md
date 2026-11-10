@@ -1,6 +1,6 @@
 # Teaming Partner Shortlist
 
-Use after resolving `teaming-partner-shortlist` to compare potential partners for a specific pursuit.
+Use after resolving `teaming-partner-shortlist` to compare potential partners for a specific pursuit. If `template-library.md` is not beside this guide, no template is installed: build these sheets natively with live formulas for the calculations described, and ignore instructions to inspect or copy a template.
 
 1. **Read the workbook.** Inspect all six sheets, their instructions and formulas before filling the verified blank master or selected working revision. Blue cells are inputs; gray cells calculate. Expand grouped columns to find the candidate, need and source IDs. The populated example illustrates the method; its prime capabilities and recommendations are not inputs for yours.
 

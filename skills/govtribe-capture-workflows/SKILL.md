@@ -27,6 +27,7 @@ Choose references that match the request. For follow-ups, keep the active opport
 - [Set Up Recurring Checks](references/relevant-opportunities.md#5-set-up-recurring-checks): Save useful searches or update existing monitors and their email cadence.
 - [Price-to-Win Review](references/conduct-price-to-win-review.md): Apply pricing evidence from `govtribe-pricing-data` to pursuit decisions.
 - [GAO Bid Protest Evidence](references/gao-bid-protest-evidence.md): Assess protest-related pursuit risk.
+- **Set-aside, subcontracting-limit or other regulatory gates:** read the clause the solicitation incorporates with `Get_Regulation_Section`, in the edition the buyer applies. `govtribe-proposal-workflows` reference `references/acquisition-regulations.md` covers editions, agency deviations, supplements and citations.
 - **Existing company and proposal files:** [Search_User_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-user-files-mcp-tool) for discovery; [Vector-store content retrieval](https://govtribe.com/docs/govtribe-for-agents/guides/vector-store-content-retrieval) for supporting passages. Use native file tools for originals or unsupported formats.
 
 Use `govtribe-file-templates` for template masters and revision checks, `govtribe-govcon-writing` for narrative, and the host’s native capabilities for file creation and editing. Use `govtribe-proposal-workflows` to prepare or revise a requested response, including RFIs and sources-sought responses.

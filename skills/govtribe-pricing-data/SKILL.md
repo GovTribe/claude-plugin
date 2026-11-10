@@ -19,6 +19,7 @@ Read the matching workflow references below before relevant calculations or pric
 ## Supporting references
 
 - **Pricing sources:** [BLS wages](https://govtribe.com/docs/govtribe-for-agents/tools/bls-occupational-wage-data-mcp-tool), [GSA labor ceilings](https://govtribe.com/docs/govtribe-for-agents/tools/search-gsa-labor-rates-mcp-tool), [Service Contract Inventory](https://govtribe.com/docs/govtribe-for-agents/tools/search-service-contract-inventory-mcp-tool) and [awarded line items](https://govtribe.com/docs/govtribe-for-agents/tools/search-line-items-mcp-tool).
+- **Regulatory pricing rules:** read certified cost or pricing data rules, thresholds, price-analysis and cost-realism text with `Get_Regulation_Section` in the edition the buyer applies. Don't recall them.
 - **Existing pricing files:** [Search_User_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-user-files-mcp-tool) locates requested prior work; [source-content retrieval](https://govtribe.com/docs/govtribe-for-agents/guides/vector-store-content-retrieval) retrieves passages. Use native file tools for originals and formulas.
 
 Use `govtribe-file-templates` for template masters and revision checks, and `govtribe-govcon-writing` for pricing narrative. Use `govtribe-capture-workflows` for bid/no-bid and pursuit decisions, and `govtribe-proposal-workflows` for buyer submission requirements.

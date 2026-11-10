@@ -1,6 +1,6 @@
 <!-- GovTribe Skills generated documentation reference. Do not edit; regenerate from the canonical public GovTribe Docs page. -->
 
-# Federal contract opportunity notice chains
+# Federal contract opportunity stacks
 
 - Canonical GovTribe Docs page: [https://govtribe.com/docs/data-model/guides/federal-contract-opportunity-notice-chains](https://govtribe.com/docs/data-model/guides/federal-contract-opportunity-notice-chains)
 
@@ -10,25 +10,25 @@ Use this guide when you need to move between a federal contract opportunity, rel
 
 | Concept | Where it appears | How to use it |
 | --- | --- | --- |
-| `federal_meta_opportunity_id` | Federal contract opportunity records. | Use it to retrieve other opportunity notices in the same GovTribe notice chain. |
-| `originating_federal_meta_opportunity_id` | Federal contract awards, federal contract IDVs, and federal contract vehicles. | Use it to move from an awarded or vehicle record back to the related opportunity notice chain. |
+| `federal_meta_opportunity_id` | Federal contract opportunity records. | Use it to retrieve other opportunity notices in the same GovTribe opportunity stack. |
+| `originating_federal_meta_opportunity_id` | Federal contract awards, federal contract IDVs, and federal contract vehicles. | Use it to move from an awarded or vehicle record back to the related opportunity stack. |
 | `originating_federal_contract_opportunity` | Federal contract awards, IDVs, and vehicles when GovTribe can resolve a rich relationship. | Use it as the best already-returned source-notice anchor, then use the scalar chain ID when you need the whole chain. |
 | Original or oldest notice | The earliest federal contract opportunity GovTribe can connect in the chain. | Use it for early scope, source context, first-posted timing, and original attachments. |
 | Newest viable notice | The newest connected notice with opportunity type `Solicitation`, `Pre-Solicitation`, or `Special Notice`. | Use it for the most current actionable notice context when the target is not already the newest viable record. |
 
 `federal_meta_opportunity_id` and `originating_federal_meta_opportunity_id` are GovTribe linking IDs. They are not SAM.gov notice numbers, solicitation numbers, contract numbers, PIIDs, or UEIs.
 
-## Why notice chains exist
+## Why opportunity stacks exist
 
 SAM.gov can publish related acquisition information as separate opportunity records. Sources-sought notices, pre-solicitations, solicitations, amendments, special notices, award notices, and attached files may not always arrive as one clean parent-child thread from the source.
 
-GovTribe groups related federal contract opportunity notices into a notice chain when source relationships, procurement identifiers, or related source context support that connection. The chain can also connect to downstream awarded records when GovTribe can match the pre-award notice context to federal contract awards, IDVs, or vehicles.
+GovTribe groups related federal contract opportunity notices into an opportunity stack when source relationships, procurement identifiers, or related source context support that connection. The chain can also connect to downstream awarded records when GovTribe can match the pre-award notice context to federal contract awards, IDVs, or vehicles.
 
-Treat a notice chain as a strong retrieval path, not as a guarantee that every record in the chain has the same scope, status, attachments, or response deadline. Always compare the specific notices that matter for the task.
+Treat an opportunity stack as a strong retrieval path, not as a guarantee that every record in the chain has the same scope, status, attachments, or response deadline. Always compare the specific notices that matter for the task.
 
 ## How GovTribe maintains the chain
 
-GovTribe builds and refreshes notice chains from source identifiers and related opportunity context. When a federal contract opportunity has a usable federal solicitation number or other procurement identifier, GovTribe can use that identifier to find or create the notice chain. When SAM.gov-related opportunity IDs point to records that were previously separated, GovTribe can merge the chains and update related records to use the surviving chain.
+GovTribe builds and refreshes opportunity stacks from source identifiers and related opportunity context. When a federal contract opportunity has a usable federal solicitation number or other procurement identifier, GovTribe can use that identifier to find or create the opportunity stack. When SAM.gov-related opportunity IDs point to records that were previously separated, GovTribe can merge the chains and update related records to use the surviving chain.
 
 After a chain is updated, GovTribe can also update downstream records that match the same procurement or spend identifiers. That is how an award, IDV, or vehicle can receive `originating_federal_meta_opportunity_id` and later expose `originating_federal_contract_opportunity`.
 
@@ -42,7 +42,7 @@ When using MCP tools, use [Search Federal Contract Opportunities](https://govtri
 
 | Starting record | First retrieval path | What to inspect next |
 | --- | --- | --- |
-| Federal contract opportunity | Use `federal_meta_opportunity_id` with `Search_Federal_Contract_Opportunities` to retrieve the notice chain. | Compare the target, original or oldest notice, newest viable notice, files, direct awards, direct IDVs, and vehicle context. |
+| Federal contract opportunity | Use `federal_meta_opportunity_id` with `Search_Federal_Contract_Opportunities` to retrieve the opportunity stack. | Compare the target, original or oldest notice, newest viable notice, files, direct awards, direct IDVs, and vehicle context. |
 | Federal contract award | Use `originating_federal_meta_opportunity_id` with `Search_Federal_Contract_Opportunities`. | Review `originating_federal_contract_opportunity`, then retrieve original and newest viable notices if the chain ID is available. |
 | Federal contract IDV | Use `originating_federal_meta_opportunity_id` with `Search_Federal_Contract_Opportunities`. | Review source solicitation context, then inspect task orders, child IDVs, parent vehicle, and price-list files when relevant. |
 | Federal contract vehicle | Use `originating_federal_meta_opportunity_id` with `Search_Federal_Contract_Opportunities`. | Review source vehicle solicitation context, then inspect child IDVs, downstream awards, holders, and vehicle subcategories. |
@@ -50,7 +50,7 @@ When using MCP tools, use [Search Federal Contract Opportunities](https://govtri
 
 When the target already includes nested relationships such as `federal_contract_vehicle` or `originating_federal_contract_opportunity`, use those direct relationships before launching broader searches.
 
-Award-side outcomes are not nested on the opportunity. Retrieve them with a second call: use `Search_Federal_Contract_Awards` or `Search_Federal_Contract_IDVs` with `federal_contract_opportunity_ids` set to the opportunity `govtribe_id` for that one notice, or with `federal_meta_opportunity_ids` when the question covers the whole notice chain.
+Award-side outcomes are not nested on the opportunity. Retrieve them with a second call: use `Search_Federal_Contract_Awards` or `Search_Federal_Contract_IDVs` with `federal_contract_opportunity_ids` set to the opportunity `govtribe_id` for that one notice, or with `federal_meta_opportunity_ids` when the question covers the whole opportunity stack.
 
   When a federal contract opportunity has `part_of_mas` set to `true`, do not treat `federal_meta_opportunity_id` as a clean opportunity-specific notice-chain key. MAS opportunities can share schedule-level context. Prefer direct vehicle context, attached files, and bounded follow-up searches. To keep award-side results tied to the one notice rather than the whole schedule, filter with `federal_contract_opportunity_ids` instead of `federal_meta_opportunity_ids`.
 
@@ -83,13 +83,13 @@ Do not assume the latest notice contains every useful detail. Critical attachmen
 
 ## Award, IDV, and vehicle targets
 
-Federal contract awards, IDVs, and vehicles can point back to a source notice chain through `originating_federal_meta_opportunity_id`. They can also expose `originating_federal_contract_opportunity` as a nested relationship when GovTribe can resolve a useful federal contract opportunity from the chain.
+Federal contract awards, IDVs, and vehicles can point back to a source opportunity stack through `originating_federal_meta_opportunity_id`. They can also expose `originating_federal_contract_opportunity` as a nested relationship when GovTribe can resolve a useful federal contract opportunity from the chain.
 
 When starting from an award, IDV, or vehicle:
 
 1. Read the target record and keep its direct relationships in context.
 2. If `originating_federal_contract_opportunity` is present, inspect it before making another search call.
-3. If `originating_federal_meta_opportunity_id` is present, use it with `Search_Federal_Contract_Opportunities` to retrieve the broader notice chain.
+3. If `originating_federal_meta_opportunity_id` is present, use it with `Search_Federal_Contract_Opportunities` to retrieve the broader opportunity stack.
 4. Compare the target's award-side facts against the original and newest viable opportunity notices.
 5. Use files, descriptions, dates, agency context, vendors, vehicle context, and contract numbers to explain gaps or changes.
 
@@ -119,7 +119,7 @@ If `federal_meta_opportunity_id` or `originating_federal_meta_opportunity_id` is
 - Inspect direct relationships and visible related tabs before broad search.
 - Use attached government files when source text matters.
 - Use `similar_filter` only after exact identifiers and direct relationships are unavailable or insufficient.
-- Label similar records as comparable or possible context, not confirmed members of the same notice chain.
+- Label similar records as comparable or possible context, not confirmed members of the same opportunity stack.
 
 ## What to compare across notices
 
@@ -153,7 +153,7 @@ When records disagree, cite the specific notice or downstream record that suppor
 - [Originating federal meta opportunity ID attribute](https://govtribe.com/docs/data-model/attributes/originating-federal-meta-opportunity-id-attribute): Review the downstream bridge from awards, IDVs, and vehicles back to opportunity chains.
 - [Originating federal contract opportunity attribute](https://govtribe.com/docs/data-model/attributes/originating-federal-contract-opportunity-attribute): Review the nested relationship that can return source notice context on award-side records.
 - [Source identifiers and record matching](https://govtribe.com/docs/data-model/guides/source-identifiers-and-record-matching): Choose between GovTribe IDs, source identifiers, UEIs, source URLs, and originating-record links.
-- [Federal contract record structure](https://govtribe.com/docs/data-model/guides/federal-contract-record-structure): Choose between opportunities, vehicles, IDVs, awards, transactions, and sub-awards.
+- [Federal contract record structure](https://govtribe.com/docs/data-model/guides/federal-contract-record-structure): Choose between opportunities, vehicles, IDVs, awards, transactions, and subawards.
 
 ---
 

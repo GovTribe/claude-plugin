@@ -1,6 +1,6 @@
 # Bid / No-Bid Assessment
 
-Use after resolving `bid-no-bid-assessment` to turn a capture review into a decision document.
+Use after resolving `bid-no-bid-assessment` to turn a capture review into a decision document. If `template-library.md` is not beside this guide, no template is installed: create these sections natively and ignore instructions to inspect or copy a template.
 
 1. **Read the selected template.** Inspect its prompts and tables before filling it in: Recommendation, Decision factors, Next actions, Source questions, Source register and Company assumptions. Work from the verified blank master or selected working revision. The populated example illustrates the assessment; its company capabilities, costs and conclusions are not inputs for yours.
 

@@ -1,6 +1,6 @@
 # System / Program Research
 
-Use after resolving `system-program-research` to build an editable research workbook for the user's program, system or market-entry question.
+Use after resolving `system-program-research` to build an editable research workbook for the user's program, system or market-entry question. If `template-library.md` is not beside this guide, no template is installed: build these sheets natively with live formulas for the calculations described, and ignore instructions to inspect or copy a template.
 
 1. **Read the workbook and define the target.** Inspect Overview, System Profile, Contracts, Funding, Timeline and Research Log, including grouped input columns and formulas. Start from the verified master or selected working revision; the populated example illustrates the format. Establish the exact program, system or variant, responsible agency, research cutoff and award issue-date window. Distinguish the broader program from the system being assessed.
 

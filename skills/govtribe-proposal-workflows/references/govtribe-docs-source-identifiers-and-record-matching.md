@@ -30,10 +30,10 @@ The visible value format can vary by data type. Treat the returned `govtribe_id`
 | Many GovTribe-managed data types | Internal GovTribe key, often a 24-character ID. | Use the exact value with `govtribe_type` when reopening the record, adding it to a workflow, or passing it to another GovTribe tool. |
 | Vendor | Current SAM-backed vendor records often use the vendor's UEI; older records can have a legacy GovTribe vendor ID. | Use `uei` when matching organizations to federal source systems. Use `govtribe_id` when referencing the GovTribe vendor record. |
 | Federal agency | Agency code or agency hierarchy code. | Use the returned `govtribe_id` for GovTribe agency filters. Use source agency codes and office context when reconciling to source data. |
-| Federal contract opportunity | SAM opportunity ID or parent opportunity ID. | Use `solicitation_number` when comparing notice labels or source solicitation values. |
+| Federal contract opportunity | SAM.gov records use the SAM opportunity ID or parent opportunity ID. DLA DIBBS records use a 32-character ID that GovTribe derives from the solicitation number: the MD5 hash of `DIBBS\|` followed by the trimmed, uppercased solicitation number. DSIP topics use a 32-character ID that GovTribe derives from DSIP's topic ID. | Use `solicitation_number` when comparing notice labels or source solicitation values. For a DLA DIBBS record, `source_url` opens the RFQ PDF on DIBBS. For a DSIP topic, use the topic code. DSIP's cycle code is shared by a whole cycle, so it doesn't identify a topic. |
 | Federal contract award and federal contract IDV | PIID or referenced-IDV style identifier. | Awards and IDVs are not identified by solicitation number alone. Keep `contract_number`, referenced IDV context, and originating-opportunity fields nearby. |
-| Federal grant opportunity, award, program, and sub-award | Grants.gov opportunity ID, FAIN, Assistance Listing number, or sub-award report number, depending on the data type. | Use `grant_number` and program numbers when comparing to Grants.gov, SAM.gov, or USAspending source data. |
-| Federal contract vehicle, DOD acquisition program, GSA labor rate, and government file | Source-aligned or GovTribe-derived keys. | Use `govtribe_id` for GovTribe workflows. Use source fields, contract context, and files when auditing the original record. |
+| Federal grant opportunity, award, program, and subaward | Grants.gov opportunity ID, FAIN, Assistance Listing number, or subaward report number, depending on the data type. | Use `grant_number` and program numbers when comparing to Grants.gov, SAM.gov, or USAspending source data. |
+| Federal contract vehicle, major defense program, GSA labor rate, and government file | Source-aligned or GovTribe-derived keys. | Use `govtribe_id` for GovTribe workflows. Use source fields, contract context, and files when auditing the original record. |
 | NAICS, PSC, NIGP, and UNSPSC category | Classification code. | Category data types use their classification code as the public GovTribe ID in MCP and search responses. |
 
 Use `govtribe_id` for GovTribe workflows. Use source identifiers, such as `uei`, `contract_number`, `solicitation_number`, or `grant_number`, when matching to external systems.
@@ -75,10 +75,10 @@ If a solicitation number does not find an award, search the opportunity record f
 ## Matching rules of thumb
 
 - Use `govtribe_id` when matching inside GovTribe exports, MCP responses, Zapier data, or copied URLs.
-- Use source identifiers when comparing to SAM.gov, USAspending, Grants.gov, state and local source portals, or customer-owned spreadsheets.
+- Use source identifiers when comparing to SAM.gov, DLA DIBBS, USAspending, Grants.gov, state and local source portals, or customer-owned spreadsheets.
 - Use `uei` to match organizations, not awards or opportunities.
 - Use originating fields as strong relationship signals, but expect gaps because not every source record connects cleanly across the procurement lifecycle.
-- Use [Federal contract opportunity notice chains](https://govtribe.com/docs/data-model/guides/federal-contract-opportunity-notice-chains) when you need to retrieve original, newest viable, or originating federal contract opportunity records from chain fields.
+- Use [Federal contract opportunity stacks](https://govtribe.com/docs/data-model/guides/federal-contract-opportunity-notice-chains) when you need to retrieve original, newest viable, or originating federal contract opportunity records from chain fields.
 - When identifiers are incomplete, compare multiple signals together: agency, vendor, title, dates, contract number, solicitation number, category, place of performance, and source files.
 
 ## Official source notes
@@ -91,7 +91,7 @@ If a solicitation number does not find an award, search the opportunity record f
 ## Related articles
 
 - [Federal contract record structure](https://govtribe.com/docs/data-model/guides/federal-contract-record-structure): Choose the right federal contract record type before matching records.
-- [Federal contract opportunity notice chains](https://govtribe.com/docs/data-model/guides/federal-contract-opportunity-notice-chains): Retrieve related notices and originating opportunity context from GovTribe notice-chain fields.
+- [Federal contract opportunity stacks](https://govtribe.com/docs/data-model/guides/federal-contract-opportunity-notice-chains): Retrieve related notices and originating opportunity context from GovTribe notice-chain fields.
 - [Federal award values and transactions](https://govtribe.com/docs/data-model/guides/federal-award-values-and-transactions): Avoid mixing award summaries and transaction rows while joining data.
 - [GovTribe ID attribute](https://govtribe.com/docs/data-model/attributes/govtribe-id-attribute): Review the shared GovTribe record identifier.
 - [UEI attribute](https://govtribe.com/docs/data-model/attributes/uei-attribute): Review the SAM.gov entity identifier used on vendor records.

@@ -1,6 +1,6 @@
 # Opportunity Pipeline Tracker
 
-Use after resolving `opportunity-pipeline-tracker` to build or refresh an editable pursuit portfolio and action tracker.
+Use after resolving `opportunity-pipeline-tracker` to build or refresh an editable pursuit portfolio and action tracker. If `template-library.md` is not beside this guide, no template is installed: build these sheets natively with live formulas for the calculations described, and ignore instructions to inspect or copy a template.
 
 1. **Read the workbook and define the portfolio.** Inspect Dashboard, Pipeline, Actions and Source Data, including grouped columns and the settings below the source table. Use the verified blank master or selected working revision. Establish the company, portfolio owner, scope and review date; set Dashboard's **As of** date. Preserve the user's pursuit IDs and requested cohort. The example illustrates the layout, not current opportunities or company judgments.
 

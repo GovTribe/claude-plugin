@@ -27,6 +27,8 @@ Preserve existing requirement IDs and add IDs only for new items. Split independ
 
 Cover deadlines with local time/time zone, mandatory events, submission channel, volume/file separation, naming and size limits, pages and formatting, source-required forms/signatures and acknowledgments, eligibility/access, pricing schedules/CLINs/options, deliverables, evaluation factors and stated relative importance. Separate past-performance count, recency, permitted performer/role, relevance and questionnaire rules. For oral presentations or demonstrations, capture content, time, attendees, format and logistics. Capture the actual acknowledgment/signature instruction, method and deadline; unresolved applicability belongs in a separate check, not a confirmed requirement.
 
+Record each clause and provision incorporated by reference exactly as listed: number, title, date, alternate, fill-ins and any deviation notice. They usually sit in Sections I and K or a commercial addendum. A clause title doesn't state what the clause requires. When a requirement, fill-in or applicability question depends on the clause text, read it through [Read Acquisition Regulations](acquisition-regulations.md) in the edition the solicitation uses. The listed clause date controls; flag any difference from the current text.
+
 ## 4. Check procurement-specific sources
 
 Use the actual scope to inspect applicable instructions; industry practice alone creates no requirement.

@@ -2,6 +2,8 @@
 
 Reviewed October 16, 2026. Consult the relevant source when a procedural rule needs verification; routine prose edits do not require this bibliography. The actual procurement and applicable agency deviations determine the requirements.
 
+Read FAR, DFARS, DFARS PGI and GSAM text with `Get_Regulation_Section`, or find it with `Search_Regulations`. Choose the codified or Overhaul edition the procurement applies. The regulation links below are background, and they point to codified text unless noted.
+
 | Source | Use |
 | --- | --- |
 | [GSA: Respond to a solicitation](https://www.gsa.gov/sell-to-government/step-2-compete-for-a-contract/respond-to-a-solicitation) | Understand requirements, evaluation factors and delivery instructions before writing the response. |

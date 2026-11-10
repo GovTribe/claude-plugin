@@ -1,6 +1,6 @@
 # RFI / Sources Sought Response
 
-Use after selecting `rfi-sources-sought-response` or when continuing a selected response. Use [Template adaptation and revision checks](template-adaptation-and-revisions.md) for native file work and delivery.
+Use after selecting `rfi-sources-sought-response` or when continuing a selected response. Use [Template adaptation and revision checks](template-adaptation-and-revisions.md) for native file work and delivery. If `template-library.md` is not beside this guide, no template is installed: create the response natively from the buyer's questions and ignore instructions to inspect or copy a template.
 
 1. **Establish the requested response.** Reuse the current notice, amendments, questionnaire, information sheet and existing requirement map. Identify the actual questions, requested attachments, deadline/time zone, submission channel and page or word limits, including whether covers and attachments count. If the package needs extraction, use `govtribe-proposal-workflows` reference `references/solicitation-intelligence-and-compliance-extraction.md` from its installed root. Distinguish a capability statement, answers for a portal and a required buyer form; one may accompany another.
 

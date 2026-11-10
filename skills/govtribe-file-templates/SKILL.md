@@ -1,7 +1,7 @@
 ---
 name: govtribe-file-templates
-description: Use to select and adapt GovTribe templates for documents, workbooks and presentations, revise existing deliverables, and complete buyer-provided forms.
-compatibility: Uses native document, spreadsheet and presentation capabilities. Template resolution uses Python 3.9+ or equivalent host file and checksum capabilities.
+description: Use to create, adapt and revise GovCon documents, workbooks and presentations from GovTribe guides and any installed templates, and complete buyer-provided forms.
+compatibility: Uses native document, spreadsheet and presentation capabilities. The optional template library uses Python 3.9+ or equivalent host file and checksum capabilities.
 ---
 
 # GovTribe File Templates
@@ -20,11 +20,11 @@ Use `govtribe-govcon-writing` for narrative and capability statements; a company
 
 ## Select, adapt and check
 
-1. **Select the starting file.** Required buyer forms take precedence. For a new library file, match the requested name, ID or deliverable in `assets/catalog.json`, then run `python3 scripts/resolve_template.py TEMPLATE_ID` from this skill's root. Verify the selected revision and copy its blank master; examples are illustrative. Exact-version selection and non-Python verification are covered in the supporting reference below.
-2. **Adapt the selected file.** Read its completion guide and use the catalog's `domain_skill` for needed research, resolving resources from each skill's installed root. Reuse existing requirements, company evidence and accepted edits. Use native document, spreadsheet or presentation capabilities; preserve formulas and editable elements. Tailor content to the government buyer, internal capture team or prospective partner.
+1. **Select the starting file.** Required buyer forms take precedence. For a new file, follow `references/template-library.md` if it is installed to select, verify and copy a blank template; examples are illustrative. If it is absent, no template is installed: start a new native file and follow the guide for the deliverable.
+2. **Adapt the selected file.** Read its completion guide and use the domain workflow it names for needed research, resolving resources from each skill's installed root. Reuse existing requirements, company evidence and accepted edits. Use native document, spreadsheet or presentation capabilities; preserve formulas and editable elements. Tailor content to the government buyer, internal capture team or prospective partner.
 3. **Check the saved deliverable.** Reconcile sources, dates and calculations; recalculate workbook formulas and summary totals before rendering. Inspect the saved pages, affected sheets or slides using the adaptation checks below. Retain the editable source and matching exports. If native authoring is unavailable, provide useful Markdown, CSV or a slide outline and identify remaining file work.
 
 ## Supporting references
 
-- [Template adaptation and revision checks](references/template-adaptation-and-revisions.md): exact template selection, existing drafts, buyer forms and saved-file checks.
+- [Template adaptation and revision checks](references/template-adaptation-and-revisions.md): existing drafts, buyer forms and saved-file checks.
 - **Find supporting files:** [Search_User_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-user-files-mcp-tool). Use [Vector-store content retrieval](https://govtribe.com/docs/govtribe-for-agents/guides/vector-store-content-retrieval) for source passages and native file tools for originals, spreadsheets and images.

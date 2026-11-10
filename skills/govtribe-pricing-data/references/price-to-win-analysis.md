@@ -13,6 +13,8 @@ Find missing solicitation files, amendments and pricing schedules with [Search_G
 
 Establish the controlling quantities, units, locations, performance period, options, contract type and evaluation method. Apply the buyer's actual pricing instructions; for [federal A-E services](https://www.acquisition.gov/far/36.606), fee negotiation follows qualifications-based selection.
 
+Some regulatory rules change the pricing basis: certified cost or pricing data and its exceptions, cost or price analysis, and cost realism. For these, read the governing FAR text and any agency supplement with `Get_Regulation_Section`, in the edition the buyer applies. Dollar thresholds are inflation-adjusted and some sections moved in the Overhaul, so read the current figure instead of recalling it. `govtribe-proposal-workflows` reference `references/acquisition-regulations.md` covers editions and citations.
+
 ## 2. Research predecessor and comparable prices
 
 Start with the predecessor, then similar work for the same office or vehicle, then broader buyers with comparable scope.
@@ -24,7 +26,7 @@ Expand useful records with `fields_to_return` and read their pricing attachments
 
 ## 3. Make the comparisons meaningful
 
-Use [Comparable Prices and Cost Drivers](comparable-prices-and-cost-drivers.md) to classify the evidence and establish equivalent scope, specifications, quantities, units, geography, contract terms, dates and base/option periods. Document supported adjustments for inflation, delivery, installation or changed requirements; retain unmatched records as context. [Federal price-analysis guidance](https://www.acquisition.gov/far/15.404-1) describes comparable-price adjustments.
+Use [Comparable Prices and Cost Drivers](comparable-prices-and-cost-drivers.md) to classify the evidence and establish equivalent scope, specifications, quantities, units, geography, contract terms, dates and base/option periods. Document supported adjustments for inflation, delivery, installation or changed requirements; retain unmatched records as context. Federal price-analysis guidance describes comparable-price adjustments. It's codified at FAR 15.404-1(b); read it with `Get_Regulation_Section` in the buyer's edition.
 
 Label amounts by their actual basis: announced award amount, evaluated price, unit price, obligation, ceiling or rate. A parent ceiling or partial funding history cannot establish an order's competitive price. Determine whether a matched group supports a proposed-price assessment or target range. If none does, retain useful arithmetic observations and identify the evidence needed instead of constructing a range from unmatched signals.
 

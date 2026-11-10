@@ -4,7 +4,7 @@
 
 - Canonical GovTribe Docs page: [https://govtribe.com/docs/govtribe-for-agents/guides/filter-by-related-records-and-hierarchies](https://govtribe.com/docs/govtribe-for-agents/guides/filter-by-related-records-and-hierarchies)
 
-Use this guide when a GovTribe MCP filter seems to include records beyond the exact value supplied. Some filters match a direct field, while others follow a relationship such as a parent agency, category family, awarded vendor role, contact, jurisdiction, IDV, vehicle, file, pursuit, or sub-award connection.
+Use this guide when a GovTribe MCP filter seems to include records beyond the exact value supplied. Some filters match a direct field, while others follow a relationship such as a parent agency, category family, awarded vendor role, contact, jurisdiction, IDV, vehicle, file, pursuit, or subaward connection.
 
 ## How relationship filters work
 
@@ -66,7 +66,7 @@ If a result is connected to the organization but the role feels wrong, check the
 Some filters match through a parent, container, or connected record rather than a field that appears prominently in the returned row.
 
 - `federal_contract_idv_ids`, `federal_contract_vehicle_ids`, and vehicle subcategory filters can find records tied to ordering instruments, schedules, pools, lanes, SINs, or buying channels.
-- `federal_contract_opportunity_ids` on `Search_Federal_Contract_Awards` and `Search_Federal_Contract_IDVs` finds the awards or IDVs tied to one specific opportunity notice. Use `federal_meta_opportunity_ids` instead when the question covers the opportunity's whole notice chain. GovTribe stores at most 500 opportunity IDs per award or IDV, so a record linked to more opportunities than that, such as a Multiple Award Schedule award, may not match every opportunity it belongs to. Treat an empty result as inconclusive for MAS and other very high-volume schedules rather than as proof that no linked records exist.
+- `federal_contract_opportunity_ids` on `Search_Federal_Contract_Awards` and `Search_Federal_Contract_IDVs` finds the awards or IDVs tied to one specific opportunity notice. Use `federal_meta_opportunity_ids` instead when the question covers the opportunity's whole opportunity stack. GovTribe stores at most 500 opportunity IDs per award or IDV, so a record linked to more opportunities than that, such as a Multiple Award Schedule award, may not match every opportunity it belongs to. Treat an empty result as inconclusive for MAS and other very high-volume schedules rather than as proof that no linked records exist.
 - State and local IDV or vehicle filters can find records connected to state and local parent contract structures.
 - Government file and user file filters can use parent record, source record, workspace, pursuit, or file-bearing entity context.
 - Workspace filters can narrow by pursuit, pipeline, stage, task, owner, creator, saved search, or workflow state when the selected tool exposes those filters.
@@ -97,6 +97,8 @@ Pursuit responses do not include nested discussion or comment arrays. Retrieve t
 1. Resolve the pursuit with [Search pursuits MCP tool](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuits-mcp-tool) or another tool that returns a pursuit `govtribe_id`.
 2. Pass that ID to [Search pursuit discussions MCP tool](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuit-discussions-mcp-tool) using `pursuit_ids`.
 3. Pass returned discussion IDs to [Search pursuit comments MCP tool](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuit-comments-mcp-tool) using `discussion_ids`.
+
+Use `discussion_ids` on `Search_Pursuit_Discussions` or `comment_ids` on `Search_Pursuit_Comments` when you need to read known records by ID.
 
 ## Example
 

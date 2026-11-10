@@ -11,7 +11,7 @@ Start with the current source inventory, requirement register and amendments. Us
 
 ## 2. Select the working file
 
-For a new workbook, use `govtribe-file-templates` to resolve **Proposal Compliance & Control** (`proposal-control-workbook`). Read `govtribe-file-templates` reference `references/proposal-control-workbook.md` and its `references/template-adaptation-and-revisions.md` from the installed File Templates root, then populate a copy of the verified blank master using the host's native spreadsheet capabilities.
+For a new workbook, use `govtribe-file-templates` to resolve **Proposal Compliance & Control** (`proposal-control-workbook`) when its template library (`govtribe-file-templates` reference `references/template-library.md`) is installed. Read `govtribe-file-templates` reference `references/proposal-control-workbook.md` and its `references/template-adaptation-and-revisions.md` from the installed File Templates root, then populate a copy of the verified blank master using the host's native spreadsheet capabilities. Without the library, build the workbook natively from that guide's sheet and field map.
 
 For an update, continue the selected working file, preserving its layout, formulas, IDs and accepted edits. If the user requests a simple matrix or supplies a buyer layout, use that structure; the controls below do not require eleven sheets.
 

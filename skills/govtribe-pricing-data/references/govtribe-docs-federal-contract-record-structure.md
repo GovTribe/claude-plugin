@@ -17,7 +17,7 @@ Federal contract records answer different questions depending on where they sit 
 | [Federal contract IDV data type](https://govtribe.com/docs/data-model/data-types/federal-contract-idv) | Parent ordering instrument. | What parent contract or agreement can issue orders? |
 | [Federal contract award](https://govtribe.com/docs/data-model/data-types/federal-contract-award) | Awarded contract, order, purchase order, or BPA call. | Who won and what work was awarded? |
 | [Federal transaction](https://govtribe.com/docs/data-model/data-types/federal-transaction) | Action-level spending or modification event. | What changed or obligated value over time? |
-| [Federal contract sub-award data type](https://govtribe.com/docs/data-model/data-types/federal-contract-sub-award) | Reported downstream subcontract. | Which subcontractors were reported under prime award activity? |
+| [Federal contract subaward data type](https://govtribe.com/docs/data-model/data-types/federal-contract-sub-award) | Reported downstream subcontract. | Which subcontractors were reported under prime award activity? |
 
 ## How to choose the right record type
 
@@ -29,11 +29,11 @@ Federal contract records answer different questions depending on where they sit 
 | I want a vendor's parent contract. | Federal contract IDV. | IDVs are parent instruments used for future orders. |
 | I want historical awarded work. | Federal contract award. | Awards are the main prime awarded-work records. |
 | I want modification or obligation history. | Federal transaction. | Transactions are action-level records beneath awards or IDVs. |
-| I want downstream subcontracting. | Federal contract sub-award. | Sub-awards are reported subcontracting activity beneath prime awards. |
+| I want downstream subcontracting. | Federal contract subaward. | Subawards are reported subcontracting activity beneath prime awards. |
 
 ## How records connect
 
-Not every record has every relationship. A contract opportunity may connect to an award when source identifiers support it. An award may connect to a parent IDV. An IDV may connect to a vehicle. An award may also connect to transactions and reported sub-awards. When direct relationships are missing, compare records through identifiers, agency roles, vendor roles, categories, dates, source URLs, and file context.
+Not every record has every relationship. A contract opportunity may connect to an award when source identifiers support it. An award may connect to a parent IDV. An IDV may connect to a vehicle. An award may also connect to transactions and reported subawards. When direct relationships are missing, compare records through identifiers, agency roles, vendor roles, categories, dates, source URLs, and file context.
 
 ## GovTribe relationship mapping
 
@@ -41,10 +41,10 @@ Not every record has every relationship. A contract opportunity may connect to a
 | --- | --- | --- |
 | `federal_contract_vehicle` | Vehicle or broad contract family connected to an opportunity, award, or IDV. | [Federal contract vehicle attribute](https://govtribe.com/docs/data-model/attributes/federal-contract-vehicle-attribute) |
 | `federal_contract_idv` | Parent IDV connected to a federal contract award. | [Federal contract IDV attribute](https://govtribe.com/docs/data-model/attributes/federal-contract-idv-attribute) |
-| `federal_meta_opportunity_id` | Notice-chain identifier connected to a federal contract opportunity. | [Federal contract opportunity notice chains](https://govtribe.com/docs/data-model/guides/federal-contract-opportunity-notice-chains) |
+| `federal_meta_opportunity_id` | Notice-chain identifier connected to a federal contract opportunity. | [Federal contract opportunity stacks](https://govtribe.com/docs/data-model/guides/federal-contract-opportunity-notice-chains) |
 | `originating_federal_contract_opportunity` | Upstream opportunity connected to an awarded or vehicle record. | [Originating federal contract opportunity attribute](https://govtribe.com/docs/data-model/attributes/originating-federal-contract-opportunity-attribute) |
 | `task_orders` | Child task orders connected to an IDV. | [Task orders attribute](https://govtribe.com/docs/data-model/attributes/task-orders-attribute) |
-| `sub_contracts` | Reported contract sub-awards connected to a prime award. | [Federal contract sub-award attribute](https://govtribe.com/docs/data-model/attributes/federal-contract-sub-award-attribute) |
+| `sub_contracts` | Reported contract subawards connected to a prime award. | [Federal contract subaward attribute](https://govtribe.com/docs/data-model/attributes/federal-contract-sub-award-attribute) |
 
 ## Official source notes
 
@@ -56,7 +56,7 @@ Not every record has every relationship. A contract opportunity may connect to a
 ## Related articles
 
 - [Federal contract data model](https://govtribe.com/docs/data-model/guides/federal-contract-data-model): Review the broader federal contract hierarchy.
-- [Federal contract opportunity notice chains](https://govtribe.com/docs/data-model/guides/federal-contract-opportunity-notice-chains): Use notice-chain fields to connect federal opportunities to related awards, IDVs, and vehicles.
+- [Federal contract opportunity stacks](https://govtribe.com/docs/data-model/guides/federal-contract-opportunity-notice-chains): Use notice-chain fields to connect federal opportunities to related awards, IDVs, and vehicles.
 - [Federal award values and transactions](https://govtribe.com/docs/data-model/guides/federal-award-values-and-transactions): Distinguish award summaries, transaction events, obligations, and potential values.
 - [Source identifiers and record matching](https://govtribe.com/docs/data-model/guides/source-identifiers-and-record-matching): Use identifiers and originating links to compare related records.
 - [Contracting and funding federal agencies](https://govtribe.com/docs/data-model/guides/contracting-and-funding-federal-agencies): Choose the right agency role on federal contract awards and IDVs.

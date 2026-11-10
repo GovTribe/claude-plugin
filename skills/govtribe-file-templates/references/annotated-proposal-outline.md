@@ -1,6 +1,6 @@
 # Annotated Proposal Outline
 
-Use after resolving `annotated-proposal-outline` through File Templates. Copy the blank master for a new outline; continue a selected draft using [Template adaptation and revision checks](template-adaptation-and-revisions.md). Adapt its headings to the buyer's required response structure.
+Use after resolving `annotated-proposal-outline` through File Templates. Copy the blank master for a new outline; continue a selected draft using [Template adaptation and revision checks](template-adaptation-and-revisions.md). Adapt its headings to the buyer's required response structure. If `template-library.md` is not beside this guide, no template is installed: create a new outline natively from the sections below and ignore instructions to inspect or copy a template.
 
 ## 1. Reuse the requirements
 
@@ -29,5 +29,3 @@ Prioritize mandatory and evaluated content within the buyer's page rules. Label 
 Map every mandatory instruction and evaluation factor to a response location or visible gap. Apply amendments to all affected sections, evidence requests, assignments and page allocations while preserving accepted content elsewhere. Reconcile shared staffing, schedules, technical boundaries and pricing dependencies.
 
 Use native document capabilities and the adaptation guide to create and inspect the file. Deliver the outline with material gaps and next writing actions; link the existing compliance register instead of requiring another matrix or JSON companion.
-
-For an optional machine-readable outline, `govtribe-proposal-workflows` retains `assets/annotated-proposal-outline-schema.json` and `scripts/validate_annotated_outline.py` at its installed root. That helper checks supplied JSON structure and mappings; use native document checks for the delivered file.

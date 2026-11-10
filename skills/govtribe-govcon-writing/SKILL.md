@@ -21,6 +21,6 @@ Produce the requested words from available context; a capability statement or em
 
 - [Source authority and claims](references/source-authority-and-claims.md): conflicting requirements, missing facts, performer attribution and proposed commitments.
 - [State and local adaptation](references/state-and-local-adaptation.md): buyer-specific terminology, forms and addenda.
-- [Research sources](references/research-sources.md): official guidance when a procedural rule needs verification.
+- [Research sources](references/research-sources.md): regulation text through `Get_Regulation_Section`, and official guidance when a procedural rule needs verification.
 - **Create or revise a complete file/package:** use the relevant response guide in `govtribe-file-templates`, plus its `references/template-adaptation-and-revisions.md` for selected-file preservation and native format checks. Keep factual gaps and remaining file work separate from external copy; inline requests need inline text.
 - **Find supporting files:** [Search_User_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-user-files-mcp-tool) and [Vector-store content retrieval](https://govtribe.com/docs/govtribe-for-agents/guides/vector-store-content-retrieval). Before a GovTribe search, read [Choose a search mode and write queries](https://govtribe.com/docs/govtribe-for-agents/guides/choose-a-search-mode-and-write-queries), unless already in context; alternatively retrieve that article by title through `Documentation` in `govtribe-for-agents`.
