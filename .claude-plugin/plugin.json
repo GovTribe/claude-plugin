@@ -10,6 +10,7 @@
   "repository": "https://github.com/GovTribe/claude-plugin",
   "skills": "./skills/",
   "license": "Apache-2.0",
+  "keywords": ["govcon", "government contracting", "federal contracts", "procurement", "capture", "proposals", "pricing", "grants", "state and local"],
   "supportUrl": "https://govtribe.com/docs/govtribe-user-guide/contact-govtribe",
   "privacyPolicyUrl": "https://www.govexec.com/about/privacy-policy/",
   "icon": "./assets/govtribe-icon.png"

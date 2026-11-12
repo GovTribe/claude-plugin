@@ -4,7 +4,7 @@
   "proposed_release_version": "1.2.1",
   "release_version_confirmed": true,
   "approval_status": "user-authorized integrity-only release; full acceptance ledger remains incomplete",
-  "archive_sha256": "f10b035034649e83dcb4ed20316f7882e75b9b10f2ecadd0e7276d230109c926",
+  "archive_sha256": "0d33f1cd22944ae309d04e180b5887c1ef6a2235c0800d68fd7263d1e8e6f49c",
   "source_commit": "b791b30385595aebbbc39de6285e4a67a65b4d56",
   "prepared_input_digest": "f83ce80b5ccada3731351ae65838337ad03ca5bc8c7cabd24415108c04fb20db",
   "distribution_workflow_digest": "232406a6aed0520cc3a48b663892c85c8cfab376e480ad0df382ff7bae985596",
