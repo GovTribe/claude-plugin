@@ -1,69 +1,44 @@
 ---
 title: Federal Buyer Expansion Plan
-description: How to build a one-office federal buyer expansion plan for a target vendor and buyer office.
+description: Build a company's growth plan for a federal buyer using mission priorities, buying history, upcoming work, access routes and stakeholder engagement.
 ---
 
 # Federal Buyer Expansion Plan
 
-Use this reference when the user wants a buyer-specific federal pursuit plan for one vendor and one federal office, not a general vendor deep dive or a market scan.
+## 1. Establish the company and target account
 
-## Goal
-- Resolve the target vendor and buyer office, analyze the office's recent buying pattern, judge the vendor's access and fit, surface evidence-backed contacts, and identify near-term demand.
-- Keep the answer office-specific and tied to the last 24 months of buying behavior.
-- For a document-style deliverable, prefer the structure in `assets/federal-buyer-expansion-plan-template.md` from the skill root.
-- Before delivering a customer-facing brief, contact list, or companion artifact, read [Final Capture Deliverable Quality Checks](./final-deliverable-quality-checks.md).
+Reuse resolved company and buyer context; otherwise use [Search_Vendors](https://govtribe.com/docs/govtribe-for-agents/tools/search-vendors-mcp-tool) and [Search_Federal_Agencies](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-agencies-mcp-tool). Identify the relevant office or program; if results cover a broader agency, retain that distinction.
 
-## Workflow
+Reuse [Relevant Opportunities' company profile](relevant-opportunities.md#1-build-the-company-profile-from-its-work): contract/grant/subaward experience, certifications, held vehicles and relevant pursuit outcomes. Supplement sparse award history with supplied capabilities and relevant commercial work.
 
-### 1. Resolve the vendor and the office first
-- Resolve the target vendor with `Search_Vendors`.
-- Resolve the target buyer office with `Search_Federal_Agencies`.
-- Do not proceed until both sides resolve cleanly enough to search.
+Use requested dates; otherwise examine five years of company experience plus older active work, 24 months of buyer history, upcoming work through the next 24 months, and notices from the past six months. Apply these windows when reusing research references.
 
-### 2. Derive the vendor's lane focus
-- Use `Search_Federal_Contract_Awards` for the resolved vendor as an aggregation-first vendor-history pass over the last 24 months.
-- Reuse dominant NAICS, PSC, set-aside, vehicle, and IDV patterns as the vendor's most credible lane focus.
-- If the vendor-history pass is too thin to support a defensible lane focus, ask for the minimum NAICS, PSC, or work-category clarification and stop.
+## 2. Understand mission priorities and funding
 
-### 3. Build the office buying profile in both roles
-- Run aggregation-first office buying passes with `Search_Federal_Contract_Awards` for the resolved office as both:
-  - `contracting_federal_agency`
-  - `funding_federal_agency`
-- Keep the same 24-month window in both passes.
-- Use the vendor-derived lane focus to interpret which office lanes matter most.
-- Follow with row-level retrieval to select representative recent buys for each role.
+Read official program pages, strategic/performance plans, budget justifications and industry-day materials. Identify problems the company could help solve and connect them to demonstrated capabilities. Use **Federal Budget Data** in `govtribe-market-intelligence` for targeted funding checks, comparing budget cycles when relevant. Distinguish requested funding from enacted resources and a stated priority from a planned procurement.
 
-### 4. Judge vendor access and ordering-path fit
-- Use `Search_Federal_Contract_Awards` to check for direct vendor overlap with the office.
-- If direct overlap is sparse or absent, run one careful adjacent-evidence pass against the office's dominant lanes, value bands, and ordering patterns.
-- Keep direct evidence separate from adjacent or inferred evidence.
-- If office award evidence shows meaningful IDV or vehicle concentration, run one targeted `Search_Federal_Contract_IDVs` or `Search_Federal_Contract_Vehicles` follow-on lookup to explain the ordering path.
-- If direct office overlap is sparse and teaming with an established office incumbent is a credible access path, use `references/team-on-an-opportunity.md` to identify and coordinate with potential partners on live opportunities in the office.
+## 3. Establish how the buyer buys
 
-### 5. Pull evidence-backed contacts and live demand
-- Use `Search_Contacts` against the office, narrowing with representative award IDs when needed.
-- If no usable contacts remain after narrowing, say so clearly and do not invent outreach targets.
-- Run a current-demand check with `Search_Federal_Contract_Opportunities`:
-  - active solicitations
-  - recent pre-solicitations
-- Keep live demand subordinate to the historical office buying pattern. Do not let a sparse live cohort override the core office profile.
+Use [Search_Federal_Contract_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-awards-mcp-tool) separately with `contracting_federal_agency_ids` and `funding_federal_agency_ids`. Identify representative scopes, incumbents, competition, set-asides and ordering patterns. Use [Search_Federal_Transactions](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-transactions-mcp-tool) for obligations during the history window, including activity on older awards.
 
-### 6. Verify and trim
-- Remove obvious outliers, weak adjacent-evidence claims, and redundant office rows.
-- Lower confidence when the plan depends on sparse office history, one-off vehicle signals, or one-record contact evidence.
-- If the evidence is too thin for a credible office plan, say so clearly and stop.
+Reuse **Federal Buying Pattern Analysis** in `govtribe-market-intelligence` for aggregations, progressive disclosure, grant/subaward research and value comparisons. Compare the company's existing work with buyer needs to identify credible expansion areas.
 
-## Output contract
-- Return vendor and office resolution, search approach, office buying profile, representative recent buys, evidence-backed contacts, ordering-path and access assessment, office-specific pursuit angles, current open and near-term opportunities, next actions, and confidence.
-- Make rendered briefs read like pursuit memos, not raw market-scan notes. Open with an expansion call that states pursuit posture, best entry lane, access path, primary 90-day action, confidence, and the critical caveat.
-- Use compact markdown tables for buying-profile facts, representative buys, contacts, and live opportunities.
-- Keep resolved scope as a short note or short bullet list when the document is already table-heavy; avoid a full scope table if it causes an early page split.
-- Keep tables narrow enough for portrait Markdown/PDF output. Prefer three-column evidence digests over wide tables that expose role, vendor, value, vehicle, and implication as separate columns.
-- Use three-column entry-route tables like `Route`, `How to use it`, and `Watch item`; fit labels can be folded into the route name or route text.
-- In the brief, summarize representative buys as `Buy`, `Signal`, and `Capture implication`. Put full award identifiers, vendors, values, roles, vehicles, and row-level evidence in companion CSV or JSON when needed.
-- Summarize contacts as `Contact`, `Use`, and `Caveat`; do not over-format every returned contact field into the rendered plan.
-- Summarize live demand as `Opportunity`, `Timing`, and `Capture action`.
-- Include a short 90-day pursuit playbook so the output ends with an executable capture plan rather than only analysis.
-- If companion artifact links create a trailing blank page in a rendered PDF, omit them from the rendered brief and provide them in the final response instead.
-- Keep pursuit angles short and tied directly to observed buying evidence.
-- Do not turn the answer into a full offer packet or long outreach draft unless the user asks for that separately.
+## 4. Find upcoming work and entry routes
+
+Search [Search_Federal_Forecasts](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-forecasts-mcp-tool) and [Search_Federal_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-opportunities-mcp-tool) for forecasts, open solicitations, RFIs/sources sought and industry days. Include [Search_Federal_Grant_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-opportunities-mcp-tool) when relevant. Reuse **Find Early Federal Procurement Signals** in `govtribe-market-intelligence` for date filters, follow-ons and current source checks. New mission or acquisition plans can reveal opportunities beyond historical purchasing.
+
+Use [Search_Federal_Contract_IDVs](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-idvs-mcp-tool) and [Search_Federal_Contract_Vehicles](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-vehicles-mcp-tool) to verify holders, scope, pools/SINs and ordering dates. Consider direct competition, IDIQs, GWACs, BPAs, MAS/FSS, CSOs, BAAs, SBIR/STTR, OTA/consortium routes, prime teaming and reseller access as applicable. Check eligibility, membership and partner requirements. A closed notice may leave a live parent framework, future call or teaming route; verify it.
+
+Use [Find Incumbent](find-incumbent-for-federal-contract-opportunity.md) for selected work and [Likely Bidders](likely-bidders.md) for complementary partners and buyer access.
+
+## 5. Map stakeholders and useful engagement
+
+Use [Search_Contacts](https://govtribe.com/docs/govtribe-for-agents/tools/search-contacts-mcp-tool) with `federal_agency_ids`, narrowing through representative records in `referenced_govtribe_ids`. Supplement with official organization pages and notices to identify program owners, technical users, contracting personnel, small-business offices and prime partners. Verify each person's role; a listed POC alone does not establish decision authority or an existing relationship.
+
+For useful contacts or roles, specify the engagement purpose: validate a mission need, clarify timing/access, demonstrate relevant experience, or explore workshare. Identify suitable RFIs, industry days or small-business outreach sessions. After solicitation release, follow its communication instructions through the contracting officer.
+
+## 6. Prioritize and sequence actions
+
+Recommend the strongest expansion areas and gaps to close. Set practical actions for the next 90 days, with timing, responsible roles and what each action should establish; retain later acquisition milestones. For requested tracking or monitoring, reuse [Manage Pipelines and Pursuits](workspace-pipeline-operations.md) and [Set Up Recurring Checks](relevant-opportunities.md#5-set-up-recurring-checks).
+
+Prepare an appropriate GovCon account plan with supporting links, recommendations and material gaps; choose the report format for the user's needs.

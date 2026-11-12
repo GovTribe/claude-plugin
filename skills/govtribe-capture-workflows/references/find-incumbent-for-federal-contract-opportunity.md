@@ -1,86 +1,34 @@
 ---
 title: Find Incumbent for a Federal Contract Opportunity
-description: Recover the exact incumbent contract or strongest defensible incumbent for a federal opportunity using direct procurement lineage before constrained fallback evidence.
+description: Identify who performs the work behind a federal contract opportunity and the supporting contract or task order.
 ---
 
 # Find Incumbent for a Federal Contract Opportunity
 
-Use this reference when the user asks who currently performs the work, asks for the exact incumbent contract or delivery order, or supplies incumbent-research rules that prohibit title-only matching. This is a lineage workflow, not a generic likely-bidder ranking.
+## 1. Read the opportunity and its documents
 
-## Goal
-- Resolve the target opportunity and identify the current performing contract or strongest defensible incumbent using four ordered tiers:
-  1. direct notice-thread and linked-record evidence
-  2. current child-order recovery
-  3. predecessor recovery
-  4. tightly constrained fallback
-- Return the actual award, task order, delivery order, or other child instrument whenever the evidence supports one.
-- Keep lineage explicit. Do not overstate a parent vehicle, generic same-agency award, or solicitation-title similarity as order-level proof.
+Resolve the supplied notice with [Search_Federal_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-opportunities-mcp-tool), using `govtribe_ids` or `solicitation_numbers`. Establish whether the question concerns today's performer or the predecessor to a particular procurement; use the requested date, otherwise today.
 
-## Non-negotiable research rules
-- Do not rely solely on solicitation title, description similarity, NAICS/PSC overlap, or a vendor's general agency footprint.
-- Operate the relevant GovTribe tools when the user asks for exact incumbent tracing; do not answer with an ungrounded hypothesis when searchable records are available.
-- Prefer contract, task-order, delivery-order, IDV, opportunity-thread, office, program, site, platform, and period-of-performance identifiers over loose keyword resemblance.
-- Distinguish `Confirmed Incumbent`, `Likely Incumbent`, and `Supporting Predecessor Evidence`.
-- Preserve the active opportunity context across follow-ups instead of making the user restate the target.
+Read descriptions, buyer, location and related notices. Use [Search_Government_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-government-files-mcp-tool) with `federal_contract_opportunity_ids` to find the latest solicitation, controlling amendments, Q&A and transition documents. Look for incumbent names, existing contract/order numbers, distinctive programs and work being replaced. Read full files through native download/text tools or [source-content retrieval](https://govtribe.com/docs/govtribe-for-agents/guides/vector-store-content-retrieval) when snippets are insufficient.
 
-## Workflow
+## 2. Retrieve the named contracts and related awards
 
-### 1. Resolve the target opportunity exactly
-- Use `Search_Federal_Contract_Opportunities` with exact lookup first.
-- Reuse `federal_meta_opportunity_id`, notice-chain relationships, agency, awarding office, program, classification, vehicle, site, and scope text.
-- Recover attached government-file text when identifiers, incumbent language, transition facts, or predecessor references may be present in the solicitation package.
-- If the target does not resolve cleanly enough to one opportunity, ask for the minimum missing detail and stop.
+Look up contract/order numbers with [Search_Federal_Contract_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-awards-mcp-tool) and `piids`; use [Search_Federal_Contract_IDVs](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-idvs-mcp-tool) for parent-instrument numbers. Search exact identifiers without date restrictions.
 
-### 2. Tier 1: direct thread evidence
-- Use direct dataset linkage first.
-- If `federal_meta_opportunity_id` is present, query `Search_Federal_Contract_Awards` with it before broader searches.
-- The opportunity row does not expose linked awards or IDVs. Recover them with a second call: `Search_Federal_Contract_Awards` with `federal_contract_opportunity_ids` set to the opportunity `govtribe_id`, and `Search_Federal_Contract_IDVs` with the same value when a parent instrument may be involved. Page through both.
-- Reuse predecessor, vehicle, and notice-chain relationships already exposed on the opportunity.
-- Inspect exact contract numbers, task-order numbers, delivery-order numbers, incumbent names, and transition statements surfaced in files or records.
-- Use a narrow aggregation-only verification pass only when direct thread concentration materially clarifies whether one performer dominates the thread.
-- If a linked vehicle or IDV materially clarifies the thread, run one targeted parent lookup, but do not treat parent-instrument context alone as incumbent proof.
+For related awards/IDVs, use `federal_contract_opportunity_ids` for the selected notice or `federal_meta_opportunity_ids` for its notice chain. Follow the [notice-chain guide](https://govtribe.com/docs/data-model/guides/federal-contract-opportunity-notice-chains); MAS-level chains can include unrelated schedule context. A linked award may be the new winner or a vehicle holder; establish its role before calling it the incumbent.
 
-### 3. Tier 2: current child-order recovery
-- If direct thread evidence does not confirm the incumbent, recover the most defensible current child order or award.
-- Build exact quoted office, program, site, platform, system, requirement phrase, and scope variants from the opportunity and source files.
-- Run the recovery sequence in order:
-  - exact contract/order identifiers and direct lineage fields
-  - exact quoted platform, system, office, program, site, or requirement terms
-  - the same terms with the strongest same-agency, office, NAICS, PSC, vehicle, set-aside, place, and period-of-performance filters
-  - one narrow semantic retry only if the exact and keyword sweeps remain too broad or too thin
-- Mine returned award text for exact identifiers and rerun exact lookups immediately when a contract number, IDV number, task-order number, delivery-order number, or child-award reference appears.
-- If a candidate award references a parent IDV, expand that lineage before inclusion or exclusion.
-- Use the current exact-scope child order or award as the incumbent record when its period of performance and scope support current performance.
+When a parent IDV is identified, search its orders through `Search_Federal_Contract_Awards` with `federal_contract_idv_ids`. Request `govtribe_id`, `contract_number`, `awardee`, `descriptions`, `contracting_federal_agency`, `place_of_performance`, `award_date`, `completion_date`, `ultimate_completion_date`, `federal_contract_idv` and `govtribe_url` through `fields_to_return` to compare the actual work.
 
-### 4. Tier 3: predecessor recovery
-- Only after Tier 1 and Tier 2 fail, search for older same-office, same-program, same-site, or same-functional-scope work.
-- Prioritize exact office, site, program, branded system, requirement phrase, and contract lineage matches over generic same-agency similarity.
-- Use `Search_Federal_Contract_Awards` as the primary predecessor surface and `Search_Federal_Contract_IDVs` when the opportunity language or recovered awards imply a parent instrument.
-- If an IDV, parent award, or surfaced identifier is found, expand lineage before reaching a conclusion.
-- Treat older exact-scope work as supporting predecessor evidence unless it is still current enough to satisfy Tier 2.
+## 3. Fill gaps with targeted research
 
-### 5. Tier 4: constrained fallback
-- Only after the first three tiers fail, use `similar_filter` from the resolved opportunity with strict same-agency or office, same NAICS or PSC, same vehicle or IDV, same set-aside, place, scope, and recent-window filters.
-- Use `search_mode: "semantic"` only inside this fallback tier when the exact and filter-first pass remains too thin.
-- Use `Likely Incumbent` only for strong constrained fallback matches.
-- Do not widen into open-ended likely-bidder logic.
+Search awards using distinctive program, system, site or requirement wording and the relevant buyer/office. Follow newly discovered contract numbers and predecessor references immediately. Use semantic search or `similar_filter` when wording has changed. Refine searches and review relevant remaining results before concluding no match was found.
 
-### 6. Verification and stop conditions
-- Exclude keyword-adjacent awards, wrong-scope same-agency work, wrong-office work, wrong-vehicle work, expired unrelated orders, parent-only lineage, and entity-mismatched vendor results.
-- Before returning `No Defensible Incumbent`, expand every plausible Tier 2 or Tier 3 lineage lead or explicitly reject it with a reason.
-- If the answer depends on Tier 2, Tier 3, or Tier 4 instead of direct thread evidence, say so explicitly.
-- If the resolved incumbent is a candidate teaming partner rather than a head-on competitor, use `references/team-on-an-opportunity.md` to coordinate a teaming interest on the recompete.
-- If the user asks for a full record dossier after the incumbent is resolved, hand the exact award/order/IDV target to the `govtribe-deep-dive` skill.
+Use classifications, vehicle, geography and dates where they help; the follow-on's NAICS, set-aside, vehicle or contracting office may differ. Avoid recent-award cutoffs that hide older contracts still performing the work. Search official agency forecasts, procurement announcements, SAM.gov and other web sources for unresolved incumbent or predecessor details, then retrieve any identified awards in GovTribe.
 
-## Output contract
-- Start with the resolved opportunity and the incumbent call.
-- Name the exact current contract/order when supported, including identifier, vendor, parent instrument, scope, period of performance, and evidence tier.
-- Then return ordered sections for direct evidence, current child-order recovery, predecessor evidence, supporting lineage, fallback, exclusions, risks, and confidence.
-- Use compact markdown tables for each populated evidence section.
-- Keep evidence labels explicit:
-  - `Confirmed Incumbent`
-  - `Likely Incumbent`
-  - `Supporting Predecessor Evidence`
-  - `Supporting Lineage`
-  - `No Defensible Incumbent`
-- If order-level incumbency remains unconfirmed, say so clearly instead of centering a parent IDV or vehicle.
+## 4. Verify who performs the work and when
+
+Compare scope, location, buyer, awardee and performance dates. Use [Search_Federal_Transactions](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-transactions-mcp-tool), filtered by `federal_contract_award_ids`, and source documents when modifications, extensions or bridge contracts affect the answer. An IDV's ordering deadline and an award's possible option end date do not establish current performance.
+
+Distinguish the current performer, historical predecessor and successor/new winner. Allow multiple incumbents for consolidated work or a documented new requirement without an incumbent. If only an inferred match or historical award is supported, explain the missing link; an empty search does not establish that no incumbent exists.
+
+Prepare an appropriate GovCon report identifying the supported performer and contract/order, relevant dates, supporting links and material gaps. Let the requested use determine the format.

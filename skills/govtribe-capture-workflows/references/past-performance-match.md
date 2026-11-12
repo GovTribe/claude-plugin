@@ -1,68 +1,44 @@
 ---
 title: Past Performance Match
-description: How to assess whether a target company's past performance aligns to a specific federal contract or grant requirement.
+description: Find a company's most relevant past performance for a government requirement and explain its strengths and gaps.
 ---
 
 # Past Performance Match
 
-Use this reference when the user wants defensible past-performance references for a specific company and a specific contract, grant, or file-based requirement.
+## 1. Identify the company and requirement
 
-## Goal
-- Resolve the company and the target requirement, recover the strongest comparable past performance, and write a defensible reference memo that explains the most important gaps or risks.
-- Keep the answer focused on evidence-backed comparability, not on generic capability marketing.
-- Use `assets/past-performance-reference-memo-template.md` from the skill root for document-style outputs.
-- Before delivering a customer-facing memo or companion artifact, read [Final Capture Deliverable Quality Checks](./final-deliverable-quality-checks.md).
+Reuse known company and opportunity context. Resolve a supplied pursuit with [Search_Pursuits](https://govtribe.com/docs/govtribe-for-agents/tools/search-pursuits-mcp-tool), the company with [Search_Vendors](https://govtribe.com/docs/govtribe-for-agents/tools/search-vendors-mcp-tool), and the linked or supplied target with [Search_Federal_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-opportunities-mcp-tool), [Search_Federal_Grant_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-opportunities-mcp-tool), or [Search_State_And_Local_Contract_Opportunities](https://govtribe.com/docs/govtribe-for-agents/tools/search-state-and-local-contract-opportunities-mcp-tool). Read a supplied requirement directly. Ask for missing context that changes the comparison; continue with supplied company references when no vendor record resolves.
 
-## Workflow
+## 2. Read the buyer's past-performance requirements
 
-### 1. Resolve the target company first
-- Resolve the company with `Search_Vendors` whenever the input maps cleanly to a vendor record.
-- Reuse vendor identity, classifications, certifications, and parent-child context only when they materially affect interpretation.
-- If the company does not resolve cleanly enough to search, ask for the minimum missing detail and stop.
+Use [Search_Government_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-government-files-mcp-tool) for the solicitation or funding notice, amendments and Q&A. Establish scope, evaluation criteria, reference count, recency, permitted performing entities/roles and required forms. Compare file IDs, posting dates and amendment text to identify the controlling version. Read full files with native tools or [source-content retrieval](https://govtribe.com/docs/govtribe-for-agents/guides/vector-store-content-retrieval) when snippets are insufficient.
 
-### 2. Resolve the target requirement into the best available surface
-- Contract path: resolve the opportunity with `Search_Federal_Contract_Opportunities` and keep its agency, NAICS, PSC, set-aside, vehicle, timing, and scope language.
-- Grant path: resolve the opportunity or program with `Search_Federal_Grant_Opportunities` or `Search_Federal_Grant_Programs` and keep its agency, program, assistance-type, timing, and scope language.
-- File-first path: if the requirement is primarily an uploaded artifact, extract the requirement from user files before constructing award searches.
-- If the requirement remains too vague, ask for the minimum missing detail and stop.
+Use the buyer's performance window; otherwise review the past five years, including older awards with work performed during that period. Check performance dates rather than filtering only by award date.
 
-### 3. Use file evidence explicitly
-- Read [Prior User File Context](./prior-user-file-context.md) before searching user files for company-provided past performance, capability statements, proposal excerpts, or uploaded requirement files.
-- Use `Search_User_Files` only when those files materially improve the requirement basis or internal reference story.
-- If the resolved opportunity exposes `government_files`, use `Search_Government_Files` before final scoring.
-- Reuse `content_snippet` first.
-- When exact file language materially improves requirement extraction, follow the bundled [vector-store retrieval guide](./govtribe-docs-vector-store-content-retrieval.md): call `Add_To_Vector_Store`, then `Search_Vector_Store`, and cite returned source metadata through the host's native citation format.
+## 3. Find comparable company work
 
-### 4. Start with company-constrained award retrieval
-- Contract path: use `Search_Federal_Contract_Awards` with `vendor_ids` plus the strongest opportunity-derived agency, classification, set-aside, vehicle, date, value, and place filters.
-- Grant path: use `Search_Federal_Grant_Awards` with `vendor_ids` plus the strongest program, agency, assistance-type, date, value, and place filters.
-- When the resolved opportunity exposes direct lineage such as `federal_meta_opportunity_id`, use that before broader comparability logic.
-- Request explicit row fields needed for scope, timing, value, customer, and lineage interpretation.
+Search federal awards using `vendor_ids` and the requirement's substantive work:
 
-### 5. Broaden only after the direct pass
-- If the company-constrained cohort is thin or vague, run one seeded `similar_filter` recovery pass from the resolved opportunity while keeping `vendor_ids` and the strongest structural filters in place.
-- Use `search_mode: "semantic"` only after the direct pass and keep the strongest requirement-derived filters in place.
-- Do not let semantic broadening replace the company-constrained award pass.
+- [Search_Federal_Contract_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-awards-mcp-tool) for prime contracts and delivered orders.
+- [Search_Federal_Grant_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-awards-mcp-tool) for funded projects.
+- [Search_Federal_Contract_Sub_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-contract-sub-awards-mcp-tool) and [Search_Federal_Grant_Sub_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-federal-grant-sub-awards-mcp-tool) for subcontract/subrecipient experience; verify which side is the company.
 
-### 6. Compare, score, and trim
-- Score candidate references on scope overlap, customer overlap, classification overlap, contract or assistance structure, operational environment, value band, recency, and requirement text alignment.
-- Use file evidence to sharpen the requirement side, not to replace award-side matching.
-- Exclude weak keyword-adjacent work, mismatched agencies, and records that only partly resemble the requirement.
-- Normalize vendor identity only when legal-entity or parent-child context materially affects the interpretation.
-- Select an anchor reference first, then decide which references are supporting evidence and which should be withheld or reserved.
-- Treat score as a defensibility aid, not the memo itself. Do not let a matching table replace the argument.
-- If the gap analysis surfaces requirement dimensions the company cannot defensibly cover alone, use `references/team-on-an-opportunity.md` to find a partner whose past performance closes the gap.
+For state/local work, use [Search_State_And_Local_Contract_Awards](https://govtribe.com/docs/govtribe-for-agents/tools/search-state-and-local-contract-awards-mcp-tool) with scope, buyer, state or classifications; verify the company in `awardee_name`. `contracting_organization` identifies the buyer; this tool has no `vendor_ids` filter.
 
-## Output contract
-- Start with a reference decision that states match posture, recommended use, anchor reference, main proof point, main limitation, and confidence.
-- Keep decision-table cells short enough to render cleanly; put detailed proof in the anchor reference profile instead.
-- Include a requirement basis section that names the concrete requirement dimensions the references must prove.
-- Use a short bulleted reference-set index, not a matching table. Include the anchor and the most important support reference only; move reserve, weak, or do-not-use references into prose.
-- Write an anchor reference profile in prose with evidence basis, why it is defensible, limits to disclose, and how to frame it.
-- Separate supporting references from the anchor so weaker proof points do not dilute the strongest story.
-- Include gap/risk assessment and evidence traceability so a reviewer can see which requirement and award facts support the conclusion.
-- Make the scoring rationale explicit for the best references and explicit about meaningful gaps, but keep long analysis out of table cells.
-- If there is not enough evidence for a defensible match, say so clearly instead of stretching the comparison.
-- Validate full requirement-to-reference match memos before finalizing. A requested evidence-collection brief without a target requirement instead uses source-inventory and document contract checks; preserve its actual evidence count and concise owner actions. Full match-memo section/count minimums do not apply to that distinct deliverable.
-- For a full match memo, run:
-  `python3 scripts/validate_past_performance_match_memo.py path/to/past_performance_match.md`
+Use keyword, semantic or supported [similarity search](https://govtribe.com/docs/govtribe-for-agents/guides/find-similar-records), keeping company identity fixed. Add agency, classification, location or value filters when required for the comparison; relax optional filters when useful work is missed.
+
+Use `fields_to_return` for `govtribe_id`, `name` and available scope, customer, amount, dates and performing-entity fields; add `govtribe_url`/`govtribe_ai_summary` where supported. Subawards expose `description` and `prime_contractor`/`sub_contractor` or `prime_grantee`/`sub_grantee`. Expand promising records and deduplicate by `govtribe_id`. Group records for the same project before counting references. For work under an IDV/vehicle, assess delivered orders and actual workshare.
+
+## 4. Verify the company's contribution and results
+
+Review a reasonable selection of relevant, already-visible company files: project descriptions, past-performance narratives, evaluations and customer references. Read supplied files directly; scope [Search_User_Files](https://govtribe.com/docs/govtribe-for-agents/tools/search-user-files-mcp-tool) to relevant `user_file_ids` when indexed. Include supported commercial work when the buyer permits it.
+
+Confirm the performing entity, prime/subrecipient role, actual scope, scale, dates, deliverables and documented outcomes. Identify parent, affiliate or personnel experience separately and apply the buyer's rules for using it. An award records work awarded; successful performance needs supporting results, evaluations or customer references.
+
+## 5. Recommend references and explain gaps
+
+Compare scope, complexity, scale, operating environment, recency and results against the buyer's criteria. Assess useful cross-buyer or partly overlapping work; select the combination that best covers the requirement and required reference count. Explain each recommendation's strengths, limitations and missing support. Distinguish missing information from demonstrated weakness.
+
+For partner gaps, use [Likely Bidders](likely-bidders.md) for complementary-company research and [Team On An Opportunity](team-on-an-opportunity.md) for GovTribe teaming actions.
+
+Prepare an appropriate GovCon past-performance assessment with recommended references, relevance, source links and remaining gaps. Let the requested use determine the format, following any buyer-required forms or reference limits.

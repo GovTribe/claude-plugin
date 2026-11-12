@@ -1,8 +1,8 @@
-<img src="assets/govtribe-logo.png" alt="GovTribe" width="96" />
+![GovTribe](assets/govtribe-logo.png)
 
 # GovTribe
 
-Claude plugin containing the GovTribe MCP connection and eight government contracting skills.
+Claude plugin containing the GovTribe MCP connection and seven government contracting skills.
 
 ## Requirements
 
@@ -42,26 +42,25 @@ If GovTribe is already connected through your Claude.ai account, the skills can 
 
 | Skill | Scope |
 | --- | --- |
-| `govtribe-market-intelligence` | Market sizing, buyers, vendors, forecasts, and recompetes |
+| `govtribe-market-intelligence` | Market sizing, buyers, vendors, forecasts, recompetes, and individual-record Deep Dive research |
 | `govtribe-capture-workflows` | Opportunity discovery, pipeline, bid/no-bid, incumbents, competitors, and teaming |
 | `govtribe-pricing-data` | Labor rates, staffing, pricing models, and price-to-win evidence |
-| `govtribe-deep-dive` | Research on an individual opportunity, award, agency, vendor, program, or jurisdiction |
 | `govtribe-proposal-workflows` | Solicitation extraction, compliance matrices, outlines, and proposal documents |
-| `govtribe-file-templates` | Templates for documents, workbooks, and presentations |
-| `govtribe-document-editing` | Requested edits, review annotations, revision checks, and artifact validation |
+| `govtribe-file-templates` | Structure and completion guides for documents, workbooks, and presentations |
 | `govtribe-govcon-writing` | Source-backed proposal narratives, RFI replies, and official correspondence |
+| `govtribe-docs` | GovTribe product guides, data definitions, query guidance, and MCP tool documentation |
 
-In Claude Code, skills use the `/govtribe:` prefix, for example `/govtribe:govtribe-deep-dive`.
+In Claude Code, skills use the `/govtribe:` prefix, for example `/govtribe:govtribe-market-intelligence`.
 
 Example requests:
 
 - “Find NASA's federal agency record in GovTribe and cite the source.”
 - “Calculate the FTEs required for 36,000 annual labor hours at 1,800 productive hours per FTE.”
 - “Build a compliance checklist from this solicitation and its amendments.”
-- “Choose a template for our capture brief and adapt it using these sources.”
+- “Draft a capture brief for this opportunity from these sources.”
 - “Apply these review comments to the selected document and check the saved revision.”
 
-The plugin connects to `https://govtribe.com/mcp`. Available tools depend on the connected account and client. Skills include reference guides, templates, and optional Python helpers for document and spreadsheet outputs. Workspace changes and outbound messages require a user request.
+The plugin connects to `https://govtribe.com/mcp`. Available tools depend on the connected account and client. Skills contain Markdown reference guides and outlines only; Claude builds documents and workbooks with its own file tools. Workspace changes and outbound messages require a user request.
 
 ## Support, privacy, and license
 
@@ -69,6 +68,10 @@ The plugin connects to `https://govtribe.com/mcp`. Available tools depend on the
 - [GovTribe MCP documentation](https://govtribe.com/docs/govtribe-user-guide/govtribe-mcp/)
 - [GovTribe support](https://govtribe.com/docs/govtribe-user-guide/contact-govtribe/)
 - [Plugin issues](https://github.com/GovTribe/claude-plugin/issues)
-- [Privacy policy](https://govtribe.com/docs/govtribe-user-guide/privacy-policy/) and [MCP data handling](https://govtribe.com/docs/govtribe-user-guide/ai-data-handling-and-subprocessors/)
+- [Privacy policy](https://www.govexec.com/about/privacy-policy/) and [MCP data handling](https://govtribe.com/docs/govtribe-user-guide/ai-data-handling-and-subprocessors/)
 
 Do not include credentials or private account data in GitHub issues. The plugin is licensed under [Apache-2.0](LICENSE). GovTribe service access is subject to the [GovTribe Terms of Use](https://govtribe.com/docs/govtribe-user-guide/terms-of-use/).
+
+## Release 1.2.1
+
+This release contains Market Intelligence (including Deep Dive), Capture, Pricing, Proposal Workflows, File Templates, GovCon Writing and GovTribe Docs. It ships no template files or scripts: the file template guides describe each document's structure, and Claude creates the file natively. See [release provenance](docs/provenance.md) for integrity checks and known limitations.

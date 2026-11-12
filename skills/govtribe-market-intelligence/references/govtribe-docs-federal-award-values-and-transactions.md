@@ -4,7 +4,7 @@
 
 - Canonical GovTribe Docs page: [https://govtribe.com/docs/data-model/guides/federal-award-values-and-transactions](https://govtribe.com/docs/data-model/guides/federal-award-values-and-transactions)
 
-Use value fields differently depending on whether the question is about an award-level record, a transaction-level event, or a potential contract limit. This guide applies to GovTribe federal contract awards, federal contract IDVs, federal grant awards, federal transactions, and federal sub-award records.
+Use value fields differently depending on whether the question is about an award-level record, a transaction-level event, or a potential contract limit. This guide applies to GovTribe federal contract awards, federal contract IDVs, federal grant awards, federal transactions, and federal subaward records.
 
 ## Quick model
 
@@ -59,19 +59,19 @@ Select `contract_award` and `contract_idv` for prime contract activity. The `tra
 - Use transaction records when the question requires a time series, modification history, action date, reason for modification, or obligation movement.
 - Do not add award-level `dollars_obligated` to transaction-level values for the same award unless you have deliberately designed a reconciliation workflow.
 - Treat `ceiling_value` as potential value. It can be much larger than obligated dollars and should not be used as committed spending.
-- Treat sub-awards as separately reported downstream activity, not as another transaction layer on the prime award.
+- Treat subawards as separately reported downstream activity, not as another transaction layer on the prime award.
 
 ## Official source notes
 
-- [USAspending Federal Spending Guide](https://www.usaspending.gov/data/Federal-Spending-Guide.pdf) distinguishes prime awards, sub-awards, prime award transactions, prime award summaries, obligations, and outlays.
+- [USAspending Federal Spending Guide](https://www.usaspending.gov/data/Federal-Spending-Guide.pdf) distinguishes prime awards, subawards, prime award transactions, prime award summaries, obligations, and outlays.
 - [SAM.gov Contract Award Data](https://sam.gov/contract-data) is the federal contract award source GovTribe uses for contract award and IDV records.
 - [FAR 4.601](https://www.acquisition.gov/far/4.601) defines contract actions and contract action reports for FPDS reporting context.
 - [FAR 4.605](https://www.acquisition.gov/far/4.605) covers FPDS reporting identifiers and award reporting procedures.
 
 ## Related articles
 
-- [Federal contract data model](https://govtribe.com/docs/data-model/guides/federal-contract-data-model): Understand how awards, IDVs, vehicles, transactions, and sub-awards fit together.
-- [Federal grant data model](https://govtribe.com/docs/data-model/guides/federal-grant-data-model): Understand how grant opportunities, programs, awards, transactions, and sub-awards fit together.
+- [Federal contract data model](https://govtribe.com/docs/data-model/guides/federal-contract-data-model): Understand how awards, IDVs, vehicles, transactions, and subawards fit together.
+- [Federal grant data model](https://govtribe.com/docs/data-model/guides/federal-grant-data-model): Understand how grant opportunities, programs, awards, transactions, and subawards fit together.
 - [Federal transaction](https://govtribe.com/docs/data-model/data-types/federal-transaction): Review action-level transaction records.
 - [Dollars obligated attribute](https://govtribe.com/docs/data-model/attributes/dollars-obligated-attribute): Review the shared obligation value attribute.
 

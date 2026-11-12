@@ -57,7 +57,7 @@ Use `fields_to_return` when the agent needs records back. It chooses which field
 | Allowed values come from the tool reference. | Use the exact field names listed in the selected tool's `Available Fields` table. |
 | Omitted or empty requests return `govtribe_id`. | Start there when the next step only needs IDs for follow-up calls. |
 | Unselected fields are removed from records. | Request relationship, summary, description, file, contact, category, and financial fields only when the current step needs them. |
-| Records do not include high-volume child-record lists. | `fields_to_return` shapes each record's own fields. Smaller related-record arrays such as government files, points of contact, and price lists are still returned inline when requested. Retrieve high-volume children such as task orders, sub-awards, grant awards, or grant opportunities with a second call to the child record's `Search_*` tool. |
+| Records do not include high-volume child-record lists. | `fields_to_return` shapes each record's own fields. Smaller related-record arrays such as government files, points of contact, and price lists are still returned inline when requested. Retrieve high-volume children such as task orders, subawards, grant awards, or grant opportunities with a second call to the child record's `Search_*` tool. |
 | Search scores are explicit. | Typed `Search_*` record rows include `score` as a number when the result is relevance-ranked and `null` when the result set is not score-ranked or a score is unavailable. |
 
 Focused opportunity scan:
@@ -105,7 +105,7 @@ Avoid requesting every available field during the first pass. Add fields only fo
 
 ## Look up child records in two calls
 
-A record does not carry a list of its high-volume child records. A federal contract IDV does not return its task orders, a federal grant program does not return its grant awards, and a federal contract award does not return its sub-awards. Reaching those child records always takes a second search call.
+A record does not carry a list of its high-volume child records. A federal contract IDV does not return its task orders, a federal grant program does not return its grant awards, and a federal contract award does not return its subawards. Reaching those child records always takes a second search call.
 
 1. Resolve the parent record. Search for the parent with the tool that owns it and keep the returned `govtribe_id`.
 
@@ -121,11 +121,11 @@ The second call is a full search, not a capped sample. It accepts filters, date 
 | Awards made from a federal contract opportunity | `Search_Federal_Contract_Awards` | `federal_contract_opportunity_ids` |
 | IDVs made from a federal contract opportunity | `Search_Federal_Contract_IDVs` | `federal_contract_opportunity_ids` |
 | Task orders under a federal contract IDV | `Search_Federal_Contract_Awards` | `federal_contract_idv_ids` |
-| Sub-awards under a federal contract award | `Search_Federal_Contract_Sub_Awards` | `federal_contract_award_ids` |
-| Contract awards tied to a DOD acquisition program | `Search_Federal_Contract_Awards` | `dod_acquisition_program_ids` |
+| Subawards under a federal contract award | `Search_Federal_Contract_Sub_Awards` | `federal_contract_award_ids` |
+| Contract awards tied to a major defense program | `Search_Federal_Contract_Awards` | `dod_acquisition_program_ids` |
 | Grant awards under a federal grant program | `Search_Federal_Grant_Awards` | `federal_grant_program_ids` |
 | Grant opportunities under a federal grant program | `Search_Federal_Grant_Opportunities` | `federal_grant_program_ids` |
-| Grant sub-awards under a federal grant award | `Search_Federal_Grant_Sub_Awards` | `federal_grant_award_ids` |
+| Grant subawards under a federal grant award | `Search_Federal_Grant_Sub_Awards` | `federal_grant_award_ids` |
 
 Not every parent-child pairing has a filter. Blanket purchase agreements held under a parent IDV have no parent filter today. Check the child tool's page in the [MCP tools](https://govtribe.com/docs/govtribe-for-agents/tools) reference before assuming one exists, and narrow with `query`, date ranges, or other available filters when no parent filter is listed.
 
