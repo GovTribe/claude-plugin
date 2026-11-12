@@ -2,8 +2,8 @@
 
 Claude 1.2.1 replaces the unpublished 1.2.0 candidate.
 
-Web source: `107ffd9f2e14c58bc0e4f34205c6016454ed5afd`. Portable digest:
-`e341165991c4861c213d8ccf12de814457365f446803b8238f1d089d7ee57015`.
+Web source: `b791b30385595aebbbc39de6285e4a67a65b4d56`. Portable digest:
+`f83ce80b5ccada3731351ae65838337ad03ca5bc8c7cabd24415108c04fb20db`.
 
 All 104 skill files match the generated, structurally validated Claude candidate
 exactly. `skill-source.json` records their hashes. The root manifest retains the

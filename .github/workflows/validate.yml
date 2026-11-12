@@ -19,9 +19,9 @@ jobs:
         run: |
           bad=$(git ls-files | grep -Ev '(^|/)(LICENSE|\.gitignore)$|\.(md|json|ya?ml|txt|png|jpe?g|gif|webp)$' || true)
           if [ -n "$bad" ]; then echo "Disallowed file types:"; echo "$bad"; exit 1; fi
-          for f in $(git ls-files); do
+          while IFS= read -r -d '' f; do
             if [ "$(head -c 2 "$f")" = '#!' ]; then echo "Script header in $f"; exit 1; fi
-          done
+          done < <(git ls-files -z)
       - run: npx --yes @anthropic-ai/claude-code@2.1.292 plugin validate . --strict
       - run: npx --yes @anthropic-ai/claude-code@2.1.292 plugin validate .claude-plugin/plugin.json --strict
       - run: npx --yes @anthropic-ai/claude-code@2.1.292 plugin validate skills --strict
